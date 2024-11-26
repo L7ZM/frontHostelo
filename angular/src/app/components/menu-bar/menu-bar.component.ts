@@ -11,6 +11,10 @@ export class MenuBarComponent {
   menu: Array<MenuItem> = [
     {label: 'Home', icon: 'pi pi-home'},
     {label: 'Customers', icon: 'pi pi-users'},
-    {label: 'Settings', icon: 'pi pi-cog'}
+    {label: 'Rooms', icon: 'pi pi-building'},
+    {label: 'Services', icon: 'pi pi-list'},
+    {label: 'Bookings', icon: 'pi pi-calendar-plus'},
+    
   ]
+
 }

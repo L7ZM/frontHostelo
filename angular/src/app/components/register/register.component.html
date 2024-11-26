@@ -1,122 +1,27 @@
-<div class="flex" style="height: 100vh">
-  <div class="col-6 m-3 flex flex-column justify-content-center">
-    <div class="m-auto">
+<div class="flex" style="height: 50vh; flex-direction: row;">
+  <div class="col-6 form-section flex flex-column justify-content-center">
+    <div class="m-auto" style="width: 50%;">
       <div class="text-center">
-        <p-avatar
-          image="https://user-images.githubusercontent.com/40702606/210880158-e7d698c2-b19a-4057-b415-09f48a746753.png"
-          styleClass="mr-2"
-          size="xlarge"
-          shape="circle"
-        ></p-avatar>
-        <h1>Register for an account</h1>
+        <!-- <p-avatar image="./assets/logo.png" size="large" shape="circle"></p-avatar> -->
+        <h1>Create Account</h1>
       </div>
-      <p-message
-        *ngIf="errorMsg"
-        severity="error"
-        [text]="errorMsg"
-        styleClass="mb-2 w-full"
-      ></p-message>
-      <div class="field">
-        <label for="nom">Nom</label>
-        <input
-          [(ngModel)]="customer.nom"
-          id="nom"
-          pInputText
-          placeholder="Jane"
-          type="text"
-          class="w-full"
-        >
+      <p-message *ngIf="errorMsg" severity="error" [text]="errorMsg" class="mb-2 w-full"></p-message>
+      <div class="field-row">
+        <div class="field"><label for="nom">Nom</label><input [(ngModel)]="customer.nom" id="nom" pInputText placeholder="Jane" type="text" class="w-full"></div>
+        <div class="field"><label for="prenom">Prenom</label><input [(ngModel)]="customer.prenom" id="prenom" pInputText placeholder="Arablanca" type="text" class="w-full"></div>
       </div>
-
-      <div class="field">
-        <label for="prenom">Prenom</label>
-        <input
-          [(ngModel)]="customer.prenom"
-          id="prenom"
-          pInputText
-          placeholder="Arablanca"
-          type="text"
-          class="w-full"
-        >
+      <div class="field"><label for="email">Email</label><input [(ngModel)]="customer.email" id="email" pInputText placeholder="Jane@gmail.com" type="email" class="w-full"></div>
+      <div class="field-row">
+        <div class="field"><label for="telephone">Tel</label><input [(ngModel)]="customer.telephone" id="telephone" pInputText placeholder="07 07 07 07 07" type="string" class="w-full"></div>
+        <div class="field"><label for="dateNaissance">Date</label><input [(ngModel)]="customer.dateNaissance" id="dateNaissance" pInputText type="date" class="w-full"></div>
       </div>
-
-      <div class="field">
-        <label for="email">Email</label>
-        <input
-          [(ngModel)]="customer.email"
-          id="email"
-          pInputText
-          placeholder="Jane@gmail.com"
-          type="email"
-          class="w-full"
-        >
-      </div>
-      <div class="field">
-        <label for="password">Password</label>
-        <input
-          [(ngModel)]="customer.password"
-          id="password"
-          pInputText
-          placeholder="Password"
-          type="password"
-          class="w-full"
-        >
-      </div>
-      <div class="field">
-        <label for="telephone">Telephone</label>
-        <input
-          [(ngModel)]="customer.telephone"
-          id="telephone"
-          pInputText
-          placeholder="07 07 07 07 07"
-          type="string"
-          class="w-full"
-        >
-      </div>
-      
-      <div class="field">
-        <label for="adresse">Adresse</label>
-        <input
-          [(ngModel)]="customer.adresse"
-          id="adresse"
-          pInputText
-          placeholder="123 rue city"
-          type="string"
-          class="w-full"
-        >
-      </div>
-
-      <div class="field">
-        <label for="dateNaissance">Date de naissance</label>
-        <input
-          [(ngModel)]="customer.dateNaissance"
-          id="dateNaissance"
-          pInputText
-          type="date"
-          class="w-full"
-        >
-      </div>
-      <button
-        (click)="createAccount()"
-        pButton
-        label="Create an account"
-        class="w-full"
-      ></button>
-      <button
-        (click)="login()"
-        pButton
-        label="Have an account? Login now."
-        class="w-full p-button-link text-left pl-0"
-      ></button>
+      <div class="field"><label for="password">Password</label><input [(ngModel)]="customer.password" id="password" pInputText placeholder="Password" type="password" class="w-full"></div>
+      <div class="field"><label for="adresse">Adresse</label><input [(ngModel)]="customer.adresse" id="adresse" pInputText placeholder="123 rue city" type="string" class="w-full"></div>
+      <button (click)="createAccount()" pButton label="Create" class="w-full mt-3"></button>
+      <button (click)="login()" pButton label="Login" class="w-full p-button-link text-left pl-0"></button>
     </div>
   </div>
-  <div class="col-6 flex flex-column justify-content-center align-items-center right-container">
-    <h1>
-      <a href="https://amigoscode.com/courses" target="_blank">Enrol Now</a>
-    </h1>
-    <img
-      class="background p-6 pt-0"
-      src="https://user-images.githubusercontent.com/40702606/215539167-d7006790-b880-4929-83fb-c43fa74f429e.png"
-    >
+  <div class="col-6 right-container" style="height: 100vh;">
+    <img src="assets/Home.jpg" alt="Background">
   </div>
 </div>

@@ -1,0 +1,75 @@
+<nav class="navbar">
+  <!-- Logo -->
+  <div class="logo">
+            <p-avatar
+          image="./assets/LogoPNG.png"
+          styleClass="mr-5"
+          size="xlarge"
+          shape="circle"
+        ></p-avatar>
+  </div>
+
+  <!-- Navigation Menu -->
+  <ul class="nav-menu" >
+    <!-- Visitor Menu -->
+    <li *ngIf="userRole === 'visitor' || userRole === 'user'">
+      <a routerLink="">Home</a>
+    </li>
+    <li *ngIf="userRole === 'visitor' || userRole === 'user'">
+      <a routerLink="/about">About</a>
+    </li>
+    <li *ngIf="userRole === 'visitor' || userRole === 'user'">
+      <a routerLink="/contact">Contact</a>
+    </li>
+    <li *ngIf="userRole === 'visitor' || userRole === 'user'">
+      <a routerLink="/rooms">View Rooms</a>
+    </li>
+
+    <!-- Admin/Staff Menu -->
+    <li *ngIf="userRole === 'staff'" class="dropdown">
+      <a href="customers">Manage Users</a>
+    </li>
+    <li *ngIf="userRole === 'staff'" class="dropdown">
+      <a href="#">Manage Rooms</a>
+    </li>
+    <li *ngIf="userRole === 'staff'" class="dropdown">
+      <a href="#">Manage Services</a>
+    </li>
+    <li *ngIf="userRole === 'staff'" class="dropdown">
+      <a>Bookings</a>
+      <div class="dropdown-content">
+        <a routerLink="/manage-bookings">All Bookings</a>
+        <a routerLink="/manage-bookings/add">Book for Client</a>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Action Buttons -->
+  <div class="nav-actions">
+    <!-- Visitor Actions -->
+    <button
+      *ngIf="userRole === 'visitor'"
+      pButton
+      type="button"
+      label="Login"
+      class="btn login"
+      routerLink="login"
+    ></button>
+    <button
+      *ngIf="userRole === 'visitor'"
+      pButton
+      type="button"
+      label="Sign Up"
+      class="btn signup"
+      routerLink="register"
+    ></button>
+
+<!-- profile -->
+
+<div class="nav-actions">
+  <div *ngIf="userRole === 'user'|| userRole==='staff'" class="profile-menu">
+    <i class="pi pi-user profile-icon" (click)="menu.toggle($event)"></i>
+    <p-menu #menu [model]="profileItems" [popup]="true"></p-menu>
+  </div>
+</div>
+

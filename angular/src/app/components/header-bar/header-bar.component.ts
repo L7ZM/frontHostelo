@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AuthenticationResponse } from '../../models/authentication-response';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header-bar',
@@ -9,32 +9,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./header-bar.component.scss']
 })
 export class HeaderBarComponent {
+  logout(): void {
+   RouterLink:"";
+  }
 
   constructor(
     private router: Router
   ) {
   }
-  items: Array<MenuItem> = [
-    {
-      label: 'Profile',
-      icon: 'pi pi-user'
-    },
-    {
-      label: 'Settings',
-      icon: 'pi pi-cog'
-    },
-    {
-      separator: true
-    },
-    {
-      label: 'Sign out',
-      icon: 'pi pi-sign-out',
-      command: () => {
-        localStorage.clear();
-        this.router.navigate(['login']);
-      }
-    },
+  profileItems: MenuItem[] = [
+    { label: 'Edit Profile', icon: 'pi pi-user-edit' },
+    { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.logout() }
   ];
+  // items: Array<MenuItem> = [
+  //   {
+  //     label: 'Profile',
+  //     icon: 'pi pi-user'
+  //   },
+  //   {
+  //     label: 'Settings',
+  //     icon: 'pi pi-cog'
+  //   },
+  //   {
+  //     separator: true
+  //   },
+  //   {
+  //     label: 'Sign out',
+  //     icon: 'pi pi-sign-out',
+  //     command: () => {
+  //       localStorage.clear();
+  //       this.router.navigate(['login']);
+  //     }
+  //   },
+  // ];
 
   get username(): string {
     const storedUser = localStorage.getItem('user');

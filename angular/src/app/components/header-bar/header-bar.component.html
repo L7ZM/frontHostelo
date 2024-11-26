@@ -1,6 +1,6 @@
 <div class="flex flex-column align-items-end border-bottom-1 border-gray-200 pt-3 pb-3">
   <div class="flex flex-row align-items-center">
-    <button
+    <!-- <button
       pButton
       pRipple
       type="button"
@@ -16,17 +16,13 @@
     <div>
       <p class="text-base mb-0 mt-1 text-gray-700">{{username}}</p>
       <p class="text-sm mb-1 mt-0 text-gray-500">{{userRole}}</p>
-    </div>
-    <div>
-      <button
-        pButton
-        pRipple
-        type="button"
-        icon="pi pi-angle-down"
-        class="p-button-secondary p-button-text"
-        (click)="menu.toggle($event)"
-      ></button>
-      <p-menu #menu [popup]="true" [model]="items"></p-menu>
-    </div>
+    </div> -->
+   
+<div class="nav-actions">
+  <div class="profile-menu">
+    <i class="pi pi-user profile-icon" (click)="menu.toggle($event)"></i>
+    <p-menu #menu [model]="profileItems" [popup]="true"></p-menu>
+  </div>
+</div>
   </div>
 </div>

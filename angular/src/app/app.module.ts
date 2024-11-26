@@ -27,9 +27,12 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { RegisterComponent } from './components/register/register.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+NavbarComponent
 
 @NgModule({
   declarations: [
+    NavbarComponent,
     AppComponent,
     CustomerComponent,
     MenuBarComponent,
