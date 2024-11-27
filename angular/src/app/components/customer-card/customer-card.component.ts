@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CustomerDTO } from '../../models/customer-dto';
+import { CustomerDTO } from '../../models/customer/customer-dto';
 
 @Component({
   selector: 'app-customer-card',
@@ -19,11 +19,8 @@ export class CustomerCardComponent {
   delete: EventEmitter<CustomerDTO> = new EventEmitter<CustomerDTO>();
   @Output()
   update: EventEmitter<CustomerDTO> = new EventEmitter<CustomerDTO>();
+searchQuery: any;
 
-  get customerImage(): string {
-    const gender = this.customer.pointsFidelite === 0 ? 30 : 50 ;
-    return `https://randomuser.me/api/portraits/male/${this.customerIndex}.jpg`;
-  }
 
   onDelete() {
     this.delete.emit(this.customer);

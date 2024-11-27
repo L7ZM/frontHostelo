@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CustomerRegistrationRequest } from '../../models/customer-registration-request';
+import { CustomerRegistrationRequest } from '../../models/customer/customer-registration-request';
 import { CustomerService } from '../../services/customer/customer.service';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { AuthenticationRequest } from '../../models/authentication-request';
+import { AuthenticationRequest } from '../../models/auth/authentication-request';
 
 @Component({
   selector: 'app-register',

@@ -1,4 +1,4 @@
-import { CustomerDTO } from './customer-dto';
+import { CustomerDTO } from '../customer/customer-dto';
 
 export interface AuthenticationResponse {
   token?: string;

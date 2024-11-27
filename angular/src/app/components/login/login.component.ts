@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationRequest } from '../../models/authentication-request';
+import { AuthenticationRequest } from '../../models/auth/authentication-request';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
 

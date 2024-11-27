@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CustomerRegistrationRequest } from '../../models/customer-registration-request';
+import { CustomerRegistrationRequest } from '../../models/customer/customer-registration-request';
 
 @Component({
   selector: 'app-manage-customer',

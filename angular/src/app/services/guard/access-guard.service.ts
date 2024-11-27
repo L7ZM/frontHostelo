@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthenticationResponse } from '../../models/authentication-response';
+import { AuthenticationResponse } from '../../models/auth/authentication-response';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthenticationResponse } from '../../models/authentication-response';
+import { AuthenticationResponse } from '../../models/auth/authentication-response';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({

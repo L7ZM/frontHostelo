@@ -1,38 +1,27 @@
-<p-card [style]="{width: '316px'}" styleClass="p-card-shadow text-center">
-  <ng-template pTemplate="header">
-    <div>
-      <img class="border-round-top cover"
-           height="120"
-           alt="Card"
-           src="https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-      >
-    </div>
-    <div class="flex justify-content-center" style="margin-top: -50px">
-      <img
-        class="customer-avatar"
-        [src]="customerImage"
-      >
-    </div>
-  </ng-template>
+<p-card [style]="{width: '320px'}" styleClass="p-card-shadow text-center customer-card">
   <ng-template pTemplate="content">
     <p-badge
       [value]="'' + (customerIndex + 1)"
+      class="customer-badge"
     ></p-badge>
-    <h2>{{customer.nom}}</h2>
-    <p class="text-gray-600">Email</p>
-    <p class="text-gray-600">Male</p>
+    <h2 class="customer-name">{{ customer.nom }}</h2>
+    <h3 class="customer-email">{{ customer.email }}</h3>
+    <p class="customer-phone">{{ customer.telephone || 'No phone number provided' }}</p>
   </ng-template>
+
   <ng-template pTemplate="footer">
     <button
       pButton
       label="Update"
-      class="p-button-secondary p-button-outlined p-button-rounded"
+      icon="pi pi-pencil"
+      class="p-button-outlined p-button-rounded p-button-secondary update-button"
       (click)="onUpdate()"
     ></button>
     <button
       pButton
       label="Delete"
-      class="p-button-danger p-button-outlined p-button-rounded ml-3"
+      icon="pi pi-trash"
+      class="p-button-outlined p-button-rounded p-button-danger delete-button"
       (click)="onDelete()"
     ></button>
   </ng-template>
