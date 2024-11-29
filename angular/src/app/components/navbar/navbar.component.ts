@@ -8,7 +8,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class NavbarComponent {
 
-  userRole='staff';
+  userRole='visitor';
   profileItems: MenuItem[] = [
     { label: 'Edit Profile', icon: 'pi pi-user-edit' },
     { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.logout() }

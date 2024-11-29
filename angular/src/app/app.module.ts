@@ -33,6 +33,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RoomManagementComponent } from './components/room-management/room-management.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { FooterComponent } from './components/footer/footer.component';
 NavbarComponent;
 
 @NgModule({
@@ -45,6 +48,9 @@ NavbarComponent;
     CustomerCardComponent,
     RegisterComponent,
     RoomManagementComponent,
+    DashboardComponent,
+    SideBarComponent,
+    FooterComponent,
   ],
   imports: [
     InputTextareaModule,

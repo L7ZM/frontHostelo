@@ -1,53 +1,57 @@
-<p-sidebar
-  [(visible)]="display"
-  [position]="'right'"
-  [transitionOptions]="'300ms cubic-bezier(0, 0, 0.2, 1)'"
-  styleClass="p-sidebar-lg"
->
-  <app-manage-customer
-    [customer]="customer"
-    [operation]="operation"
-    (submit)="save($event)"
-    (cancel)="cancel()"
-  ></app-manage-customer>
-</p-sidebar>
-<!-- 
-<div class="flex align-items-stretch" style="height: 99vh;">
-  <div class="flex flex-column align-items-stretch border-right-1 col-2 border-gray-200">
-    <app-menu-bar></app-menu-bar>
-  </div> -->
-  <div class="flex flex-column flex-grow-1">
-    <!-- <div>
-      <app-header-bar></app-header-bar>
-    </div> -->
-    <div class="main-container p-3">
-      <button
-        pButton
-        icon="pi pi-plus"
-        label="Create customer"
-        class="p-button-success"
-        (click)="createCustomer()"
-      >
-      </button>
-      <div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4">
-        <app-customer-card
-          *ngFor="let customer of customers; let index = index"
-          [customer]="customer"
-          [customerIndex]="index"
-          (delete)="deleteCustomer($event)"
-          (update)="updateCustomer($event)"
-        ></app-customer-card>
-      </div>
+<div class="customer-page-container">
+  <!-- Barre latérale -->
+  <div class="sidebar">
+    <app-side-bar></app-side-bar>
+  </div>
+
+  <!-- Contenu principal -->  
+  <div class="main-content">
+    <button type="button" pButton  class="btn btn-sm btn-success me-1 mb-4" (click)="createCustomer()"
+    >
+      <i class="fa fa-fw fa-plus me-1" ></i> Add User
+    </button>
+    
+    <!-- Liste des cartes de clients -->
+    <div class="customer-card-container">
+      <app-customer-card
+        *ngFor="let customer of customers; let index = index"
+        [customer]="customer"
+        [customerIndex]="index"
+        (delete)="deleteCustomer($event)"
+        (update)="updateCustomer($event)"
+      ></app-customer-card>
     </div>
   </div>
-<!-- </div> -->
 
-<p-confirmDialog
-  header="Confirmation"
-  icon="pi pi-exclamation-triangle"
-  acceptLabel="Delete"
-  acceptButtonStyleClass="p-button-danger"
-  acceptIcon="pi pi-trash"
-  rejectLabel="Cancel"
-></p-confirmDialog>
-<p-toast position="bottom-center"></p-toast>
+  <!-- Sidebar pour gérer un client -->
+  <p-sidebar
+    [(visible)]="display"
+    [position]="'right'"
+    [transitionOptions]="'300ms cubic-bezier(0, 0, 0.2, 1)'"
+    styleClass="p-sidebar-lg"
+  >
+    <app-manage-customer
+      [customer]="customer"
+      [operation]="operation"
+      (submit)="save($event)"
+      (cancel)="cancel()"
+    ></app-manage-customer>
+  </p-sidebar>
+
+  <!-- Dialogue de confirmation -->
+  <p-confirmDialog
+    header="Confirmation"
+    icon="pi pi-exclamation-triangle"
+    acceptLabel="Delete"
+    acceptButtonStyleClass="p-button-danger"
+    acceptIcon="pi pi-trash"
+    rejectLabel="Cancel"
+  ></p-confirmDialog>
+
+  <!-- Toast de notifications -->
+  <p-toast position="bottom-center"></p-toast>
+
+  <!-- <div class="footer">
+    <app-footer></app-footer>
+  </div> -->
+</div>
