@@ -1,0 +1,54 @@
+.card {
+  margin: 20px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.p-table {
+  font-size: 14px; /* Smaller font size for the table */
+}
+
+.p-toolbar {
+  margin-bottom: 16px;
+}
+
+.p-button {
+  font-size: 15px; /* Smaller button text */
+  padding: 7px 14px; /* Smaller button padding */
+}
+
+// .p-button-rounded {
+//   width: 30px;
+//   height: 30px;
+// }
+
+.p-dialog {
+  border-radius: 8px;
+}
+
+.p-inputNumber,
+.p-dropdown,
+.p-inputTextarea {
+  width: 100%;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.photo-preview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.photo-item {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.photo-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}

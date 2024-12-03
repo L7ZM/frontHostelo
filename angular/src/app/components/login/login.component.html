@@ -3,51 +3,77 @@
   <div class="col-6 form-section flex flex-column justify-content-center">
     <div class="m-auto">
       <div class="text-center">
-        <!-- <p-avatar
-          image="./assets/logo.png"
-          styleClass="mr-2"
-          size="xlarge"
-          shape="circle"
-        ></p-avatar> -->
         <h1>Sign in to your account</h1>
       </div>
+
       <p-message
         *ngIf="errorMsg"
         severity="error"
         [text]="errorMsg"
         styleClass="mb-2 w-full"
       ></p-message>
-      <div class="field">
-        <label for="email">Email</label>
-        <input
-          [(ngModel)]="authenticationRequest.email"
-          id="email"
-          pInputText
-          placeholder="Jane@amigoscode.com"
-          type="email"
+
+      <form #form="ngForm" (ngSubmit)="login()">
+        <!-- Email Field -->
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            [(ngModel)]="authenticationRequest.email"
+            id="email"
+            name="email"
+            pInputText
+            placeholder="Jane@amigoscode.com"
+            type="email"
+            class="w-full"
+            required
+            email
+            #email="ngModel"
+            [ngClass]="{ 'error-border': email.touched && email.invalid }"
+          />
+          <div *ngIf="email.touched && email.invalid" class="error-message">
+            <small *ngIf="email.errors?.['required']">Email is required.</small>
+            <small *ngIf="email.errors?.['email']">Invalid email format.</small>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            [(ngModel)]="authenticationRequest.password"
+            id="password"
+            name="password"
+            pInputText
+            placeholder="Password"
+            type="password"
+            class="w-full"
+            required
+            minlength="6"
+            #password="ngModel"
+            [ngClass]="{ 'error-border': password.touched && password.invalid }"
+          />
+          <div *ngIf="password.touched && password.invalid" class="error-message">
+            <small *ngIf="password.errors?.['required']">Password is required.</small>
+            <small *ngIf="password.errors?.['minlength']">
+              Password must be at least 6 characters.
+            </small>
+          </div>
+        </div>
+
+        <!-- Login Button -->
+        <button
+          pButton
+          label="Login"
           class="w-full"
-        >
-      </div>
-      <div class="field">
-        <label for="password">Password</label>
-        <input
-          [(ngModel)]="authenticationRequest.password"
-          id="password"
-          pInputText
-          placeholder="Password"
-          type="password"
-          class="w-full"
-        >
-      </div>
+          type="submit"
+          [disabled]="form.invalid"
+        ></button>
+      </form>
+
+      <!-- Signup Button -->
       <button
         pButton
-        label="Login"
-        class="w-full"
-        (click)="login()"
-      ></button>
-      <button
-        pButton
-        label="Don't have an account?   Signup now."
+        label="Don't have an account? Signup now."
         class="w-full p-button-link text-left pl-0"
         (click)="register()"
       ></button>
@@ -58,8 +84,8 @@
   <div class="col-6 right-container flex flex-column justify-content-center align-items-center">
     <img
       class="background"
-      src="assets/Home.jpg"
+      src="assets/7.jpg"
       alt="Background"
-    >
+    />
   </div>
 </div>

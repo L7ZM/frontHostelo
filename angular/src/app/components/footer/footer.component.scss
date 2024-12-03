@@ -1,0 +1,91 @@
+// /* Set the minimum height of the body and html to 100% */
+// html, body {
+//   height: 100%;
+//   overflow-x: hidden; /* Prevent horizontal scrolling */
+// }
+
+// /* Make the main content area take the remaining space */
+// main {
+//   min-height: 100%; /* Ensure main takes up the rest of the page height */
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// /* Footer styles */
+// #page-footer {
+//   background: linear-gradient(135deg, #734e3a, #c68b38); /* Gradient background */
+//   color: #fff;
+//   padding-top: 50px;
+//   padding-bottom: 30px;
+//   width: 100%;
+//   position: relative;
+//   margin-top: auto; /* Ensure footer stays at the bottom */
+// }
+
+// /* Content inside the footer */
+// #page-footer .content {
+//   max-width: 100%; /* Ensure the footer content never exceeds 100% width */
+//   margin: 0 auto;
+//   padding-left: 15px;
+//   padding-right: 15px;
+// }
+
+// #page-footer .row {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   flex-wrap: wrap; /* Allows wrapping of content on smaller screens */
+//   width: 100%;
+// }
+
+// #page-footer .row > div {
+//   flex: 1;
+//   text-align: center;
+//   padding: 10px;
+// }
+
+// #page-footer h3 {
+//   font-size: 1.25rem;
+//   font-weight: bold;
+//   margin-bottom: 15px;
+// }
+
+// #page-footer .fs-sm {
+//   font-size: 0.875rem; /* Smaller font size for footer */
+// }
+
+// #page-footer a {
+//   color: #f39c12; /* Elegant gold color for links */
+//   text-decoration: none;
+//   transition: color 0.3s ease;
+// }
+
+// #page-footer a:hover {
+//   color: #e67e22; /* Darker gold on hover */
+// }
+
+// #page-footer .fa-heart {
+//   color: #e74c3c; /* Red heart color */
+// }
+
+// #page-footer .text-primary {
+//   color: #3498db; /* Blue color for the OneUI link */
+// }
+
+// #page-footer .text-gold {
+//   color: #f39c12; /* Gold color for PixelCave link */
+// }
+
+// #page-footer .text-primary:hover {
+//   color: #2980b9; /* Darker blue on hover */
+// }
+
+// #page-footer .col-sm-6 {
+//   padding: 5px;
+// }
+
+// #page-footer .col-sm-6.order-sm-1,
+// #page-footer .col-sm-6.order-sm-2 {
+//   flex: 0 1 50%; /* Ensure both sections take up equal space */
+// }
+

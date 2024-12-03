@@ -30,7 +30,6 @@ export class RoomManagementComponent {
   ];
 
   etatOptions = [
-    
     { label: 'DISPONIBLE', value: 'DISPONIBLE' },
     { label: 'OCCUPE', value: 'OCCUPEE' },
     { label: 'MAINTENANCE', value: 'EN_ENTRETIEN' }
@@ -95,22 +94,34 @@ export class RoomManagementComponent {
 
   onPhotoSelect(event: any) {
     const files = event.files;
-    Array.from(files).forEach((file: any) => {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.room.photos.push(e.target.result.split(',')[1]);
-      };
-      reader.readAsDataURL(file);
-    });
+    if (files && files.length > 0) {
+      // Use type assertion to ensure TypeScript understands the array contains File objects
+      (files as File[]).forEach((file: File) => {
+        // Check if it's a valid File object
+        if (file instanceof File) {
+          this.room.photos.push(file);
+        }
+      });
+    }
   }
+
+
 
   removePhoto(index: number) {
     this.room.photos.splice(index, 1);
   }
-
   saveRoom() {
+    const formData = new FormData();
+    formData.append('chambre', JSON.stringify(this.room)); // The room details as JSON string
+
+    // Append each file in the photos array to FormData
+    this.room.photos.forEach((photo: File) => {
+      formData.append('photo', photo, photo.name); // 'photo' as the field name and `photo.name` for the filename
+    });
+
+    // Send the form data to the backend
     if (this.isNew) {
-      this.roomService.create(this.room).subscribe({
+      this.roomService.create(formData).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
@@ -127,7 +138,7 @@ export class RoomManagementComponent {
         })
       });
     } else {
-      this.roomService.update(this.room.id!, this.room).subscribe({
+      this.roomService.update(this.room.id!, formData).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
@@ -145,4 +156,5 @@ export class RoomManagementComponent {
       });
     }
   }
+
 }

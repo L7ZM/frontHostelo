@@ -19,13 +19,30 @@ export class AuthenticationService {
   login(authRequest: AuthenticationRequest): Observable<AuthenticationResponse> {
     return this.http.post<AuthenticationResponse>(this.authUrl, authRequest);
   }
-  
+
   getToken(): string | undefined | null{
-    const storedUser = localStorage.getItem('user');
+        const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const authResponse: AuthenticationResponse = JSON.parse(storedUser);
       return authResponse.token; // Extract and return the token
     }
     return null;
+  }
+
+  // getUserInfo(): { username: string; email: string } | null {
+  //   const storedUser = localStorage.getItem('user');
+  //   if (storedUser) {
+  //     const authResponse: AuthenticationResponse = JSON.parse(storedUser);
+  //     return { username: authResponse.username, email: authResponse.email }; // Extract username and email
+  //   }
+  //   return null;
+  // }
+  getRoles(): string[]  {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const authResponse: AuthenticationResponse = JSON.parse(storedUser);
+      return [authResponse.roles];
+    }
+    return [""];
   }
 }

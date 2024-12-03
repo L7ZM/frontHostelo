@@ -20,21 +20,30 @@ export class CustomerService {
   findAll(): Observable<CustomerDTO[]> {
     return this.http.get<CustomerDTO[]>(this.customerUrl);
   }
-
+  // Method to create a customer
+  createCustomer(
+    customer: CustomerRegistrationRequest,
+  ): Observable<any> {
+    return this.http.post(`${this.customerUrl}`, customer);
+  }
   registerCustomer(customer: CustomerRegistrationRequest): Observable<void> {
     return this.http.post<void>(this.customerUrl, customer);
   }
 
-  deleteCustomer(id: number | undefined): Observable<void> {
-    return this.http.delete<void>(`${this.customerUrl}/${id}`);
+  deleteCustomer(email: string | undefined): Observable<void> {
+    return this.http.delete<void>(`${this.customerUrl}/${email}`);
   }
-  updateCustomer(id: number, customer: CustomerDTO, token: string): Observable<CustomerDTO> {
-    return this.http.put<CustomerDTO>(`${this.customerUrl}/${id}`, customer, {
+  updateCustomer(
+    id: number,
+    customer: CustomerDTO,
+    token: string
+  ): Observable<CustomerDTO> {
+    return this.http.put<CustomerDTO>(`${this.customerUrl}`, customer, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
   }
-  
-  
+
+
 }

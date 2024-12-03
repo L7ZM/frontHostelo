@@ -1,0 +1,40 @@
+<div class="search-bar">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    placeholder="Search rooms by type, price, or description..."
+    (input)="filterRooms()"
+  >
+  <button class="search-button" (click)="filterRooms()">Search</button>
+</div>
+
+<div class="room-container">
+  <div *ngFor="let room of filteredRooms" class="room-card">
+    <p-carousel [value]="room.photos" [numVisible]="1" [numScroll]="1">
+      <ng-template pTemplate="item" let-photo>
+        <img [src]="'data:image/jpeg;base64,' + photo" alt="Room photo" style="width: 100%; height: auto;">
+      </ng-template>
+    </p-carousel>
+
+    <div class="room-details">
+      <h3>Room {{ room.numeroChambre }} - {{ room.type }}</h3>
+      <p>{{ room.description }}</p>
+      <p>Price: ${{ room.prix }}</p>
+
+      <!-- Date input for room booking -->
+      <input type="date" [(ngModel)]="selectedDate" placeholder="Select your date" />
+
+      <!-- Dropdown for selecting services, specific to each room -->
+      <select  (change)="onServiceChange(room)">
+        <option value="breakfast">Breakfast</option>
+        <option value="extraBed">Extra Bed</option>
+        <option value="wifi">Wi-Fi</option>
+      </select>
+
+      <!-- Number of people input -->
+      <input type="number" [(ngModel)]="selectedPeople" placeholder="Number of people" min="1" />
+
+      <button class="book-button" (click)="bookRoom(room.id)">Book</button>
+    </div>
+  </div>
+</div>
