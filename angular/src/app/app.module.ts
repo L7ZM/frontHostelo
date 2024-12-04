@@ -34,7 +34,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RoomManagementComponent } from './components/room-management/room-management.component';
-import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
@@ -55,7 +54,6 @@ NavbarComponent;
     CustomerCardComponent,
     RegisterComponent,
     RoomManagementComponent,
-    SideBarComponent,
     FooterComponent,
     HomeComponent,
     VirtualTourComponent,

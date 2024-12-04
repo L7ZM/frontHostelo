@@ -22,21 +22,9 @@
 
       <div class="menu">
         <ul class="nav-main">
-          <li *ngIf="userRole === 'staff'" class="nav-main-heading">Administration</li>
-          <li *ngIf="userRole === 'user'" class="nav-main-heading">User Dashboard</li>
 
-          <li *ngIf="userRole === 'user'" class="nav-main-item">
-            <a class="nav-main-link" routerLink="/my-bookings">
-              <i class="pi pi-calendar nav-main-link-icon"></i>
-              <span class="nav-main-link-name">My Bookings</span>
-            </a>
-          </li>
-          <li *ngIf="userRole === 'user'" class="nav-main-item">
-            <a class="nav-main-link" routerLink="/profile">
-              <i class="pi pi-user nav-main-link-icon"></i>
-              <span class="nav-main-link-name">My Profile</span>
-            </a>
-          </li>
+          <li *ngIf="userRole === 'staff'" class="nav-main-heading">Administration</li>
+
 
           <li *ngIf="userRole === 'staff'" class="nav-main-item">
             <a class="nav-main-link" routerLink="rooms">
@@ -60,6 +48,20 @@
             <a class="nav-main-link" routerLink="/bookings">
               <i class="pi pi-calendar-plus nav-main-link-icon"></i>
               <span class="nav-main-link-name">Manage Bookings</span>
+            </a>
+          </li>
+          <li *ngIf="userRole !== 'visitor'" class="nav-main-heading">User Dashboard</li>
+
+          <li *ngIf="userRole !== 'visitor'"  class="nav-main-item">
+            <a class="nav-main-link" routerLink="/my-bookings">
+              <i class="pi pi-calendar nav-main-link-icon"></i>
+              <span class="nav-main-link-name">My Bookings</span>
+            </a>
+          </li>
+          <li *ngIf="userRole !== 'visitor'"  class="nav-main-item">
+            <a class="nav-main-link" routerLink="/profile">
+              <i class="pi pi-user nav-main-link-icon"></i>
+              <span class="nav-main-link-name">My Profile</span>
             </a>
           </li>
         </ul>
