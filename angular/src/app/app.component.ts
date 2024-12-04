@@ -8,10 +8,4 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private authService: AuthenticationService,private router:Router){}
-  ngOnInit(): void {
-    if (this.authService.isTokenExpired()) {
-      this.authService.logout();
-      this.router.navigate(['/login']); // Navigate to login instead of reloading
-    }}
 }

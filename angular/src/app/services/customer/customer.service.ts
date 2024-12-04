@@ -11,7 +11,7 @@ import { CustomerUpdateRequest } from '../../models/customer/customer-update-req
 })
 export class CustomerService {
 
-  private readonly customerUrl = `${environment.api.baseUrl}/${environment.api.customerUrl}`;
+  private readonly customerUrl = `${environment.api.baseUrl}/${environment.api.adminUrl}`;
 
   constructor(
     private http: HttpClient
