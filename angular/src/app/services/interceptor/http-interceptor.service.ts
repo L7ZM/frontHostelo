@@ -1,30 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpHeaders,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthenticationResponse } from '../../models/auth/authentication-response';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpInterceptorService implements HttpInterceptor {
+  constructor(private authService: AuthenticationService) {}
 
-  constructor() { }
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const token = this.authService.getToken();
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const authResponse: AuthenticationResponse = JSON.parse(storedUser);
-      const token = authResponse.token;
-      if (token) {
-        const authReq = req.clone({
-          headers: new HttpHeaders({
-            Authorization: 'Bearer ' + token
-          })
-        });
-        return next.handle(authReq);
-      }
+    if (token && !this.authService.isTokenExpired()) {
+      const authReq = req.clone({
+        headers: req.headers.set('Authorization', 'Bearer ' + token),
+      });
+      return next.handle(authReq);
+    } else if (token && this.authService.isTokenExpired()) {
+      this.authService.logout();
     }
+
     return next.handle(req);
   }
 }

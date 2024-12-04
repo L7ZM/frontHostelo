@@ -34,11 +34,11 @@ export class RegisterComponent {
         }
         this.authenticationService.login(authReq)
         .subscribe({
-          next: (authenticationResponse) => {
+          next: (authenticationResponse: any) => {
             localStorage.setItem('user', JSON.stringify(authenticationResponse));
-            this.router.navigate(['customers']);
+            this.router.navigate(['']);
           },
-          error: (err) => {
+          error: (err: { error: { statusCode: number; }; }) => {
             if (err.error.statusCode === 401) {
               this.errorMsg = 'Login and / or password is incorrect';
             }

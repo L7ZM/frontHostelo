@@ -3,6 +3,7 @@ export const environment = {
     baseUrl: 'http://localhost:8080',
     authUrl: 'auth/login',
     registerUrl: 'auth/signup',
-    customerUrl: 'api/users'
+    customerUrl: 'api/users',
+    adminUrl: 'api/admin/users',
   }
 };

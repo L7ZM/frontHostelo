@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  authenticationRequest: AuthenticationRequest = {};
+  authenticationRequest: AuthenticationRequest = { email: '', password: '' };  // Set default structure
   errorMsg = '';
+  isLoading = false;  // For showing a loading spinner
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -19,18 +20,24 @@ export class LoginComponent {
 
   login() {
     this.errorMsg = '';
+    this.isLoading = true;  // Start loading spinner
     this.authenticationService.login(this.authenticationRequest)
-    .subscribe({
-      next: (authenticationResponse) => {
-        localStorage.setItem('user', JSON.stringify(authenticationResponse));
-        this.router.navigate(['customers']);
-      },
-      error: (err) => {
-        if (err.error.statusCode === 401) {
-          this.errorMsg = 'Login and / or password is incorrect';
+      .subscribe({
+        next: (authenticationResponse) => {
+          localStorage.setItem('user', JSON.stringify(authenticationResponse));
+          this.isLoading = false;  // Stop loading spinner
+
+          this.router.navigate(['']);  // Redirect to home page or based on user role
+        },
+        error: (err) => {
+          this.isLoading = false;  // Stop loading spinner
+          if (err.error.statusCode === 401) {
+            this.errorMsg = 'Login and/or password is incorrect';
+          } else {
+            this.errorMsg = 'Login and/or password is incorrect';
+          }
         }
-      }
-    });
+      });
   }
 
   register() {

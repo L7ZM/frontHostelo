@@ -10,9 +10,6 @@
         <h2 class="h4 fw-normal text-white-75">
           John Parker
         </h2>
-        <a class="btn btn-alt-secondary" href="be_pages_generic_profile.html">
-          <i class="fa fa-fw fa-arrow-left text-danger"></i> Back to Profile
-        </a>
       </div>
     </div>
   </div>
@@ -26,44 +23,91 @@
         <h3 class="block-title">User Profile</h3>
       </div>
       <div class="block-content">
-        <form action="be_pages_projects_edit.html" method="POST" enctype="multipart/form-data" onsubmit="return false;">
+        <form method="POST" enctype="multipart/form-data" (ngSubmit)="update()">
           <div class="row push">
-            <div class="col-lg-4">
-              <p class="fs-sm text-muted">
-                Your account’s vital info. Your username will be publicly visible.
-              </p>
-            </div>
+            <div class="col-lg-4"></div>
             <div class="col-lg-8 col-xl-5">
+
               <div class="mb-4">
-                <label class="form-label" for="one-profile-edit-username">Username</label>
-                <input type="text" class="form-control" id="one-profile-edit-username" name="one-profile-edit-username" placeholder="Enter your username.." value="john.parker">
+                <label class="form-label" for="one-profile-edit-username">Last name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="one-profile-edit-username"
+                  name="one-profile-edit-username"
+                  placeholder="Enter your last name.."
+                  [(ngModel)]="userProfile.prenom">
               </div>
+
               <div class="mb-4">
                 <label class="form-label" for="one-profile-edit-name">Name</label>
-                <input type="text" class="form-control" id="one-profile-edit-name" name="one-profile-edit-name" placeholder="Enter your name.." value="John Parker">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="one-profile-edit-name"
+                  name="one-profile-edit-name"
+                  placeholder="Enter your name.."
+                  [(ngModel)]="userProfile.nom">
               </div>
+
               <div class="mb-4">
                 <label class="form-label" for="one-profile-edit-email">Email Address</label>
-                <input type="email" class="form-control" id="one-profile-edit-email" name="one-profile-edit-email" placeholder="Enter your email.." value="john.parker@example.com">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="one-profile-edit-email"
+                  name="one-profile-edit-email"
+                  placeholder="Enter your email.."
+                  [(ngModel)]="userProfile.email">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label" for="one-profile-edit-phone">Phone Number</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="one-profile-edit-phone"
+                  name="one-profile-edit-phone"
+                  placeholder="Enter your phone.."
+                  [(ngModel)]="userProfile.telephone">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label" for="one-profile-edit-date">Date De naissance</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="one-profile-edit-date"
+                  name="one-profile-edit-date"
+                  [(ngModel)]="userProfile.dateNaissance">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label" for="one-profile-edit-adress">Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="one-profile-edit-adress"
+                  name="one-profile-edit-adress"
+                  placeholder="Enter your address.."
+                  [(ngModel)]="userProfile.adresse">
               </div>
               <div class="mb-4">
-                <label class="form-label">Your Avatar</label>
-                <div class="mb-4">
-                  <img class="img-avatar" src="assets/media/avatars/avatar13.jpg" alt="">
-                </div>
-                <div class="mb-4">
-                  <label for="one-profile-edit-avatar" class="form-label">Choose a new avatar</label>
-                  <input class="form-control" type="file" id="one-profile-edit-avatar">
-                </div>
-              </div>
-              <div class="mb-4">
-                <button type="submit" class="btn btn-alt-primary">
+                <button onclick="update()" class="btn btn-alt-primary">
                   Update
                 </button>
               </div>
             </div>
           </div>
         </form>
+
+
+
+
+
+
+
+
       </div>
     </div>
     <!-- END User Profile -->
@@ -74,7 +118,7 @@
         <h3 class="block-title">Change Password</h3>
       </div>
       <div class="block-content">
-        <form action="be_pages_projects_edit.html" method="POST" onsubmit="return false;">
+        <form  method="POST" onsubmit="return false;">
           <div class="row push">
             <div class="col-lg-4">
               <p class="fs-sm text-muted">
@@ -82,10 +126,6 @@
               </p>
             </div>
             <div class="col-lg-8 col-xl-5">
-              <div class="mb-4">
-                <label class="form-label" for="one-profile-edit-password">Current Password</label>
-                <input type="password" class="form-control" id="one-profile-edit-password" name="one-profile-edit-password">
-              </div>
               <div class="row mb-4">
                 <div class="col-12">
                   <label class="form-label" for="one-profile-edit-password-new">New Password</label>
