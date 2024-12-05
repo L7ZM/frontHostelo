@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CustomerDTO } from '../../../models/customer/customer-dto';
+import { CustomerDTO } from '../../../../models/customer/customer-dto';
 
 @Component({
   selector: 'app-customer-card',

@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AuthenticationRequest } from 'src/app/models/auth/authentication-request';
 import { AuthenticationResponse } from 'src/app/models/auth/authentication-response';
 import { environment } from 'src/environments/environment';
+import { CustomerRegistrationRequest } from 'src/app/models/customer/customer-registration-request';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService {
 
   private readonly authUrl = `${environment.api.baseUrl}/${environment.api.authUrl}`;
+  private readonly registerUrl = `${environment.api.baseUrl}/${environment.api.registerUrl}`;
   private jwtHelper = new JwtHelperService();
   private userRoleSubject = new BehaviorSubject<string>('visitor'); // Initial role is 'visitor'
   userRole$ = this.userRoleSubject.asObservable(); // Observable to subscribe to role changes
@@ -30,7 +32,9 @@ export class AuthenticationService {
       })
     );
   }
-
+  registerCustomer(customer: CustomerRegistrationRequest): Observable<void> {
+    return this.http.post<void>(this.registerUrl, customer);
+  }
   getToken(): string | null {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {

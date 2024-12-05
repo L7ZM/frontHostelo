@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerDTO } from '../../../models/customer/customer-dto';
-import { CustomerService } from '../../../services/customer/customer.service';
-import { CustomerRegistrationRequest } from '../../../models/customer/customer-registration-request';
+import { CustomerDTO } from '../../../../models/customer/customer-dto';
+import { CustomerService } from '../../../../services/customer/customer.service';
+import { CustomerRegistrationRequest } from '../../../../models/customer/customer-registration-request';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 

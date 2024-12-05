@@ -26,9 +26,6 @@ export class CustomerService {
   ): Observable<any> {
     return this.http.post(`${this.customerUrl}`, customer);
   }
-  registerCustomer(customer: CustomerRegistrationRequest): Observable<void> {
-    return this.http.post<void>(this.customerUrl, customer);
-  }
 
   deleteCustomer(email: string | undefined): Observable<void> {
     return this.http.delete<void>(`${this.customerUrl}/${email}`);

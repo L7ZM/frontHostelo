@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustomerComponent } from './components/customers Management/customer/customer.component';
+import { CustomerComponent } from './components/admin features/customers Management/customer/customer.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { RoomManagementComponent } from './components/room-management/room-management.component';
+import { RoomManagementComponent } from './components/admin features/room-management/room-management.component';
 import { HomeComponent } from './components/home/home.component';
-import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
+import { VirtualTourComponent } from './components/user featurs/virtual-tour/virtual-tour.component';
 import { RoomListComponent } from './components/room-list/room-list.component';
-import { AboutComponent } from './components/about/about.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { AboutComponent } from './components/user featurs/about/about.component';
+import { ContactComponent } from './components/user featurs/contact/contact.component';
+import { ProfileComponent } from './components/user featurs/profile/profile.component';
 import { RoleGuard } from './guards/role.guard';
 import { NoAuthGuard } from './guards/no-auth.guard';
+import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,12 @@ const routes: Routes = [
   {
     path: 'rooms',
     component: RoomManagementComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['ROLE_ADMIN'] },
+   },
+   {
+    path: 'services',
+    component: ServicesManagementComponent,
     canActivate: [RoleGuard],
     data: { roles: ['ROLE_ADMIN'] },
    },

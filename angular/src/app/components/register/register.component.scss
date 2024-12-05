@@ -1,47 +1,103 @@
 /* Flex Layout for the entire page */
 .flex {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  min-height: 100vh; /* Full viewport height */
+  height: 100vh;
+  flex-direction: row;
 }
 
 /* Form Section Styling */
 .form-section {
-  padding: 2rem;
+  padding: 1rem; /* Reduced padding */
   background: #f7f8fc;
   display: flex;
   justify-content: center;
-  flex-grow: 1; /* Allow the form section to grow and fill available space */
+  align-items: center;
+  height: 100%;
+}
+
+/* Form container with larger width */
+.form-container {
+  width: 70%; /* Increased the width */
+  max-width: 400px; /* Set max-width */
+  margin-top: 0;
 }
 
 /* Right Container Styling */
 .right-container {
-  // background-size: cover;
+  background-size: cover;
   background-position: center;
   height: 100%;
   position: relative;
-  display: flex;
-  align-items: center; /* Vertically center the image if necessary */
-  justify-content: center; /* Center the content within the container */
 }
 
 .right-container img {
   object-fit: cover;
-  width: 100%;
   height: 100%;
+  width: 100%;
+  border-radius: 0px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Field Row for inputs */
+/* Error Border for Inputs */
+.error-border {
+  border: 2px solid red !important;
+}
+
+.error-message {
+  color: red;
+  font-size: 10px; /* Smaller error message text */
+  margin-top: 3px;
+}
+
 .field-row {
   display: flex;
-  gap: 10px;
-  width: 100%; /* Ensure the field row stretches across */
+  gap: 6px; /* Reduced gap between fields */
+  width: 100%;
 }
 
-/* Flex Style for Each Input */
 .field-row .field {
-  flex: 1; /* Make fields take equal width */
+  flex: 1;
 }
 
+button {
+  width: 100%;
+  margin-top: 0.25rem; /* Reduced top margin */
+  padding: 0.4rem; /* Reduced button padding */
+  font-size: 12px; /* Smaller button font */
+  text-align: center;
+  border-radius: 4px;
+}
 
+input, button {
+  height: 35px; /* Smaller input height */
+  font-size: 14px; /* Smaller font size */
+}
+/* Adjusted Form Container for Smaller Form */
+.form-container.small-form {
+  width: 55%; /* Reduced the width further */
+  max-width: 320px;
+  padding: 1rem;
+}
+
+.navbar-logo {
+  width: 120px; /* Increased logo size */
+  height: 120px;
+}
+
+/* Login Link Styling */
+.login-link {
+  font-size: 12px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+/* Field Row */
+.field-row {
+  display: flex;
+  gap: 8px;
+}

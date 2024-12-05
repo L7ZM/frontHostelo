@@ -1,10 +1,16 @@
-
-<div class="flex" style="height: 100vh; flex-direction: row;">
+<div class="flex" style="flex-direction: row;">
   <!-- Form Section -->
   <div class="col-6 form-section flex flex-column justify-content-center">
-    <div class="m-auto">
+    <div class="form-container">
       <div class="text-center">
-        <h1>Sign in to your account</h1>
+        <a routerLink="" class="d-flex justify-content-center mb-3">
+          <img
+            src="assets/LogoPNG.png"
+            alt="Hotel Logo"
+            class="navbar-logo"
+          />
+        </a>
+        <h1>Welcome Back!</h1>
       </div>
 
       <p-message
@@ -72,12 +78,9 @@
       </form>
 
       <!-- Signup Button -->
-      <button
-        pButton
-        label="Don't have an account? Signup now."
-        class="w-full p-button-link text-left pl-0"
-        (click)="register()"
-      ></button>
+      <div class="signup-button" (click)="register()">
+        Don’t have an account yet? <span style="font-weight: bold;">Sign up here!</span>
+      </div>
     </div>
   </div>
 
