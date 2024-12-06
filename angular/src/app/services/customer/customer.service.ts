@@ -24,7 +24,7 @@ export class CustomerService {
   createCustomer(
     customer: CustomerRegistrationRequest,
   ): Observable<any> {
-    return this.http.post(`${this.customerUrl}`, customer);
+    return this.http.post(`http://localhost:8080/api/admin/createUser`, customer);
   }
 
   deleteCustomer(email: string | undefined): Observable<void> {
@@ -35,7 +35,7 @@ export class CustomerService {
     customer: CustomerDTO,
     token: string
   ): Observable<CustomerDTO> {
-    return this.http.put<CustomerDTO>(`${this.customerUrl}`, customer, {
+    return this.http.put<CustomerDTO>(`http://localhost:8080/api/user/update`, customer, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

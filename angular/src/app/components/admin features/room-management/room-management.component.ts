@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Room } from 'src/app/models/room/room.model';
 import { RoomService } from 'src/app/services/rooms/room-service.service';
 
@@ -7,9 +7,10 @@ import { RoomService } from 'src/app/services/rooms/room-service.service';
   selector: 'app-room',
   templateUrl: './room-management.component.html',
   styleUrls: ['./room-management.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService,ConfirmationService]
 })
 export class RoomManagementComponent {
+
   rooms: Room[] = [];
   room: Room = {
     numeroChambre: 0,
@@ -37,7 +38,8 @@ export class RoomManagementComponent {
 
   constructor(
     private roomService: RoomService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
   ) {
     this.loadRooms();
   }
@@ -73,23 +75,35 @@ export class RoomManagementComponent {
   }
 
   deleteRoom(room: Room) {
-    if (confirm('Are you sure you want to delete this room?')) {
-      this.roomService.delete(room.id!).subscribe({
-        next: () => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Room deleted successfully'
-          });
-          this.loadRooms();
-        },
-        error: () => this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to delete room'
-        })
-      });
-    }
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this room?',
+      header: 'Confirm Deletion',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.roomService.delete(room.id!).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Room deleted successfully'
+            });
+            this.loadRooms();
+          },
+          error: () => this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Failed to delete room'
+          })
+        });
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Cancelled',
+          detail: 'Room deletion cancelled'
+        });
+      }
+    });
   }
 
   onPhotoSelect(event: any) {
