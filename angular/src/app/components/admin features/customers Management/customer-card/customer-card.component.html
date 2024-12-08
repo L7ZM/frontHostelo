@@ -1,10 +1,9 @@
 <p-card [style]="{width: '250px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'}"
         styleClass="p-card-shadow text-center customer-card compact-card">
   <ng-template pTemplate="content">
-    <p-badge
-      [value]="customer.id !== undefined ? customer.id.toString() : ''"
-      class="customer-badge compact-badge"
-    ></p-badge>
+
+    <img class="img-avatar" src="assets/media/avatars/avatar13.jpg" alt="">
+
 
     <h2 class="customer-name">{{ customer.nom }}</h2>
     <h3 class="customer-email">{{ customer.email }}</h3>

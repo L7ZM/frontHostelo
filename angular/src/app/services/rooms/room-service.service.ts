@@ -10,7 +10,7 @@ import { Room } from 'src/app/models/room/room.model';
 export class RoomService {
   private baseUrl = 'http://localhost:8080/api/chambres';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAll(): Observable<Room[]> {
     return this.http.get<Room[]>(this.baseUrl)
@@ -25,17 +25,14 @@ export class RoomService {
   create(formData: FormData): Observable<Room> {
     return this.http.post<Room>(this.baseUrl, formData, {
       headers: new HttpHeaders({
-        'Accept': 'application/json'
+        Accept: 'application/json'
       })
     }).pipe(catchError(this.handleError));
   }
 
-  update(id: number, formData: FormData): Observable<Room> {
-    return this.http.put<Room>(`${this.baseUrl}/${id}`, formData, {
-      headers: new HttpHeaders({
-        'Accept': 'application/json'
-      })
-    }).pipe(catchError(this.handleError));
+  update(id: number, room: Room): Observable<Room> {
+    return this.http.put<Room>(`${this.baseUrl}/${id}`, room)
+      .pipe(catchError(this.handleError));
   }
 
   delete(id: number): Observable<void> {

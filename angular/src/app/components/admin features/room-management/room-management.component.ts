@@ -107,68 +107,50 @@ export class RoomManagementComponent {
   }
 
   onPhotoSelect(event: any) {
-    const files = event.files;
+    // Ensure this.room.photos exists before using it
+    if (!this.room.photos) {
+      this.room.photos = [];
+    }
+
+    const files: FileList = event.files;
     if (files && files.length > 0) {
-      // Use type assertion to ensure TypeScript understands the array contains File objects
-      (files as File[]).forEach((file: File) => {
-        // Check if it's a valid File object
-        if (file instanceof File) {
-          this.room.photos.push(file);
+      Array.from(files).forEach((file: File) => {
+        this.room.photos.push(file); // Push each file into the photos array
+      });
+    }
+  }
+
+
+  removePhoto(index: number) {
+    this.room.photos.splice(index, 1);
+  }
+
+  saveRoom() {
+    if (this.isNew) {
+      const formData = new FormData();
+      formData.append("chambre", JSON.stringify(this.room)); // Serialize the room object
+
+      // Append each photo
+      this.room.photos.forEach(photo => {
+        formData.append("photo", photo);  // Assuming the API expects 'photo' key
+      });
+
+      this.roomService.create(formData).subscribe({
+        next: (room) => {
+          console.log("Room created successfully:", room);
+        },
+        error: (error) => {
+          console.error("Error creating room:", error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Failed to create room'
+          });
         }
       });
     }
   }
 
 
-
-  removePhoto(index: number) {
-    this.room.photos.splice(index, 1);
-  }
-  saveRoom() {
-    const formData = new FormData();
-    formData.append('chambre', JSON.stringify(this.room)); // The room details as JSON string
-
-    // Append each file in the photos array to FormData
-    this.room.photos.forEach((photo: File) => {
-      formData.append('photo', photo, photo.name); // 'photo' as the field name and `photo.name` for the filename
-    });
-
-    // Send the form data to the backend
-    if (this.isNew) {
-      this.roomService.create(formData).subscribe({
-        next: () => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Room created successfully'
-          });
-          this.loadRooms();
-          this.displayDialog = false;
-        },
-        error: () => this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to create room'
-        })
-      });
-    } else {
-      this.roomService.update(this.room.id!, formData).subscribe({
-        next: () => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Room updated successfully'
-          });
-          this.loadRooms();
-          this.displayDialog = false;
-        },
-        error: () => this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to update room'
-        })
-      });
-    }
-  }
 
 }

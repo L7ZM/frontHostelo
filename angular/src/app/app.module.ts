@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { CustomerComponent } from './components/admin features/customers Management/customer/customer.component';
 import { AvatarModule } from 'primeng/avatar';
@@ -27,9 +27,14 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CardModule } from 'primeng/card';
 import { BadgeModule } from 'primeng/badge';
 import { ToastModule } from 'primeng/toast';
+import { CalendarModule } from 'primeng/calendar';
+import { ListboxModule } from 'primeng/listbox';
+import { CheckboxModule } from 'primeng/checkbox';
 import { CarouselModule } from 'primeng/carousel';
+import { DividerModule } from 'primeng/divider';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SplitterModule } from 'primeng/splitter';
 import { RegisterComponent } from './components/register/register.component';
 import { RoomManagementComponent } from './components/admin features/room-management/room-management.component';
 import { HomeComponent } from './components/home/home.component';
@@ -41,6 +46,9 @@ import { ProfileComponent } from './components/user featurs/profile/profile.comp
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
+import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
+
+
 
 @NgModule({
   declarations: [
@@ -60,8 +68,12 @@ import { ServicesManagementComponent } from './components/admin features/service
     ContactComponent,
     ProfileComponent,
     ServicesManagementComponent,
+    RoomBookingComponent,
   ],
-  imports: [
+  imports: [SplitterModule,DividerModule,ReactiveFormsModule,
+    CheckboxModule,
+    ListboxModule,
+    CalendarModule,
     FormsModule,
     CarouselModule,
     InputTextareaModule,

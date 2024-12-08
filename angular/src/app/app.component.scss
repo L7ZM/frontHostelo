@@ -1,0 +1,19 @@
+/* CSS for sticky footer layout */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; /* Pushes the footer to the bottom when content is short */
+}
+
+footer {
+  width: 100%;
+}

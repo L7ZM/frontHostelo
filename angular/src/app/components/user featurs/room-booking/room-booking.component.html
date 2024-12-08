@@ -1,0 +1,25 @@
+<div class="hotel-cards-container">
+  <div class="hotel-card" *ngFor="let room of rooms">
+    <div class="hotel-left">
+      <p-carousel [value]="room.images" [numVisible]="1" [numScroll]="1" [circular]="true" >
+        <ng-template pTemplate="item" let-image>
+          <img [src]="image" alt="Room Image" class="carousel-image" />
+        </ng-template>
+      </p-carousel>
+    </div>
+    
+    <div class="hotel-right">
+      <h2 class="hotel-title">{{ room.numeroChambre }} - {{ room.type }}</h2>
+      <div class="hotel-info">
+        <span class="etat" [ngClass]="{'available': room.etat === 'DISPONIBLE', 'unavailable': room.etat !== 'DISPONIBLE'}">
+          {{ room.etat }}
+        </span>
+      </div>
+      <p class="description">{{ room.description }}</p>
+      <div class="price-section">
+        <span class="price">{{ room.prix }} EUR / nuit</span>
+        <button class="cta-button">Afficher les tarifs</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+.hotel-cards-container {
+  display: flex;
+  flex-direction: column; /* Stack the cards vertically */
+  gap: 20px;
+  justify-content: center;
+  padding: 50px 20px;
+  align-items: center; /* Center align the cards */
+}
+
+.hotel-card {
+  display: flex;
+  flex-direction: row; /* Keep the layout horizontal */
+  width: 800px; /* Increased width for larger cards */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+
+  .hotel-left {
+    width: 50%;
+    height: 100%;
+  }
+
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hotel-right {
+    padding: 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+
+    .hotel-title {
+      font-size: 24px; /* Larger title */
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .hotel-info {
+      display: flex;
+      gap: 8px;
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 15px;
+
+      .rating {
+        color: #ff9800;
+      }
+    }
+
+    .description {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .details-link {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 14px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .price-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .price {
+        font-size: 20px; /* Larger price */
+        font-weight: bold;
+      }
+
+      .cta-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
+}
