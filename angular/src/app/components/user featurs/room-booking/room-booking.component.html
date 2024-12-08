@@ -1,13 +1,25 @@
+<div class="search-bar-container">
+  <p-toolbar class="search-bar">
+    <div class="p-toolbar-group-left">
+      <p-calendar [(ngModel)]="dates" selectionMode="range" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" placeholder="Select Date Range" class="search-input"></p-calendar>
+    </div>
+    <div class="p-toolbar-group-right">
+      <button pButton pRipple label="Search" icon="pi pi-search" class="p-button-primary search-btn" (click)="onSearch()"></button>
+    </div>
+  </p-toolbar>
+</div>
+
 <div class="hotel-cards-container">
   <div class="hotel-card" *ngFor="let room of rooms">
     <div class="hotel-left">
-      <p-carousel [value]="room.images" [numVisible]="1" [numScroll]="1" [circular]="true" >
+      <!-- Carousel for room photos -->
+      <p-carousel [value]="roomPhotos[room.id]" [numVisible]="1" [numScroll]="1" [circular]="true">
         <ng-template pTemplate="item" let-image>
           <img [src]="image" alt="Room Image" class="carousel-image" />
         </ng-template>
       </p-carousel>
     </div>
-    
+
     <div class="hotel-right">
       <h2 class="hotel-title">{{ room.numeroChambre }} - {{ room.type }}</h2>
       <div class="hotel-info">

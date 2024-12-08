@@ -1,99 +1,120 @@
 .hotel-cards-container {
   display: flex;
-  flex-direction: column; /* Stack the cards vertically */
-  gap: 20px;
-  justify-content: center;
-  padding: 50px 20px;
-  align-items: center; /* Center align the cards */
+  flex-direction: column;
+  gap: 25px; /* Moderate gap between cards */
+  justify-content: flex-start;
+  padding: 40px 20px; /* More subtle padding */
+  align-items: center;
+  background-color: #f9f9f9; /* Soft, light background */
 }
 
 .hotel-card {
   display: flex;
-  flex-direction: row; /* Keep the layout horizontal */
-  width: 800px; /* Increased width for larger cards */
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  flex-direction: row;
+  width: 900px; /* Moderate width */
+  background-color: #ffffff;
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px); /* Slight hover effect */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
   }
 
   .hotel-left {
-    width: 50%;
+    width: 55%; /* Balanced left side */
     height: 100%;
+    position: relative;
   }
 
   .carousel-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    transition: opacity 0.5s ease;
   }
 
   .hotel-right {
-    padding: 20px;
-    width: 50%;
+    padding: 25px; /* Balanced padding */
+    width: 45%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+  }
 
-    .hotel-title {
-      font-size: 24px; /* Larger title */
-      font-weight: bold;
-      margin-bottom: 10px;
+  .hotel-title {
+    font-size: 24px; /* Subtle yet prominent title */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+
+  .hotel-info {
+    display: flex;
+    gap: 10px; /* Moderate space between items */
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 15px;
+
+    .rating {
+      color: #ffb400; /* Golden rating for emphasis */
+    }
+  }
+
+  .description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+
+  .details-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .price-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .price {
+      font-size: 22px; /* Moderate price size */
+      font-weight: 700;
+      color: #4caf50;
     }
 
-    .hotel-info {
-      display: flex;
-      gap: 8px;
-      font-size: 14px;
-      color: #777;
-      margin-bottom: 15px;
+    .cta-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px; /* Subtle button size */
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
 
-      .rating {
-        color: #ff9800;
-      }
-    }
-
-    .description {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 15px;
-    }
-
-    .details-link {
-      color: #007bff;
-      text-decoration: none;
-      font-size: 14px;
       &:hover {
-        text-decoration: underline;
-      }
-    }
-
-    .price-section {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .price {
-        font-size: 20px; /* Larger price */
-        font-weight: bold;
+        background-color: #0056b3;
+        transform: translateY(-2px); /* Subtle button hover effect */
       }
 
-      .cta-button {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        font-size: 14px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        &:hover {
-          background-color: #0056b3;
-        }
+      &:active {
+        transform: translateY(1px); /* Press effect */
       }
     }
   }
 }
+

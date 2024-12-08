@@ -16,7 +16,10 @@ export class RoomService {
     return this.http.get<Room[]>(this.baseUrl)
       .pipe(catchError(this.handleError));
   }
-
+ 
+  getPhotoById(roomId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${roomId}/photos`);
+  }
   getById(id: number): Observable<Room> {
     return this.http.get<Room>(`${this.baseUrl}/${id}`)
       .pipe(catchError(this.handleError));
