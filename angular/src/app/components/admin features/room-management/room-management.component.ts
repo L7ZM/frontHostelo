@@ -41,7 +41,18 @@ export class RoomManagementComponent {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
   ) {
-    this.loadRooms();
+    // this.loadRooms();
+  }
+
+  ngOnInit(): void {
+    this.roomService.getAll().subscribe({next: (data) => this.rooms = data,
+      error: () => this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to load rooms'
+      })
+      // this.filteredRooms = [...this.rooms]; // Initially show all rooms
+    });
   }
 
   loadRooms() {
