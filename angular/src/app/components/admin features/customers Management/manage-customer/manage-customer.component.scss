@@ -1,94 +1,73 @@
-/* Form container styling */
+/* Form container */
 .form-container {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 25px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
+/* Form title */
 .form-title {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: bold;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   text-align: center;
-  letter-spacing: 0.5px;
 }
 
+/* Input fields */
 .field {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  margin-bottom: 15px;
 }
 
 label {
-  font-size: 1.1rem;
-  color: #666;
-  font-weight: 500;
-}
-
-.input-field {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.3s ease;
-
-  &:focus {
-    border-color: #42a5f5;
-    box-shadow: 0 0 5px rgba(66, 165, 245, 0.5);
-  }
-
-  width: 100%;
-}
-
-/* Error message styling */
-.error-msg {
-  color: #e53935;
   font-size: 0.9rem;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+}
+
+.error-msg {
+  font-size: 0.8rem;
+  color: red;
   margin-top: 5px;
 }
 
-/* Button styles */
-.submit-btn {
-  padding: 14px;
-  background-color: #4caf50;
-  color: white;
-  border-radius: 8px;
+/* Buttons */
+.btn {
   width: 100%;
-  font-size: 1.1rem;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
   margin-top: 10px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
-  }
-
-  &:disabled {
-    background-color: #bdbdbd;
-    cursor: not-allowed;
-  }
+  background-color: #007bff;
+  color: white;
+  text-align: center;
 }
 
-.cancel-btn {
-  padding: 14px;
-  background-color: #e53935;
-  color: white;
-  border-radius: 8px;
-  width: 100%;
-  font-size: 1.1rem;
-  margin-top: 10px;
-  transition: all 0.3s ease;
+.btn:hover {
+  background-color: #0056b3;
+}
 
-  &:hover {
-    background-color: #d32f2f;
-    transform: translateY(-2px);
-  }
+.btn.cancel {
+  background-color: #dc3545;
+}
+
+.btn.cancel:hover {
+  background-color: #c82333;
 }

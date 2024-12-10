@@ -7,9 +7,7 @@
       [(ngModel)]="customer.nom"
       id="nom"
       pInputText
-      placeholder="Jane"
       type="text"
-      class="input-field"
       #nom="ngModel"
       required
     />
@@ -22,9 +20,7 @@
       [(ngModel)]="customer.prenom"
       id="prenom"
       pInputText
-      placeholder="Arablanca"
       type="text"
-      class="input-field"
       #prenom="ngModel"
       required
     />
@@ -37,9 +33,7 @@
       [(ngModel)]="customer.email"
       id="email"
       pInputText
-      placeholder="Jane@gmail.com"
       type="email"
-      class="input-field"
       #email="ngModel"
       required
       email
@@ -53,9 +47,7 @@
       [(ngModel)]="customer.telephone"
       id="telephone"
       pInputText
-      placeholder="07 07 07 07 07"
       type="text"
-      class="input-field"
       #telephone="ngModel"
       required
     />
@@ -68,9 +60,7 @@
       [(ngModel)]="customer.adresse"
       id="adresse"
       pInputText
-      placeholder="123 rue city"
       type="text"
-      class="input-field"
       #adresse="ngModel"
       required
     />
@@ -84,7 +74,6 @@
       id="dateNaissance"
       pInputText
       type="date"
-      class="input-field"
       #dateNaissance="ngModel"
       required
     />
@@ -97,9 +86,7 @@
       [(ngModel)]="customer.password"
       id="password"
       pInputText
-      placeholder="Password"
       type="password"
-      class="input-field"
       #password="ngModel"
       required
       minlength="6"
@@ -112,12 +99,12 @@
     (click)="onSubmit()"
     pButton
     label="Submit"
-    class="submit-btn"
+    class="btn"
   ></button>
   <button
     (click)="onCancel()"
     pButton
     label="Cancel"
-    class="cancel-btn"
+    class="btn cancel"
   ></button>
 </div>

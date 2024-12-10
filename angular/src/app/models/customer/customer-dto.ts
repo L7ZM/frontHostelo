@@ -10,4 +10,5 @@ export interface CustomerDTO {
   dateNaissance? : Date;
   roles?: string[],
   username?: string;
+  password?:string
 }

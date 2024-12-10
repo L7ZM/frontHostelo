@@ -35,12 +35,23 @@ export class CustomerService {
     customer: CustomerDTO,
     token: string
   ): Observable<CustomerDTO> {
-    return this.http.put<CustomerDTO>(`http://localhost:8080/api/user/update`, customer, {
+    return this.http.put<CustomerDTO>(`http://localhost:8080/api/admin/updateUser`, customer, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
   }
 
+  updateCurrentCustomer(
+    customer: CustomerDTO,
+    token: string
+  ): Observable<CustomerDTO> {
+    return this.http.put<CustomerDTO>(`http://localhost:8080/api/user/update`, customer, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'  // Ensure Content-Type is set to application/json
+      },
+    });
+  }
 
 }

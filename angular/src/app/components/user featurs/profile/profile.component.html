@@ -1,14 +1,22 @@
+
 <main id="main-container">
   <!-- Hero -->
-  <div class="bg-image" style="background-image: url('assets/media/photos/photo10@2x.jpg');">
+  <div
+    class="bg-image"
+    style="background-image: url('assets/media/photos/photo10@2x.jpg')"
+  >
     <div class="bg-primary-dark-op">
       <div class="content content-full text-center">
         <div class="my-3">
-          <img class="img-avatar img-avatar-thumb" src="assets/media/avatars/avatar13.jpg" alt="">
+          <img
+            class="img-avatar img-avatar-thumb"
+            src="assets/media/avatars/avatar13.jpg"
+            alt="User Avatar"
+          />
         </div>
         <h1 class="h2 text-white mb-0">Edit Account</h1>
         <h2 class="h4 fw-normal text-white-75">
-          John Parker
+          {{ userProfile.nom }} {{ userProfile.prenom }}
         </h2>
       </div>
     </div>
@@ -23,123 +31,129 @@
         <h3 class="block-title">User Profile</h3>
       </div>
       <div class="block-content">
-        <form method="POST" enctype="multipart/form-data" (ngSubmit)="update()">
+        <form (ngSubmit)="update()">
           <div class="row push">
             <div class="col-lg-4"></div>
             <div class="col-lg-8 col-xl-5">
-
+              <!-- Last Name -->
               <div class="mb-4">
-                <label class="form-label" for="one-profile-edit-username">Last name</label>
+                <label class="form-label" for="last-name">Last name</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="one-profile-edit-username"
-                  name="one-profile-edit-username"
+                  id="last-name"
+                  name="last-name"
                   placeholder="Enter your last name.."
-                  [(ngModel)]="userProfile.prenom">
+                  [(ngModel)]="userProfile.prenom"
+                  required
+                />
               </div>
 
+              <!-- Name -->
               <div class="mb-4">
-                <label class="form-label" for="one-profile-edit-name">Name</label>
+                <label class="form-label" for="name">Name</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="one-profile-edit-name"
-                  name="one-profile-edit-name"
+                  id="name"
+                  name="name"
                   placeholder="Enter your name.."
-                  [(ngModel)]="userProfile.nom">
+                  [(ngModel)]="userProfile.nom"
+                  required
+                />
               </div>
 
+              <!-- Email -->
               <div class="mb-4">
-                <label class="form-label" for="one-profile-edit-email">Email Address</label>
+                <label class="form-label" for="email">Email Address</label>
                 <input
                   type="email"
                   class="form-control"
-                  id="one-profile-edit-email"
-                  name="one-profile-edit-email"
+                  id="email"
+                  name="email"
                   placeholder="Enter your email.."
-                  [(ngModel)]="userProfile.email">
+                  [(ngModel)]="userProfile.email"
+                  required
+                />
               </div>
 
+              <!-- Phone -->
               <div class="mb-4">
-                <label class="form-label" for="one-profile-edit-phone">Phone Number</label>
+                <label class="form-label" for="phone">Phone Number</label>
                 <input
                   type="tel"
                   class="form-control"
-                  id="one-profile-edit-phone"
-                  name="one-profile-edit-phone"
+                  id="phone"
+                  name="phone"
                   placeholder="Enter your phone.."
-                  [(ngModel)]="userProfile.telephone">
+                  [(ngModel)]="userProfile.telephone"
+                  required
+                />
               </div>
 
+              <!-- Birth Date -->
               <div class="mb-4">
-                <label class="form-label" for="one-profile-edit-date">Date De naissance</label>
+                <label class="form-label" for="birth-date">Date De naissance</label>
                 <input
                   type="date"
                   class="form-control"
-                  id="one-profile-edit-date"
-                  name="one-profile-edit-date"
-                  [(ngModel)]="userProfile.dateNaissance">
+                  id="birth-date"
+                  name="birth-date"
+                  [(ngModel)]="userProfile.dateNaissance"
+                  required
+                />
               </div>
 
+              <!-- Address -->
               <div class="mb-4">
-                <label class="form-label" for="one-profile-edit-adress">Address</label>
+                <label class="form-label" for="address">Address</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="one-profile-edit-adress"
-                  name="one-profile-edit-adress"
+                  id="address"
+                  name="address"
                   placeholder="Enter your address.."
-                  [(ngModel)]="userProfile.adresse">
+                  [(ngModel)]="userProfile.adresse"
+                />
               </div>
+
+              <!-- New Password -->
               <div class="mb-4">
-                <button onclick="update()" class="btn btn-alt-primary">
-                  Update
-                </button>
+                <label class="form-label" for="new-password">New Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="new-password"
+                  name="new-password"
+                  [(ngModel)]="newPassword"
+                  (input)="checkPasswords()"
+                />
               </div>
-            </div>
-          </div>
-        </form>
 
-
-
-
-
-
-
-
-      </div>
-    </div>
-    <!-- END User Profile -->
-
-    <!-- Change Password -->
-    <div class="block block-rounded">
-      <div class="block-header block-header-default">
-        <h3 class="block-title">Change Password</h3>
-      </div>
-      <div class="block-content">
-        <form  method="POST" onsubmit="return false;">
-          <div class="row push">
-            <div class="col-lg-4">
-              <p class="fs-sm text-muted">
-                Changing your sign in password is an easy way to keep your account secure.
-              </p>
-            </div>
-            <div class="col-lg-8 col-xl-5">
-              <div class="row mb-4">
-                <div class="col-12">
-                  <label class="form-label" for="one-profile-edit-password-new">New Password</label>
-                  <input type="password" class="form-control" id="one-profile-edit-password-new" name="one-profile-edit-password-new">
+              <!-- Confirm Password -->
+              <div class="mb-4">
+                <label class="form-label" for="confirm-password">Confirm New Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirm-password"
+                  name="confirm-password"
+                  [(ngModel)]="confirmPassword"
+                  [ngClass]="{ 'is-invalid': passwordsMismatch }"
+                  (input)="checkPasswords()"
+                />
+                <div *ngIf="passwordsMismatch" class="invalid-feedback">
+                  Passwords do not match.
                 </div>
               </div>
-              <div class="row mb-4">
-                <div class="col-12">
-                  <label class="form-label" for="one-profile-edit-password-new-confirm">Confirm New Password</label>
-                  <input type="password" class="form-control" id="one-profile-edit-password-new-confirm" name="one-profile-edit-password-new-confirm">
-                </div>
-              </div>
+
+              <!-- Submit Button -->
               <div class="mb-4">
-                <button type="submit" class="btn btn-alt-primary">
+                <button
+                  type="submit"
+                  class="btn btn-alt-primary"
+                  [disabled]="passwordsMismatch"
+                >
                   Update
                 </button>
               </div>
@@ -148,7 +162,10 @@
         </form>
       </div>
     </div>
-    <!-- END Change Password -->
+
   </div>
+
   <!-- END Page Content -->
 </main>
+<p-toast></p-toast>
+
