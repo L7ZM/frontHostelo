@@ -86,14 +86,16 @@ input, button {
 
 /* Login Link Styling */
 .login-link {
-  font-size: 12px;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
   color: #007bff;
-  text-decoration: none;
+  cursor: pointer;
 }
 
 .login-link:hover {
   text-decoration: underline;
-  color: #0056b3;
+
 }
 
 /* Field Row */
