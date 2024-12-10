@@ -20,14 +20,16 @@ export class RoomManagementComponent {
     description: '',
     photos: []
   };
+
+  photo: File[] = [];
   selectedRoom: Room | null = null;
   displayDialog = false;
   isNew = false;
 
   typeOptions = [
-    { label: 'Single', value: 'single' },
-    { label: 'Double', value: 'Double' },
-    { label: 'Deluxe', value: 'Deluxe' }
+    { label: 'SINGLE', value: 'SINGLE' },
+    { label: 'DOUBLE', value: 'DOUBLE' },
+    { label: 'DELUXE', value: 'DELUXE' }
   ];
 
   etatOptions = [
@@ -41,7 +43,18 @@ export class RoomManagementComponent {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
   ) {
-    this.loadRooms();
+    // this.loadRooms();
+  }
+
+  ngOnInit(): void {
+    this.roomService.getAll().subscribe({next: (data) => this.rooms = data,
+      error: () => this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to load rooms'
+      })
+      // this.filteredRooms = [...this.rooms]; // Initially show all rooms
+    });
   }
 
   loadRooms() {
@@ -107,15 +120,10 @@ export class RoomManagementComponent {
   }
 
   onPhotoSelect(event: any) {
-    // Ensure this.room.photos exists before using it
-    if (!this.room.photos) {
-      this.room.photos = [];
-    }
-
     const files: FileList = event.files;
     if (files && files.length > 0) {
       Array.from(files).forEach((file: File) => {
-        this.room.photos.push(file); // Push each file into the photos array
+        this.photo.push(file); 
       });
     }
   }
@@ -128,16 +136,22 @@ export class RoomManagementComponent {
   saveRoom() {
     if (this.isNew) {
       const formData = new FormData();
-      formData.append("chambre", JSON.stringify(this.room)); // Serialize the room object
-
-      // Append each photo
-      this.room.photos.forEach(photo => {
-        formData.append("photo", photo);  // Assuming the API expects 'photo' key
+  
+      formData.append("chambre", JSON.stringify(this.room));
+  
+      this.photo.forEach((photo) => {
+        formData.append("photo", photo); 
       });
-
+  
       this.roomService.create(formData).subscribe({
         next: (room) => {
-          console.log("Room created successfully:", room);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Room created successfully'
+          });
+          this.loadRooms(); 
+          this.displayDialog = false; 
         },
         error: (error) => {
           console.error("Error creating room:", error);
@@ -150,7 +164,6 @@ export class RoomManagementComponent {
       });
     }
   }
-
 
 
 }

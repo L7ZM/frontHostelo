@@ -10,6 +10,7 @@ export class RoomBookingComponent {
   dates: Date[] = [];  // Model for the date range picker
   startDate!: Date;
   endDate!: Date;
+  roomPhotos: { [key: number]: string[] } = {};
 
   onSearch() {
     if (this.dates) {
@@ -20,7 +21,6 @@ export class RoomBookingComponent {
     }
   }
   rooms: any[] = [];
-  roomPhotos: any = {}; 
   constructor(private roomService: RoomService) {}
   ngOnInit(): void {
     this.roomService.getAll().subscribe(
@@ -32,6 +32,7 @@ export class RoomBookingComponent {
       }
     );
   }
+  
     // Method to fetch room photos by room ID
     fetchRoomPhotos(roomId: number): void {
       this.roomService.getPhotoById(roomId).subscribe(

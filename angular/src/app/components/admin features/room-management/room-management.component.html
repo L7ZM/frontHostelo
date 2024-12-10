@@ -24,7 +24,11 @@
       <ng-template pTemplate="body" let-room>
         <tr>
 
-          <td>{{room.photos}}</td>
+          <td><p-carousel [value]="room.photos" [numVisible]="1" [numScroll]="1">
+            <ng-template pTemplate="item" let-photo>
+              <img [src]="'data:image/jpeg;base64,' + photo" alt="Room photo" style="width: 30%; height: auto;">
+            </ng-template>
+          </p-carousel></td>
           <td>{{room.numeroChambre}}</td>
           <td>{{room.type}}</td>
           <td>{{room.etat}}</td>
