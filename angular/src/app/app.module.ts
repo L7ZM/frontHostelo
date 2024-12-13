@@ -47,6 +47,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
 import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 
@@ -70,7 +71,7 @@ import { RoomBookingComponent } from './components/user featurs/room-booking/roo
     ServicesManagementComponent,
     RoomBookingComponent,
   ],
-  imports: [SplitterModule,DividerModule,ReactiveFormsModule,
+  imports: [MultiSelectModule, SplitterModule, DividerModule, ReactiveFormsModule,
     CheckboxModule,
     ListboxModule,
     CalendarModule,
@@ -111,4 +112,4 @@ import { RoomBookingComponent } from './components/user featurs/room-booking/roo
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

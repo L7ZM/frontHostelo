@@ -9,9 +9,6 @@
     </div>
   </div>
   <div class="block-content">
-    <p class="fs-sm text-muted">
-      Manage your services here. You can add, edit, or delete services with details such as name, description, and price.
-    </p>
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-vcenter">
         <thead>
@@ -26,9 +23,9 @@
         <tbody>
           <tr *ngFor="let service of services; let i = index">
             <td>{{ i + 1 }}</td>
-            <td class="fw-semibold fs-sm">{{ service.name }}</td>
+            <td class="fw-semibold fs-sm">{{ service.nomService }}</td>
             <td class="fs-sm">{{ service.description }}</td>
-            <td class="fs-sm">{{ service.price | currency }}</td>
+            <td class="fs-sm">{{ service.prix | currency }}</td>
             <td class="text-center">
               <div class="btn-group">
                 <!-- Edit Button -->
@@ -62,16 +59,16 @@
 <p-dialog [(visible)]="serviceDialog" [header]="service.id ? 'Edit Service' : 'Add Service'" [modal]="true" [closable]="false" [style]="{width: '30vw'}">
   <div class="p-fluid">
     <div class="p-field">
-      <label for="name">Name</label>
-      <input id="name" type="text" pInputText [(ngModel)]="service.name" required />
+      <label for="nomService">Name</label>
+      <input id="nomService" type="text" pInputText [(ngModel)]="service.nomService" required />
     </div>
     <div class="p-field">
       <label for="description">Description</label>
       <input id="description" type="text" pInputText [(ngModel)]="service.description" required />
     </div>
     <div class="p-field">
-      <label for="price">Price</label>
-      <input id="price" type="number" pInputText [(ngModel)]="service.price" required />
+      <label for="prix">Price</label>
+      <input id="prix" type="number" pInputText [(ngModel)]="service.prix" required />
     </div>
   </div>
   <div class="p-dialog-footer">

@@ -1,5 +1,7 @@
-export  interface CustomerRegistrationRequest {
-  id?: number ;
+
+
+export interface CustomerRegistrationRequest {
+  id?: number;
   nom?: string;
   prenom?: string;
   email?: string;
@@ -8,4 +10,5 @@ export  interface CustomerRegistrationRequest {
   adresse?: string;
   pointsFidelite?: number;
   dateNaissance?: Date;
+  authorities?: { authority: string }[];
 }

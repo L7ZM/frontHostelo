@@ -1,3 +1,5 @@
+
+
 export interface CustomerDTO {
 
   id?: number;
@@ -6,9 +8,10 @@ export interface CustomerDTO {
   email?: string;
   adresse?: string ;
   telephone?: string ;
-  pointsFidelite: number;
+  pointsFidelite?: number;
   dateNaissance? : Date;
   roles?: string[],
   username?: string;
   password?:string
+  authorities?: { authority: string }[];
 }

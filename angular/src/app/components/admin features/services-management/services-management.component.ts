@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { ServicesManageService } from 'src/app/services/servicesManagement/services-manage.service'; // Import the service
 
 @Component({
   selector: 'app-services-management',
@@ -7,21 +8,33 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./services-management.component.scss'],
   providers: [MessageService],
 })
-export class ServicesManagementComponent {
-addService() {
-throw new Error('Method not implemented.');
-}
-  services = [
-    { id: 1, name: 'Premium Cleaning', description: 'Detailed cleaning service for rooms', price: 50 },
-    { id: 2, name: 'Laundry Service', description: 'Fast and reliable laundry service', price: 15 },
-    { id: 3, name: 'Room Service', description: '24/7 food and beverage service', price: 30 },
-  ];
-
+export class ServicesManagementComponent implements OnInit {
+  services: any[] = [];
   serviceDialog: boolean = false;
   service: any = {};
   submitted: boolean = false;
 
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private messageService: MessageService,
+    private serviceService: ServicesManageService // Inject the service
+  ) {}
+
+  ngOnInit(): void {
+    this.loadServices(); // Load services from the API when the component initializes
+  }
+
+  // Load all services from the API
+  loadServices() {
+    this.serviceService.getAllServices().subscribe(
+      (data) => {
+        this.services = data;
+      },
+      (error) => {
+        console.error('Error loading services', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Could not load services' });
+      }
+    );
+  }
 
   // Open dialog for new service
   openNew() {
@@ -30,30 +43,41 @@ throw new Error('Method not implemented.');
     this.serviceDialog = true;
   }
 
-  // Hide the dialog
+  // Hide the service dialog
   hideDialog() {
     this.serviceDialog = false;
   }
 
-  // Save a new or edited service
+  // Save the service (add or update)
   saveService() {
     this.submitted = true;
 
     if (this.service.name && this.service.description && this.service.price) {
       if (this.service.id) {
         // Update existing service
-        const index = this.services.findIndex((s) => s.id === this.service.id);
-        if (index !== -1) {
-          this.services[index] = { ...this.service };
-        }
-        this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Service updated successfully' });
+        this.serviceService.updateService(this.service.id,this.service).subscribe(
+          () => {
+            this.loadServices();
+            this.serviceDialog = false;
+            this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Service updated successfully' });
+          },
+          (error) => {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error updating service' });
+          }
+        );
       } else {
         // Add new service
-        this.service.id = this.services.length + 1;
-        this.services.push(this.service);
-        this.messageService.add({ severity: 'success', summary: 'Added', detail: 'Service added successfully' });
+        this.serviceService.addService(this.service).subscribe(
+          () => {
+            this.loadServices();
+            this.serviceDialog = false;
+            this.messageService.add({ severity: 'success', summary: 'Added', detail: 'Service added successfully' });
+          },
+          (error) => {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error adding service' });
+          }
+        );
       }
-      this.serviceDialog = false;
     } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill all fields' });
     }
@@ -67,7 +91,14 @@ throw new Error('Method not implemented.');
 
   // Delete a service
   deleteService(service: any) {
-    this.services = this.services.filter((s) => s.id !== service.id);
-    this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Service deleted successfully' });
+    this.serviceService.deleteService(service.id).subscribe(
+      () => {
+        this.loadServices();
+        this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Service deleted successfully' });
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error deleting service' });
+      }
+    );
   }
 }
