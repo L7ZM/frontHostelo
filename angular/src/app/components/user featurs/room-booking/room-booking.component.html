@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!-- Main Container -->
 <div class="hotel-search">
   <!-- Search Panel -->
@@ -88,17 +87,6 @@
       </div>
     </div>
   </div>
-=======
-<div class="search-bar-container">
-  <p-toolbar class="search-bar">
-    <div class="p-toolbar-group-left">
-      <p-calendar [(ngModel)]="dates" selectionMode="range" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" placeholder="Select Date Range" class="search-input"></p-calendar>
-    </div>
-    <div class="p-toolbar-group-right">
-      <button pButton pRipple label="Search" icon="pi pi-search" class="p-button-primary search-btn" (click)="onSearch()"></button>
-    </div>
-  </p-toolbar>
->>>>>>> 4f487d9 (update management booking component)
 </div>
 
 <!-- Hotel Cards Container -->
@@ -106,7 +94,6 @@
   <div class="hotel-card" *ngFor="let room of rooms">
     <!-- Left Side with Carousel -->
     <div class="hotel-left">
-<<<<<<< HEAD
       <p-carousel
         [value]="room.photos"
         [numVisible]="1"
@@ -121,11 +108,6 @@
             alt="Room photo"
             class="carousel-image"
           />
-=======
-          <p-carousel [value]="room.photos" [numVisible]="1" [numScroll]="1">
-        <ng-template pTemplate="item" let-photo>
-          <img [src]="'data:image/jpeg;base64,' + photo" alt="Room photo" style="width: 90%; height: auto;">
->>>>>>> 4f487d9 (update management booking component)
         </ng-template>
       </p-carousel>
     </div>
@@ -135,21 +117,16 @@
       <h2 class="hotel-title">{{ room.numeroChambre }} - {{ room.type }}</h2>
 
       <div class="hotel-info">
-<<<<<<< HEAD
         <span class="rating">
           <i class="fa fa-star"></i>
           {{ room.rating }}
         </span>
         <span class="etat" [ngClass]="room.etat === 'DISPONIBLE' ? 'available' : 'unavailable'">
-=======
-        <span class="etat" [ngClass]="{'available': room.etat === 'DISPONIBLE', 'unavailable': room.etat !== 'DISPONIBLE'}">
->>>>>>> 4f487d9 (update management booking component)
           {{ room.etat }}
         </span>
       </div>
 
       <p class="description">{{ room.description }}</p>
-<<<<<<< HEAD
 
       <!-- New Details Link -->
       <div class="details-section">
@@ -162,11 +139,6 @@
       <div class="price-section">
         <span class="price">{{ room.prix }} EUR / nuit</span>
         <button class="cta-button mario-button" (click)="bookRoom(room)">Book Now</button>
-=======
-      <div class="price-section">
-        <span class="price">{{ room.prix }} EUR / nuit</span>
-        <button class="cta-button">Afficher les tarifs</button>
->>>>>>> 4f487d9 (update management booking component)
       </div>
     </div>
   </div>
