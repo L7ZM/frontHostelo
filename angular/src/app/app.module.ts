@@ -49,7 +49,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
 import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
-
+import { BookingManagementComponent } from './components/admin features/booking-management/booking-management.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +70,7 @@ import { RoomBookingComponent } from './components/user featurs/room-booking/roo
     ProfileComponent,
     ServicesManagementComponent,
     RoomBookingComponent,
+    BookingManagementComponent,
   ],
 
 imports: [TooltipModule,SliderModule,MultiSelectModule, SplitterModule, DividerModule, ReactiveFormsModule,
@@ -101,6 +102,9 @@ imports: [TooltipModule,SliderModule,MultiSelectModule, SplitterModule, DividerM
     BadgeModule,
     ToastModule,
     ConfirmDialogModule,
+    FormsModule, 
+    SliderModule, // Add FormsModule for ngModel binding
+    SidebarModule 
   ],
   providers: [
     {

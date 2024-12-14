@@ -1,0 +1,97 @@
+        <main id="main-container">
+          <div class="bg-body-light" (scroll)="onscroll()" [ngClass]="navbarfixed?'fixed':'nofixed'" >
+            <div class="content content-center">
+              <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
+                <div class="flex-grow-1">
+                    
+                    <div class="input-daterange input-group" >
+                        <h3 id="bookYourStay" class="block-title">BOOK YOUR STAY</h3>
+
+                        <p-calendar [(ngModel)]="dateFrom"  [maxDate]="dateTo" id="dateFrom" placeholder="From" data-date-format="dd/mm/yyyy"  data-week-start="1" data-autoclose="true" data-today-highlight="true"></p-calendar>        
+                        <span class="input-group-text fw-semibold">
+                          <i class="fa fa-fw fa-arrow-right"></i>
+                        </span>
+                        <p-calendar [(ngModel)]="dateTo" [minDate]="dateFrom" id="dateTo" placeholder="To" data-date-format="dd/mm/yyyy"  data-week-start="1" data-autoclose="true" data-today-highlight="true"></p-calendar>  
+                       
+                        <button id="btnFilters" type="button" class="btn btn-lg rounded-pill btn-alt-secondary me-1">
+                            <i class="si si-equalizer fa-1x"></i> All filters
+                          </button>
+                          <div class="p-toolbar-group-right ">
+                          <button pButton pRipple label="Search" type="button"   icon="pi pi-search" class="btn btn-sm rounded-pill btn-outline-dark me-1" (click)="onSearch()"></button>
+                          </div> 
+                             
+                      </div>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+               
+          <div class="hotel-cards-container">
+            <div class="hotel-card " *ngFor="let room of rooms">
+              <!-- Carousel for Room Photos -->
+              <div class="hotel-left">
+                <div id="carousel-{{ room.numeroChambre }}" class="carousel slide carousel-fade">
+                  <!-- Indicators -->
+                  <div class="carousel-indicators">
+                    <button
+                      *ngFor="let photo of room.photos; let i = index"
+                      type="button"
+                      [attr.data-bs-target]="'#carousel-' + room.numeroChambre"
+                      [attr.data-bs-slide-to]="i"
+                      [class.active]="i === 0"
+                      [attr.aria-current]="i === 0 ? 'true' : null"
+                      [attr.aria-label]="'Slide ' + (i + 1)">
+                    </button>
+                  </div>
+                  <!-- Carousel Items -->
+                  <div class="carousel-inner">
+                    <div
+                      *ngFor="let photo of room.photos; let i = index"
+                      class="carousel-item"
+                      [ngClass]="{ active: i === 0 }">
+                      <img
+                        [src]="'data:image/jpeg;base64,' + photo"
+                        class="d-block w-100"
+                        alt="Room photo">
+                    </div>
+                  </div>
+                  <!-- Navigation Controls -->
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    [attr.data-bs-target]="'#carousel-' + room.numeroChambre"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    [attr.data-bs-target]="'#carousel-' + room.numeroChambre"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </div>
+          
+              <!-- Room Information -->
+              <div class="hotel-right">
+                <h2 class="hotel-title">{{ room.numeroChambre }} - {{ room.type }}</h2>
+                <div class="hotel-info">
+                  <span
+                    class="etat"
+                    [ngClass]="{'available': room.etat === 'DISPONIBLE', 'unavailable': room.etat !== 'DISPONIBLE'}">
+                    {{ room.etat }}
+                  </span>
+                </div>
+                <p class="description">{{ room.description }}</p>
+                <div class="price-section">
+                  <span class="price">{{ room.prix }} MAD / nuit</span>
+                  <button class="cta-button">Afficher les tarifs</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
