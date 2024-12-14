@@ -1,62 +1,236 @@
-<div class="search-bar-container">
-  <p-toolbar class="search-bar">
-    <div class="p-toolbar-group-left">
-      <p-calendar
-        [(ngModel)]="dates"
-        selectionMode="range"
-        [showIcon]="true"
-        [monthNavigator]="true"
-        [yearNavigator]="true"
-        placeholder="Select Date Range"
-        class="search-input">
-      </p-calendar>
+<!-- Main Container -->
+<div class="hotel-search">
+  <!-- Search Panel -->
+  <div class="search-container">
+    <div class="search-panel">
+      <!-- Date Selection -->
+      <div class="search-group dates-group">
+        <label class="search-label">Select Dates</label>
+        <div class="date-range-section">
+          <p-calendar
+            id="example-daterange1"
+            name="example-daterange1"
+            [(ngModel)]="startDate"
+            selectionMode="range"
+            [monthNavigator]="true"
+            [yearNavigator]="true"
+            placeholder="From"
+            [styleClass]="'calendar-input mario-calendar'"
+          >
+          </p-calendar>
+
+          <span class="arrow-separator">
+            <i class="fa fa-fw fa-arrow-right"></i>
+          </span>
+
+          <p-calendar
+            id="example-daterange2"
+            name="example-daterange2"
+            [(ngModel)]="endDate"
+            selectionMode="range"
+            [monthNavigator]="true"
+            [yearNavigator]="true"
+            placeholder="To"
+            [styleClass]="'calendar-input mario-calendar'"
+          >
+          </p-calendar>
+        </div>
+      </div>
+
+      <!-- Rooms & Guests -->
+      <div class="search-group rooms-guests-group">
+        <label class="search-label">Rooms & Guests</label>
+        <p-dropdown
+          [(ngModel)]="roomsGuests"
+          [options]="guestOptions"
+          [styleClass]="'simple-dropdown mario-dropdown'"
+          placeholder="1 Room, 2 Guests"
+        >
+        </p-dropdown>
+      </div>
+
+      <!-- Special Rates -->
+      <div class="search-group rates-group">
+        <label class="search-label">Special Rates</label>
+        <p-dropdown
+          [(ngModel)]="specialRate"
+          [options]="specialRateOptions"
+          [styleClass]="'simple-dropdown mario-dropdown'"
+          placeholder="Special Rates"
+        >
+        </p-dropdown>
+      </div>
+
+      <!-- Price Range Filter -->
+      <div class="search-group price-range-group">
+        <label class="search-label">Price Range</label>
+        <p-slider
+          [(ngModel)]="priceRange"
+          [min]="0"
+          [max]="1000"
+          [step]="10"
+          [range]="true"
+          [styleClass]="'price-slider mario-slider'"
+        >
+          <ng-template pTemplate="tooltip" let-value>
+            <span class="custom-tooltip">{{ value }}€</span>
+          </ng-template>
+        </p-slider>
+      </div>
+
+      <!-- Search Button -->
+      <div class="search-group button-group">
+        <button class="find-button mario-button" (click)="searchRooms()">
+          Find Rooms
+          <i class="fa fa-arrow-right"></i>
+        </button>
+      </div>
     </div>
-    <div class="p-toolbar-group-right">
-      <button 
-        pButton 
-        pRipple 
-        label="Search" 
-        icon="pi pi-search" 
-        class="p-button-primary search-btn" 
-        (click)="onSearch()">
-      </button>
-    </div>
-  </p-toolbar>
+  </div>
 </div>
 
+<!-- Hotel Cards Container -->
 <div class="hotel-cards-container">
   <div class="hotel-card" *ngFor="let room of rooms">
+    <!-- Left Side with Carousel -->
     <div class="hotel-left">
-      <!-- Carousel for room photos -->
-      <p-carousel 
-        [value]="roomPhotos[room.id]" 
-        [numVisible]="1" 
-        [numScroll]="1" 
-        [circular]="true" 
-        [showIndicators]="true">
+      <p-carousel
+        [value]="room.photos"
+        [numVisible]="1"
+        [numScroll]="1"
+        [circular]="true"
+        [showNavigators]="true"
+        [showIndicators]="true"
+      >
         <ng-template pTemplate="item" let-photo>
-          <img 
-            [src]="'data:image/jpeg;base64,' + photo" 
-            alt="Room Image" 
-            class="carousel-image" />
+          <img
+            [src]="'data:image/jpeg;base64,' + photo"
+            alt="Room photo"
+            class="carousel-image"
+          />
         </ng-template>
       </p-carousel>
     </div>
 
+    <!-- Right Side with Details -->
     <div class="hotel-right">
       <h2 class="hotel-title">{{ room.numeroChambre }} - {{ room.type }}</h2>
+
       <div class="hotel-info">
-        <span 
-          class="etat" 
-          [ngClass]="{'available': room.etat === 'DISPONIBLE', 'unavailable': room.etat !== 'DISPONIBLE'}">
+        <span class="rating">
+          <i class="fa fa-star"></i>
+          {{ room.rating }}
+        </span>
+        <span class="etat" [ngClass]="room.etat === 'DISPONIBLE' ? 'available' : 'unavailable'">
           {{ room.etat }}
         </span>
       </div>
+
       <p class="description">{{ room.description }}</p>
-      <!-- <div class="price-section">
+
+      <!-- New Details Link -->
+      <div class="details-section">
+        <a class="view-details-link" (click)="openRoomDetails(room)">
+          View Details
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="price-section">
         <span class="price">{{ room.prix }} EUR / nuit</span>
-        <button class="cta-button" (click)="showPricing(room.id)">Afficher les tarifs</button>
-      </div> -->
+        <button class="cta-button mario-button" (click)="bookRoom(room)">Book Now</button>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- Room Details Dialog -->
+<p-dialog
+  [(visible)]="displayDialog"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="room-details-dialog"
+  [dismissableMask]="true"
+>
+  <ng-template pTemplate="header">
+    <h2>{{ selectedRoom?.numeroChambre }} - {{ selectedRoom?.type }}</h2>
+  </ng-template>
+
+  <div class="dialog-content-wrapper">
+    <!-- Carousel Section -->
+    <div class="carousel-section">
+      <p-carousel
+        [value]="selectedRoom?.photos"
+        [numVisible]="1"
+        [numScroll]="1"
+        [circular]="true"
+        [showNavigators]="true"
+        [showIndicators]="true"
+      >
+        <ng-template pTemplate="item" let-photo>
+          <img
+            [src]="'data:image/jpeg;base64,' + photo"
+            alt="Room photo"
+            class="carousel-image"
+          />
+        </ng-template>
+      </p-carousel>
+    </div>
+
+    <!-- Details Grid -->
+    <div class="details-grid">
+      <!-- Room Features -->
+      <div class="info-section">
+        <h3>Room Features</h3>
+        <ul class="info-list">
+          <li><i class="fa fa-bed"></i> {{ selectedRoom?.type }}</li>
+          <li><i class="fa fa-users"></i> Max Occupancy: {{ selectedRoom?.maxOccupancy }}</li>
+          <li><i class="fa fa-arrows-alt"></i> Room Size: {{ selectedRoom?.size }} m²</li>
+          <li><i class="fa fa-wifi"></i> Free WiFi</li>
+        </ul>
+      </div>
+
+      <!-- Amenities -->
+      <div class="info-section">
+        <h3>Amenities</h3>
+        <ul class="info-list">
+          <li *ngFor="let amenity of selectedRoom?.amenities">
+            <i class="fa fa-check"></i> {{ amenity }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Room Policy -->
+      <div class="info-section">
+        <h3>Room Policy</h3>
+        <ul class="info-list">
+          <li><i class="fa fa-clock"></i> Check-in: 14:00</li>
+          <li><i class="fa fa-clock"></i> Check-out: 12:00</li>
+          <li><i class="fa fa-smoking-ban"></i> Non-smoking</li>
+        </ul>
+      </div>
+
+      <!-- Description -->
+      <div class="description-section">
+        <h3>Description</h3>
+        <p>{{ selectedRoom?.description }}</p>
+      </div>
+    </div>
+
+    <!-- Booking Section -->
+    <div class="booking-section">
+      <div class="price-details">
+        <span class="current-price">{{ selectedRoom?.prix }} EUR</span>
+        <span class="price-period">/night</span>
+        <div class="price-includes">
+          <small>Includes taxes and fees</small>
+        </div>
+      </div>
+
+      <button class="book-button" (click)="bookRoom(selectedRoom)">
+        Book Now
+      </button>
+    </div>
+  </div>
+</p-dialog>

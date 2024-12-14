@@ -7,7 +7,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { RoomManagementComponent } from './components/admin features/room-management/room-management.component';
 import { HomeComponent } from './components/home/home.component';
 import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
-import { RoomListComponent } from './components/room-list/room-list.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ProfileComponent } from './components/user featurs/profile/profile.component';
@@ -46,10 +45,7 @@ const routes: Routes = [
     path: 'tour',
     component: VirtualTourComponent
   },
-  {
-    path: 'roomList',
-    component: RoomListComponent
-  },
+
   {
     path: 'login',
     component: LoginComponent,

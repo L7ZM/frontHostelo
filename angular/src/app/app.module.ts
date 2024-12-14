@@ -35,11 +35,13 @@ import { DividerModule } from 'primeng/divider';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SplitterModule } from 'primeng/splitter';
+import { SliderModule } from 'primeng/slider';
+import { TooltipModule } from 'primeng/tooltip';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { RegisterComponent } from './components/register/register.component';
 import { RoomManagementComponent } from './components/admin features/room-management/room-management.component';
 import { HomeComponent } from './components/home/home.component';
 import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.component';
-import { RoomListComponent } from './components/room-list/room-list.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ProfileComponent } from './components/user featurs/profile/profile.component';
@@ -47,12 +49,11 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
 import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
-import { MultiSelectModule } from 'primeng/multiselect';
-
 
 
 @NgModule({
   declarations: [
+
     NavbarComponent,
     FooterComponent,
     AppComponent,
@@ -64,14 +65,14 @@ import { MultiSelectModule } from 'primeng/multiselect';
     RoomManagementComponent,
     HomeComponent,
     VirtualTourComponent,
-    RoomListComponent,
     AboutComponent,
     ContactComponent,
     ProfileComponent,
     ServicesManagementComponent,
     RoomBookingComponent,
   ],
-  imports: [MultiSelectModule, SplitterModule, DividerModule, ReactiveFormsModule,
+
+imports: [TooltipModule,SliderModule,MultiSelectModule, SplitterModule, DividerModule, ReactiveFormsModule,
     CheckboxModule,
     ListboxModule,
     CalendarModule,
