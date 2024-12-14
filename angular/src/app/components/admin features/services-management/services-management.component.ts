@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api'; // Import the confirmation service
 import { ServicesManageService } from 'src/app/services/servicesManagement/services-manage.service'; // Import the service
 
 @Component({
   selector: 'app-services-management',
   templateUrl: './services-management.component.html',
   styleUrls: ['./services-management.component.scss'],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService], // Add ConfirmationService to providers
 })
 export class ServicesManagementComponent implements OnInit {
   services: any[] = [];
@@ -16,6 +17,7 @@ export class ServicesManagementComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
+    private confirmationService: ConfirmationService, // Inject the ConfirmationService
     private serviceService: ServicesManageService // Inject the service
   ) {}
 
@@ -52,19 +54,27 @@ export class ServicesManagementComponent implements OnInit {
   saveService() {
     this.submitted = true;
 
-    if (this.service.name && this.service.description && this.service.price) {
+    // Ensure you're checking the right properties here (use the exact names as in the template)
+    if (this.service.nomService && this.service.description && this.service.prix) {
       if (this.service.id) {
         // Update existing service
-        this.serviceService.updateService(this.service.id,this.service).subscribe(
-          () => {
-            this.loadServices();
-            this.serviceDialog = false;
-            this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Service updated successfully' });
-          },
-          (error) => {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error updating service' });
+        this.confirmationService.confirm({
+          message: 'Are you sure you want to update this service?',
+          header: 'Confirmation',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.serviceService.updateService(this.service.id, this.service).subscribe(
+              () => {
+                this.loadServices();
+                this.serviceDialog = false;
+                this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Service updated successfully' });
+              },
+              (error) => {
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error updating service' });
+              }
+            );
           }
-        );
+        });
       } else {
         // Add new service
         this.serviceService.addService(this.service).subscribe(
@@ -85,20 +95,34 @@ export class ServicesManagementComponent implements OnInit {
 
   // Edit an existing service
   editService(service: any) {
-    this.service = { ...service };
+    console.log('Editing service:', service); // Ensure the service data is correct
+    this.service = { ...service }; // Make sure the selected service is correctly passed to the form
     this.serviceDialog = true;
   }
 
-  // Delete a service
-  deleteService(service: any) {
-    this.serviceService.deleteService(service.id).subscribe(
-      () => {
-        this.loadServices();
-        this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Service deleted successfully' });
-      },
-      (error) => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error deleting service' });
-      }
-    );
-  }
+
+// Delete a service with confirmation
+deleteService(service: any) {
+  this.confirmationService.confirm({
+    message: 'Are you sure you want to delete this service?',
+    header: 'Confirmation',
+    icon: 'pi pi-exclamation-triangle',
+    accept: () => {
+      // This block is executed when the user clicks "Yes"
+      this.serviceService.deleteService(service.id).subscribe(
+        () => {
+          this.loadServices();
+          this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Service deleted successfully' });
+        },
+        (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error deleting service' });
+        }
+      );
+    },
+    reject: () => {
+      // This block is executed when the user clicks "No"
+      this.messageService.add({ severity: 'info', summary: 'Cancelled', detail: 'Service deletion was cancelled' });
+    }
+  });
+}
 }

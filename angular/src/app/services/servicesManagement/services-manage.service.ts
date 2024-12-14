@@ -1,37 +1,45 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesManageService {
-  private apiUrl = 'http://localhost:8080/api/admin/services'; // URL to your API
+  private ApiUrl = 'http://localhost:8080/api/admin/serviceAdditionnel'; // URL to your API
+  private DeleteApiUrl = 'http://localhost:8080/api/admin'; // URL to your API
 
   constructor(private http: HttpClient) { }
 
   // Get all services
   getAllServices(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`);
-  }
-
-  // Get a service by ID
-  getServiceById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    return this.http.get<any>(`${this.ApiUrl}`);
   }
 
   // Add a new service
   addService(service: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}`, service);
+    let params = new HttpParams();
+    for (let key in service) {
+      if (service.hasOwnProperty(key)) {
+        params = params.set(key, service[key]);
+      }
+    }
+    return this.http.post<any>(`${this.ApiUrl}`, null, { params });
   }
 
   // Update an existing service
   updateService(id: number, service: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, service);
+    let params = new HttpParams();
+    for (let key in service) {
+      if (service.hasOwnProperty(key)) {
+        params = params.set(key, service[key]);
+      }
+    }
+    return this.http.put<any>(`${this.ApiUrl}/${id}`, null, { params });
   }
 
   // Delete a service
   deleteService(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.DeleteApiUrl}/${id}`);
   }
 }
