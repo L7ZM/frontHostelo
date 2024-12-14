@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ServicesManageService {
-  private apiUrl = 'http://localhost:8080/api/admin/services'; // URL to your API
+  private apiUrl = 'http://localhost:8080/api/admin/serviceAdditionnel'; // URL to your API
 
   constructor(private http: HttpClient) { }
 
