@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,16 +27,18 @@ export class ServicesManageService {
     return this.http.post<any>(`${this.ApiUrl}`, null, { params });
   }
 
-  // Update an existing service
-  updateService(id: number, service: any): Observable<any> {
+  updateService(service: any): Observable<any> {
     let params = new HttpParams();
     for (let key in service) {
       if (service.hasOwnProperty(key)) {
         params = params.set(key, service[key]);
       }
     }
-    return this.http.put<any>(`${this.ApiUrl}/${id}`, null, { params });
+    return this.http.post<any>(`${this.ApiUrl}`, null, { params }).pipe(
+      catchError(error => throwError(() => error))
+    );
   }
+
 
   // Delete a service
   deleteService(id: number): Observable<any> {

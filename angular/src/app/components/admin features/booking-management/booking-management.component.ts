@@ -1,6 +1,4 @@
 import { Component,  HostListener } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import * as $ from 'jquery'; // Import jQuery
 import { RoomService } from 'src/app/services/rooms/room-service.service';
 
 @Component({
@@ -47,7 +45,7 @@ export class BookingManagementComponent   {
       }
     );
   }
-  
+
     // Method to fetch room photos by room ID
     fetchRoomPhotos(roomId: number): void {
       this.roomService.getPhotoById(roomId).subscribe(

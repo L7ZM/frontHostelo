@@ -54,7 +54,6 @@ export class ServicesManagementComponent implements OnInit {
   saveService() {
     this.submitted = true;
 
-    // Ensure you're checking the right properties here (use the exact names as in the template)
     if (this.service.nomService && this.service.description && this.service.prix) {
       if (this.service.id) {
         // Update existing service
@@ -63,15 +62,13 @@ export class ServicesManagementComponent implements OnInit {
           header: 'Confirmation',
           icon: 'pi pi-exclamation-triangle',
           accept: () => {
-            this.serviceService.updateService(this.service.id, this.service).subscribe(
+            this.serviceService.updateService(this.service).subscribe(
               () => {
                 this.loadServices();
                 this.serviceDialog = false;
                 this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Service updated successfully' });
               },
-              (error) => {
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error updating service' });
-              }
+              () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error updating service' })
             );
           }
         });
@@ -83,15 +80,14 @@ export class ServicesManagementComponent implements OnInit {
             this.serviceDialog = false;
             this.messageService.add({ severity: 'success', summary: 'Added', detail: 'Service added successfully' });
           },
-          (error) => {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error adding service' });
-          }
+          () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error adding service' })
         );
       }
     } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill all fields' });
     }
   }
+
 
   // Edit an existing service
   editService(service: any) {
