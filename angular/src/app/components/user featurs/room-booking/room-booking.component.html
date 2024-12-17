@@ -1,236 +1,187 @@
-<!-- Main Container -->
-<div class="hotel-search">
-  <!-- Search Panel -->
-  <div class="search-container">
-    <div class="search-panel">
-      <!-- Date Selection -->
-      <div class="search-group dates-group">
-        <label class="search-label">Select Dates</label>
-        <div class="date-range-section">
-          <p-calendar
-            id="example-daterange1"
-            name="example-daterange1"
-            [(ngModel)]="startDate"
-            selectionMode="range"
-            [monthNavigator]="true"
-            [yearNavigator]="true"
-            placeholder="From"
-            [styleClass]="'calendar-input mario-calendar'"
-          >
-          </p-calendar>
+<main id="main-container">
+  <!-- Navbar -->
+  <div
+    class="bg-body-light"
+    (scroll)="onscroll()"
+    [ngClass]="navbarfixed ? 'fixed' : 'nofixed'"
+  >
+    <div class="content content-center">
+      <div
+        class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2"
+      >
+        <div class="flex-grow-1">
+          <div class="input-daterange input-group">
+            <h3 id="bookYourStay" class="block-title">BOOK YOUR STAY</h3>
+            <p-calendar
+              [(ngModel)]="dateFrom"
+              [maxDate]="dateTo"
+              placeholder="From"
+              dateFormat="dd/mm/yyyy"
+            ></p-calendar>
+            <span class="input-group-text fw-semibold"
+              ><i class="fa fa-arrow-right"></i
+            ></span>
+            <p-calendar
+              [(ngModel)]="dateTo"
+              [minDate]="dateFrom"
+              placeholder="To"
+              dateFormat="dd/mm/yyyy"
+            ></p-calendar>
 
-          <span class="arrow-separator">
-            <i class="fa fa-fw fa-arrow-right"></i>
-          </span>
-
-          <p-calendar
-            id="example-daterange2"
-            name="example-daterange2"
-            [(ngModel)]="endDate"
-            selectionMode="range"
-            [monthNavigator]="true"
-            [yearNavigator]="true"
-            placeholder="To"
-            [styleClass]="'calendar-input mario-calendar'"
-          >
-          </p-calendar>
+            <button
+              class="btn btn-lg rounded-pill btn-alt-secondary me-2" style="margin-left:7px ;"
+              (click)="visible = true"
+            >
+              <i class="pi pi-filter"></i> Filters
+            </button>
+            <button
+              pButton
+              pRipple
+              label="Search"
+              icon="pi pi-search"
+              class="btn btn-sm rounded-pill btn-outline-dark me-1"
+              (click)="applyFilters()"
+            ></button>
+          </div>
         </div>
-      </div>
-
-      <!-- Rooms & Guests -->
-      <div class="search-group rooms-guests-group">
-        <label class="search-label">Rooms & Guests</label>
-        <p-dropdown
-          [(ngModel)]="roomsGuests"
-          [options]="guestOptions"
-          [styleClass]="'simple-dropdown mario-dropdown'"
-          placeholder="1 Room, 2 Guests"
-        >
-        </p-dropdown>
-      </div>
-
-      <!-- Special Rates -->
-      <div class="search-group rates-group">
-        <label class="search-label">Special Rates</label>
-        <p-dropdown
-          [(ngModel)]="specialRate"
-          [options]="specialRateOptions"
-          [styleClass]="'simple-dropdown mario-dropdown'"
-          placeholder="Special Rates"
-        >
-        </p-dropdown>
-      </div>
-
-      <!-- Price Range Filter -->
-      <div class="search-group price-range-group">
-        <label class="search-label">Price Range</label>
-        <p-slider
-          [(ngModel)]="priceRange"
-          [min]="0"
-          [max]="1000"
-          [step]="10"
-          [range]="true"
-          [styleClass]="'price-slider mario-slider'"
-        >
-          <ng-template pTemplate="tooltip" let-value>
-            <span class="custom-tooltip">{{ value }}€</span>
-          </ng-template>
-        </p-slider>
-      </div>
-
-      <!-- Search Button -->
-      <div class="search-group button-group">
-        <button class="find-button mario-button" (click)="searchRooms()">
-          Find Rooms
-          <i class="fa fa-arrow-right"></i>
-        </button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Hotel Cards Container -->
-<div class="hotel-cards-container">
-  <div class="hotel-card" *ngFor="let room of rooms">
-    <!-- Left Side with Carousel -->
-    <div class="hotel-left">
-      <p-carousel
-        [value]="room.photos"
-        [numVisible]="1"
-        [numScroll]="1"
-        [circular]="true"
-        [showNavigators]="true"
-        [showIndicators]="true"
-      >
-        <ng-template pTemplate="item" let-photo>
-          <img
-            [src]="'data:image/jpeg;base64,' + photo"
-            alt="Room photo"
-            class="carousel-image"
-          />
+  <!-- Room Cards -->
+  <div class="hotel-cards-container">
+    <div class="hotel-card" *ngFor="let room of filteredRooms">
+      <!-- Room Image Carousel -->
+      <div class="hotel-left">
+        <div *ngIf="room.photos?.length; else noPhoto">
+          <div
+            id="carousel-{{ room.numeroChambre }}"
+            class="carousel slide carousel-fade"
+          >
+            <div class="carousel-inner">
+              <div
+                *ngFor="let photo of room.photos; let i = index"
+                class="carousel-item"
+                [class.active]="i === 0"
+              >
+                <img
+                  [src]="'data:image/jpeg;base64,' + photo"
+                  class="d-block w-100"
+                  alt="Room photo"
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              [attr.data-bs-target]="'#carousel-' + room.numeroChambre"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              [attr.data-bs-target]="'#carousel-' + room.numeroChambre"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
+        </div>
+        <ng-template #noPhoto>
+          <div class="no-photo-placeholder text-center">
+            No Photos Available
+          </div>
         </ng-template>
-      </p-carousel>
-    </div>
+      </div>
 
-    <!-- Right Side with Details -->
-    <div class="hotel-right">
-      <h2 class="hotel-title">{{ room.numeroChambre }} - {{ room.type }}</h2>
-
-      <div class="hotel-info">
-        <span class="rating">
-          <i class="fa fa-star"></i>
-          {{ room.rating }}
-        </span>
-        <span class="etat" [ngClass]="room.etat === 'DISPONIBLE' ? 'available' : 'unavailable'">
+      <!-- Room Details -->
+      <div class="hotel-right">
+        <h2 class="hotel-title">{{ room.numeroChambre }} - {{ room.type }}</h2>
+        <span
+          class="badge me-2"
+          [ngClass]="{
+            'bg-success': room.etat === 'DISPONIBLE',
+            'bg-danger': room.etat === 'OCCUPEE',
+            'bg-warning': room.etat === 'EN_ENTRETIEN'
+          }"
+        >
           {{ room.etat }}
         </span>
-      </div>
-
-      <p class="description">{{ room.description }}</p>
-
-      <!-- New Details Link -->
-      <div class="details-section">
-        <a class="view-details-link" (click)="openRoomDetails(room)">
-          View Details
-          <i class="fa fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <div class="price-section">
-        <span class="price">{{ room.prix }} EUR / nuit</span>
-        <button class="cta-button mario-button" (click)="bookRoom(room)">Book Now</button>
+        <p class="description">
+          {{ room.description || "No description available." }}
+        </p>
+        <div class="price-section">
+          <span class="price">{{ room.prix }} MAD / nuit</span>
+          <button class="btn btn-primary btn-sm mt-2">
+            Afficher les tarifs
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</main>
 
-<!-- Room Details Dialog -->
+<!-- Filter Dialog -->
 <p-dialog
-  [(visible)]="displayDialog"
+  header="Filtres"
+  [(visible)]="visible"
   [modal]="true"
-  [draggable]="false"
-  [resizable]="false"
-  styleClass="room-details-dialog"
-  [dismissableMask]="true"
+  [closable]="true"
 >
-  <ng-template pTemplate="header">
-    <h2>{{ selectedRoom?.numeroChambre }} - {{ selectedRoom?.type }}</h2>
-  </ng-template>
 
-  <div class="dialog-content-wrapper">
-    <!-- Carousel Section -->
-    <div class="carousel-section">
-      <p-carousel
-        [value]="selectedRoom?.photos"
-        [numVisible]="1"
-        [numScroll]="1"
-        [circular]="true"
-        [showNavigators]="true"
-        [showIndicators]="true"
-      >
-        <ng-template pTemplate="item" let-photo>
-          <img
-            [src]="'data:image/jpeg;base64,' + photo"
-            alt="Room photo"
-            class="carousel-image"
-          />
-        </ng-template>
-      </p-carousel>
-    </div>
 
-    <!-- Details Grid -->
-    <div class="details-grid">
-      <!-- Room Features -->
-      <div class="info-section">
-        <h3>Room Features</h3>
-        <ul class="info-list">
-          <li><i class="fa fa-bed"></i> {{ selectedRoom?.type }}</li>
-          <li><i class="fa fa-users"></i> Max Occupancy: {{ selectedRoom?.maxOccupancy }}</li>
-          <li><i class="fa fa-arrows-alt"></i> Room Size: {{ selectedRoom?.size }} m²</li>
-          <li><i class="fa fa-wifi"></i> Free WiFi</li>
-        </ul>
-      </div>
+  <!-- Room Type Filter -->
+  <div class="filter-section">
+    <h4>Room Type</h4>
+    <p-multiSelect
+      [options]="roomTypes"
+      [(ngModel)]="selectedRoomTypes"
+      defaultLabel="Select Room Types"
+    ></p-multiSelect>
+  </div>
 
-      <!-- Amenities -->
-      <div class="info-section">
-        <h3>Amenities</h3>
-        <ul class="info-list">
-          <li *ngFor="let amenity of selectedRoom?.amenities">
-            <i class="fa fa-check"></i> {{ amenity }}
-          </li>
-        </ul>
-      </div>
-
-      <!-- Room Policy -->
-      <div class="info-section">
-        <h3>Room Policy</h3>
-        <ul class="info-list">
-          <li><i class="fa fa-clock"></i> Check-in: 14:00</li>
-          <li><i class="fa fa-clock"></i> Check-out: 12:00</li>
-          <li><i class="fa fa-smoking-ban"></i> Non-smoking</li>
-        </ul>
-      </div>
-
-      <!-- Description -->
-      <div class="description-section">
-        <h3>Description</h3>
-        <p>{{ selectedRoom?.description }}</p>
-      </div>
-    </div>
-
-    <!-- Booking Section -->
-    <div class="booking-section">
-      <div class="price-details">
-        <span class="current-price">{{ selectedRoom?.prix }} EUR</span>
-        <span class="price-period">/night</span>
-        <div class="price-includes">
-          <small>Includes taxes and fees</small>
-        </div>
-      </div>
-
-      <button class="book-button" (click)="bookRoom(selectedRoom)">
-        Book Now
-      </button>
-    </div>
+  <!-- Availability Filter -->
+  <div class="filter-section">
+    <h4>Availability</h4>
+    <p-dropdown
+      [options]="availabilityOptions"
+      [(ngModel)]="selectedAvailability"
+      placeholder="Select Availability"
+    ></p-dropdown>
+  </div>
+  <!-- Price Filter -->
+  <div class="filter-section">
+    <h4>Price Range</h4>
+    <p-slider
+      [(ngModel)]="priceRange"
+      [min]="100"
+      [max]="1000"
+      [range]="true"
+    ></p-slider>
+    <p>{{ priceRange[0] }} MAD - {{ priceRange[1] }} MAD</p>
+  </div>
+  <!-- Buttons -->
+  <div class="dialog-footer">
+    <button
+      pButton
+      label="Reset"
+      (click)="resetFilters()"
+      class="p-button-text"
+    ></button>
+    <button
+      pButton
+      label="Apply"
+      icon="pi pi-check"
+      class="p-button-primary"
+      (click)="applyFilters()"
+    ></button>
   </div>
 </p-dialog>

@@ -38,6 +38,7 @@ import { SplitterModule } from 'primeng/splitter';
 import { SliderModule } from 'primeng/slider';
 import { TooltipModule } from 'primeng/tooltip';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { RegisterComponent } from './components/register/register.component';
 import { RoomManagementComponent } from './components/admin features/room-management/room-management.component';
 import { HomeComponent } from './components/home/home.component';
@@ -53,7 +54,6 @@ import { BookingManagementComponent } from './components/admin features/booking-
 
 @NgModule({
   declarations: [
-
     NavbarComponent,
     FooterComponent,
     AppComponent,
@@ -73,7 +73,14 @@ import { BookingManagementComponent } from './components/admin features/booking-
     BookingManagementComponent,
   ],
 
-imports: [TooltipModule,SliderModule,MultiSelectModule, SplitterModule, DividerModule, ReactiveFormsModule,
+  imports: [
+    RadioButtonModule,
+    TooltipModule,
+    SliderModule,
+    MultiSelectModule,
+    SplitterModule,
+    DividerModule,
+    ReactiveFormsModule,
     CheckboxModule,
     ListboxModule,
     CalendarModule,
@@ -102,9 +109,9 @@ imports: [TooltipModule,SliderModule,MultiSelectModule, SplitterModule, DividerM
     BadgeModule,
     ToastModule,
     ConfirmDialogModule,
-    FormsModule, 
+    FormsModule,
     SliderModule, // Add FormsModule for ngModel binding
-    SidebarModule 
+    SidebarModule,
   ],
   providers: [
     {
@@ -117,4 +124,4 @@ imports: [TooltipModule,SliderModule,MultiSelectModule, SplitterModule, DividerM
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

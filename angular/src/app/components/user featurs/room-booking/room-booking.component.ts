@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RoomService } from 'src/app/services/rooms/room-service.service';
 
 @Component({
@@ -7,132 +7,72 @@ import { RoomService } from 'src/app/services/rooms/room-service.service';
   styleUrls: ['./room-booking.component.scss'],
 })
 export class RoomBookingComponent implements OnInit {
-  // Date related properties
-  dates: Date[] = [];
-  startDate!: Date;
-  endDate!: Date;
-
-  // Room and guest properties
+  dateFrom!: Date;
+  dateTo!: Date;
   rooms: any[] = [];
-  roomTypes: any[] = [];
-  roomPhotos: { [key: number]: string[] } = {};
+  filteredRooms: any[] = [];
+  navbarfixed: boolean = false;
 
-  // Filter properties
-  roomTypeFilter: any;
-  priceFilter: any;
-  availabilityFilter: any;
-  priceRange: number[] = [0, 1000];
+  // Filters properties
+  visible: boolean = false;
+  priceRange: number[] = [100, 1000]; // Price range filter
+  roomTypes: string[] = ['SIMPLE', 'DELUXE', 'DOUBLE']; // Static room types
+  selectedRoomTypes: string[] = []; // User selected room types
 
-  // Dialog control
-  displayDialog: boolean = false;
-  selectedRoom: any = null;
+  // Availability options
+  availabilityOptions: string[] = ['DISPONIBLE', 'OCCUPEE', 'EN_ENTRETIEN'];
+  selectedAvailability: string = ''; // Stores selected availability option
 
-  // Dropdown options
-  guestOptions: any[] = [
-    { label: '1 Room, 1 Guest', value: '1-1' },
-    { label: '1 Room, 2 Guests', value: '1-2' },
-    { label: '1 Room, 3 Guests', value: '1-3' },
-    { label: '2 Rooms, 4 Guests', value: '2-4' }
-  ];
-
-  specialRateOptions: any[] = [
-    { label: 'Standard Rate', value: 'STANDARD' },
-    { label: 'Member Rate', value: 'MEMBER' },
-    { label: 'Corporate Rate', value: 'CORPORATE' },
-    { label: 'Senior Rate', value: 'SENIOR' }
-  ];
-
-  // Form model properties
-  guestCount: any;
-  roomsGuests: any;
-  specialRate: any;
+  @HostListener('window:scroll', ['$event'])
+  onscroll() {
+    this.navbarfixed = window.scrollY > 100;
+  }
 
   constructor(private roomService: RoomService) {}
 
   ngOnInit(): void {
-    this.initializeData();
-  }
-
-  private initializeData(): void {
-    // Fetch rooms
     this.fetchRooms();
-
-    // Initialize default values
-    this.roomsGuests = this.guestOptions[0].value;
-    this.specialRate = this.specialRateOptions[0].value;
   }
 
-  private fetchRooms(): void {
-    this.roomService.getAll().subscribe({
-      next: (data) => {
+  // Fetch all rooms
+  fetchRooms(): void {
+    this.roomService.getAll().subscribe(
+      (data) => {
         this.rooms = data;
-        // Fetch photos for each room
-        this.rooms.forEach(room => {
-          this.fetchRoomPhotos(room.id);
-        });
+        this.filteredRooms = [...this.rooms]; // Initialize filteredRooms with all rooms
       },
-      error: (error) => {
+      (error) => {
         console.error('Error fetching room data', error);
       }
+    );
+  }
+
+  // Apply Filters
+  applyFilters(): void {
+    this.filteredRooms = this.rooms.filter((room) => {
+      // Check if room price is within the selected range
+      const inPriceRange =
+        room.prix >= this.priceRange[0] && room.prix <= this.priceRange[1];
+
+      // Check if room type matches selected types (or if no types are selected)
+      const matchesType =
+        this.selectedRoomTypes.length === 0 || this.selectedRoomTypes.includes(room.type);
+
+      // Check if room availability matches the selected availability (or if no availability filter is selected)
+      const matchesAvailability =
+        this.selectedAvailability === '' || room.etat === this.selectedAvailability;
+
+      return inPriceRange && matchesType && matchesAvailability;
     });
+
+    this.visible = false; // Close the dialog after applying filters
   }
 
-  fetchRoomPhotos(roomId: number): void {
-    this.roomService.getPhotoById(roomId).subscribe({
-      next: (photos) => {
-        this.roomPhotos[roomId] = photos;
-      },
-      error: (error) => {
-        console.error(`Error fetching photos for room ${roomId}:`, error);
-      }
-    });
-  }
-
-  searchRooms(): void {
-    const searchCriteria = {
-      startDate: this.startDate,
-      endDate: this.endDate,
-      guestCount: this.roomsGuests,
-      specialRate: this.specialRate,
-      priceRange: this.priceRange,
-      roomType: this.roomTypeFilter,
-      availability: this.availabilityFilter
-    };
-
-    console.log('Search criteria:', searchCriteria);
-    // Implement search logic here using the roomService
-  }
-
-  onSearch(): void {
-    if (this.dates && this.dates.length === 2) {
-      this.startDate = this.dates[0];
-      this.endDate = this.dates[1];
-      this.searchRooms();
-    } else {
-      console.log('Please select both start and end dates.');
-    }
-  }
-
-  openRoomDetails(room: any): void {
-    this.selectedRoom = room;
-    this.displayDialog = true;
-  }
-
-  bookRoom(room: any): void {
-    console.log('Booking room:', room);
-    // Implement booking logic here
-  }
-
-  // Helper method to get photos for a specific room
-  getRoomPhotos(roomId: number): string[] {
-    return this.roomPhotos[roomId] || [];
-  }
-
-  // Optional: Method to format price for display
-  formatPrice(price: number): string {
-    return new Intl.NumberFormat('fr-FR', {
-      style: 'currency',
-      currency: 'EUR'
-    }).format(price);
+  // Reset Filters
+  resetFilters(): void {
+    this.priceRange = [100, 1000]; // Reset price range
+    this.selectedRoomTypes = []; // Clear selected room types
+    this.selectedAvailability = ''; // Clear selected availability
+    this.filteredRooms = [...this.rooms]; // Reset filtered rooms to all rooms
   }
 }
