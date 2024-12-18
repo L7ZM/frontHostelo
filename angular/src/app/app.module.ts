@@ -51,7 +51,6 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
 import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
 import { BookingManagementComponent } from './components/admin features/booking-management/booking-management.component';
-import { MyBookingsComponent } from './components/user featurs/my-bookings/my-bookings.component';
 
 @NgModule({
   declarations: [
@@ -71,8 +70,7 @@ import { MyBookingsComponent } from './components/user featurs/my-bookings/my-bo
     ProfileComponent,
     ServicesManagementComponent,
     RoomBookingComponent,
-    BookingManagementComponent,
-    MyBookingsComponent,
+    BookingManagementComponent
   ],
 
   imports: [
