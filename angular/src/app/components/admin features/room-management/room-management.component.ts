@@ -47,14 +47,7 @@ export class RoomManagementComponent {
   }
 
   ngOnInit(): void {
-    this.roomService.getAll().subscribe({next: (data) => this.rooms = data,
-      error: () => this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Failed to load rooms'
-      })
-      // this.filteredRooms = [...this.rooms]; // Initially show all rooms
-    });
+    this.loadRooms();
   }
 
   loadRooms() {
@@ -77,12 +70,14 @@ export class RoomManagementComponent {
       description: '',
       photos: []
     };
+    this.photo = [];
     this.isNew = true;
     this.displayDialog = true;
   }
 
   editRoom(room: Room) {
     this.room = { ...room };
+    this.photo = [];
     this.isNew = false;
     this.displayDialog = true;
   }
@@ -134,15 +129,18 @@ export class RoomManagementComponent {
   }
 
   saveRoom() {
-    if (this.isNew) {
+    console.log("your in save method")
       const formData = new FormData();
-  
-      formData.append("chambre", JSON.stringify(this.room));
+      formData.append('numeroChambre', this.room.numeroChambre.toString());
+      formData.append('type', this.room.type);
+      formData.append('etat', this.room.etat);
+      formData.append('prix', this.room.prix.toString());
+      formData.append('description', this.room.description);
   
       this.photo.forEach((photo) => {
-        formData.append("photo", photo); 
+        formData.append('photos', photo);
       });
-  
+      if (this.isNew) {
       this.roomService.create(formData).subscribe({
         next: (room) => {
           this.messageService.add({
@@ -162,8 +160,27 @@ export class RoomManagementComponent {
           });
         }
       });
-    }
+    }else{
+        this.roomService.update(this.room.id!, formData).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Room updated successfully'
+            });
+            this.loadRooms();
+            this.displayDialog = false;
+          },
+          error: (error) => {
+            console.error('Error updating room:', error);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Failed to update room'
+            });
+      }
+    });
   }
+    
 
-
-}
+}}

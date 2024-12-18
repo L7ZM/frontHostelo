@@ -33,9 +33,12 @@ export class RoomService {
     }).pipe(catchError(this.handleError));
   }
 
-  update(id: number, room: Room): Observable<Room> {
-    return this.http.put<Room>(`${this.baseUrl}/${id}`, room)
-      .pipe(catchError(this.handleError));
+  // update(id: number, room: Room): Observable<Room> {
+  //   return this.http.put<Room>(`${this.baseUrl}/${id}`, room)
+  //     .pipe(catchError(this.handleError));
+  // }
+  update(id: number, formData: FormData): Observable<Room> {
+    return this.http.put<Room>(`${this.baseUrl}/${id}`, formData);
   }
 
   delete(id: number): Observable<void> {

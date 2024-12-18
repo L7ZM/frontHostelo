@@ -15,6 +15,7 @@ import { NoAuthGuard } from './guards/no-auth.guard';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
 import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
 import { BookingManagementComponent } from './components/admin features/booking-management/booking-management.component';
+import { MyBookingsComponent } from './components/user featurs/my-bookings/my-bookings.component';
 
 const routes: Routes = [
   {
@@ -76,10 +77,10 @@ const routes: Routes = [
     data: { roles: ['ROLE_ADMIN'] },
    },
    {
-    path: 'bookings',
-    component: BookingManagementComponent,
+    path: 'my-bookings',
+    component: MyBookingsComponent,
     canActivate: [RoleGuard],
-    data: { roles: ['ROLE_ADMIN'] },
+    data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] },
    }
 
 ];
