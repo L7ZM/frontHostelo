@@ -138,7 +138,7 @@ export class RoomManagementComponent {
       formData.append('description', this.room.description);
   
       this.photo.forEach((photo) => {
-        formData.append('photos', photo);
+        formData.append('photos', photo); // Append each photo file
       });
       if (this.isNew) {
       this.roomService.create(formData).subscribe({
