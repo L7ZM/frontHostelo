@@ -131,15 +131,27 @@ export class RoomManagementComponent {
   saveRoom() {
     console.log("your in save method")
       const formData = new FormData();
-      formData.append('numeroChambre', this.room.numeroChambre.toString());
-      formData.append('type', this.room.type);
-      formData.append('etat', this.room.etat);
-      formData.append('prix', this.room.prix.toString());
-      formData.append('description', this.room.description);
-  
-      this.photo.forEach((photo) => {
-        formData.append('photos', photo); // Append each photo file
+      // formData.append('numeroChambre', this.room.numeroChambre.toString());
+      // formData.append('type', this.room.type);
+      // formData.append('etat', this.room.etat);
+      // formData.append('prix', this.room.prix.toString());
+      // formData.append('description', this.room.description);
+
+      // ----------------
+      const chambreJson = JSON.stringify({
+        numeroChambre: this.room.numeroChambre,
+        type: this.room.type,
+        etat: this.room.etat,
+        prix: this.room.prix,
+        description: this.room.description
       });
+    
+      formData.append('chambre', chambreJson);
+    
+      this.photo.forEach((photo) => {
+        formData.append('photo', photo); 
+      });
+
       if (this.isNew) {
       this.roomService.create(formData).subscribe({
         next: (room) => {

@@ -74,6 +74,12 @@ const routes: Routes = [
     component: ServicesManagementComponent,
     canActivate: [RoleGuard],
     data: { roles: ['ROLE_ADMIN'] },
+   },
+   {
+    path: 'ManageBooking',
+    component: BookingManagementComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['ROLE_ADMIN'] },
    }
 
 ];
