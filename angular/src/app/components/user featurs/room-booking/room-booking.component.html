@@ -12,24 +12,37 @@
         <div class="flex-grow-1">
           <div class="input-daterange input-group">
             <h3 id="bookYourStay" class="block-title">BOOK YOUR STAY</h3>
+
+            <!-- Date From -->
             <p-calendar
               [(ngModel)]="dateFrom"
               [maxDate]="dateTo"
               placeholder="From"
               dateFormat="dd/mm/yyyy"
+              [ngClass]="{'error-border': dateFromError}"
+              (ngModelChange)="validateDates()"
             ></p-calendar>
-            <span class="input-group-text fw-semibold"
-              ><i class="fa fa-arrow-right"></i
-            ></span>
+
+
+            <span class="input-group-text fw-semibold">
+              <i class="fa fa-arrow-right"></i>
+            </span>
+
+            <!-- Date To -->
             <p-calendar
               [(ngModel)]="dateTo"
               [minDate]="dateFrom"
               placeholder="To"
               dateFormat="dd/mm/yyyy"
+              [ngClass]="{'error-border': dateToError}"
+              (ngModelChange)="validateDates()"
             ></p-calendar>
 
+
+            <!-- Filters and Search Buttons -->
             <button
-              class="btn btn-lg rounded-pill btn-alt-secondary me-2" style="margin-left:7px ;"
+              class="btn btn-lg rounded-pill btn-alt-secondary me-2"
+              style="margin-left:7px ;"
               (click)="visible = true"
             >
               <i class="pi pi-filter"></i> Filters
@@ -43,6 +56,8 @@
               (click)="applyFilters()"
             ></button>
           </div>
+
+
         </div>
       </div>
     </div>
@@ -120,8 +135,8 @@
         </p>
         <div class="price-section">
           <span class="price">{{ room.prix }} MAD / nuit</span>
-          <button class="btn btn-primary btn-sm mt-2">
-            Afficher les tarifs
+          <button class="btn btn-primary btn-sm mt-2" (click)="openBookingDialog(room)">
+            Book
           </button>
         </div>
       </div>

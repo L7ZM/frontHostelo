@@ -1,3 +1,15 @@
+/* Red border for the input fields when they have errors */
+.error-border {
+  border: 1px solid red !important;
+}
+
+
+/* Ensuring the input fields have some margin for better layout */
+.p-calendar {
+  margin-bottom: 10px; /* Add space between the calendar input and the error message */
+  display: block; /* Make sure inputs take full width of their container */
+}
+
 .content {
   padding-left: 15rem;
   padding-right: 15rem;

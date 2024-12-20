@@ -1,0 +1,45 @@
+<div class="room-details">
+  <!-- Room Image Carousel -->
+  <div *ngIf="room.photos?.length; else noPhoto" class="carousel-container">
+    <div class="carousel-inner">
+      <div *ngFor="let photo of room.photos; let i = index" class="carousel-item" [class.active]="i === 0">
+        <img [src]="'data:image/jpeg;base64,' + photo" class="d-block w-100" alt="Room photo" />
+      </div>
+    </div>
+  </div>
+  <ng-template #noPhoto>
+    <div class="no-photo">No Photos Available</div>
+  </ng-template>
+
+  <!-- Room Details -->
+  <h2>{{ room.numeroChambre }} - {{ room.type }}</h2>
+  <p>{{ room.description || 'No description available.' }}</p>
+  <p>Price: {{ room.prix }} MAD / night</p>
+
+  <!-- Display Dates -->
+  <div class="date-container">
+    <p><strong>Check-in Date (From):</strong> {{ dateFrom | date: 'shortDate' }}</p>
+    <p><strong>Check-out Date (To):</strong> {{ dateTo | date: 'shortDate' }}</p>
+    <p><strong>Total Days:</strong> {{ totalDays }} days</p>
+  </div>
+
+  <!-- Select Services -->
+  <h3>Select Services</h3>
+  <div *ngFor="let service of services" class="service-item">
+    <p-checkbox
+      [label]="service.nomService + ' (' + service.prix + ' MAD)'"
+      [(ngModel)]="selectedServices[service.nomService]"
+      [value]="service"
+      (ngModelChange)="updatePrice(service)"
+    ></p-checkbox>
+  </div>
+
+  <!-- Total Price -->
+  <h3>Total Price: {{ totalPrice }} MAD</h3>
+
+  <!-- Dialog Footer -->
+  <div class="dialog-footer">
+    <button pButton label="Close" icon="pi pi-times" (click)="closeDialog()" class="p-button-text"></button>
+    <button pButton label="Confirm Booking" icon="pi pi-check" class="p-button-primary"></button>
+  </div>
+</div>
