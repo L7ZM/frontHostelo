@@ -2,6 +2,7 @@
 html, body {
   height: 100%;
   margin: 0;
+  background-color: #ece6d7;
 }
 
 .page-container {
@@ -11,7 +12,8 @@ html, body {
 }
 
 main {
-  flex: 1; /* Pushes the footer to the bottom when content is short */
+  flex: 1;
+  background-color: #ece6d7;
 }
 
 footer {
