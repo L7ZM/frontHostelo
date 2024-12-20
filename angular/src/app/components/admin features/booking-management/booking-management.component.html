@@ -1,94 +1,86 @@
 
-<div class="card">
-    <p-table
-        #dt2
-        dataKey="id"
-        [rows]="10"
-        [showCurrentPageReport]="true"
-        [rowsPerPageOptions]="[10, 25, 50]"
-        [paginator]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
-        [tableStyle]="{ 'min-width': '75rem' }"
-        >
-        <ng-template pTemplate="caption">
-            <div class="flex">
-                <span class="p-input-icon-left ml-auto">
-                    <i class="pi pi-search"></i>
-                    <!-- <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" /> -->
-                </span>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width:22%">Name</th>
-                <th style="width:22%">Country</th>
-                <th style="width:22%">Agent</th>
-                <th style="width:22%">Status</th>
-                <th style="width:12%">Verified</th>
-            </tr>
-            <tr>
-                <th>
-                    <p-columnFilter type="text" field="name"></p-columnFilter>
-                </th>
-                <th>
-                    <p-columnFilter type="text" field="country.name"></p-columnFilter>
-                </th>
-                <th>
-                    <p-columnFilter field="representative" matchMode="in" [showMenu]="false">
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [ngModel]="value"  placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
-                                <ng-template let-option pTemplate="item">
-                                    <div class="inline-block vertical-align-middle">
-                                        <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24" class="vertical-align-middle" />
-                                        <span class="ml-1 mt-1">{{ option.name }}</span>
-                                    </div>
+              <div class="card">
+                <p-confirmDialog></p-confirmDialog>
+                <p-table 
+                  [value]="reservations" 
+                  dataKey="id"
+                  [rows]="10"
+                  [paginator]="true"
+                  [rowsPerPageOptions]="[10, 25, 50]"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                  [globalFilterFields]="['numeroChambre', 'dateDebut', 'dateFin', 'status']"
+                >
+                
+                <ng-template pTemplate="caption">
+                  <p style="text-align: center; align-items: center; height: 0rem;">MANAGE BOOKING</p>
+                </ng-template>
+                
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="min-width:8rem">
+                        <div class="flex align-items-center">
+                          Room Number
+                          <p-columnFilter type="text" field="numeroChambre" display="menu"></p-columnFilter>
+                        </div>
+                      </th>
+                      <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                          Start Date
+                          <!-- <p-columnFilter type="date"  field="dateDebut" display="menu"></p-columnFilter> -->
+                        </div>
+                      </th>
+                      <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                          End Date
+                          <!-- <p-columnFilter type="date" field="dateFin" display="menu"></p-columnFilter> -->
+                        </div>
+                      </th>
+                      <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                            Status
+                            <!-- <p-columnFilter field="status" matchMode="equals" display="menu">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-dropdown [ngModel]="value" [options]="reservations" (onChange)="filter($event.value)" placeholder="Any">
+                                        <ng-template let-option pTemplate="item">
+                                            <p-tag [value]="option.value" [severity]="getSeverity(option.label)"></p-tag>
+                                        </ng-template>
+                                    </p-dropdown>
                                 </ng-template>
-                            </p-multiSelect>
-                        </ng-template>
-                    </p-columnFilter>
-                </th>
-                <th>
-                    <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown [ngModel]="value"  (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                                <ng-template let-option pTemplate="item">
-                                    <!-- <p-tag [value]="option.value" [severity]="getSeverity(option.label)"></p-tag> -->
-                                </ng-template>
-                            </p-dropdown>
-                        </ng-template>
-                    </p-columnFilter>
-                </th>
-                <th>
-                    <p-columnFilter type="boolean" field="verified"></p-columnFilter>
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-customer>
-            <tr>
-                <td>
-                    {{ customer.name }}
-                </td>
-                <td>
-                    <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" style="width: 20px" />
-                    <span class="ml-1 vertical-align-middle">{{ customer.country.name }}</span>
-                </td>
-                <td>
-                    <img [alt]="customer.representative.name" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ customer.representative.image }}" width="32" style="vertical-align: middle" />
-                    <span class="ml-1 vertical-align-middle">{{ customer.representative.name }}</span>
-                </td>
-                <td>
-                    <!-- <p-tag [value]="customer.status" [severity]="getSeverity(customer.status)"></p-tag> -->
-                </td>
-                <td>
-                    <i class="pi" [ngClass]="{ 'text-green-500 pi-check-circle': customer.verified, 'text-red-500 pi-times-circle': !customer.verified }"></i>
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="5">No customers found.</td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
+                            </p-columnFilter> -->
+                        </div>
+                    </th>
+                      <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                          Actions
+                        </div>
+                      </th>                  
+                      </tr>
+                  </ng-template>
+              
+                  <ng-template pTemplate="body" let-reservation>
+                    <tr>
+                      <td>{{ reservation.numeroChambre }}</td>
+                      <td>{{ reservation.dateDebut | date: 'dd/MM/yyyy' }}</td>
+                      <td>{{ reservation.dateFin | date: 'dd/MM/yyyy' }}</td>
+                      <td>
+                        <p-tag 
+                          *ngIf="reservation.status" 
+                          [value]="reservation.status" 
+                          [severity]="getSeverity(reservation.status)">
+                        </p-tag>
+                      </td>
+                      <td>
+                        <button pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-outlined mr-2" (click)="validateReservation(reservation)"  ></button>
+                        <button pButton pRipple icon="pi pi-file-edit" class="p-button-rounded p-button-success p-button-outlined mr-2" ></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteReservation(reservation)" ></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+              
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="4">No bookings found.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>

@@ -51,6 +51,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
 import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
 import { BookingManagementComponent } from './components/admin features/booking-management/booking-management.component';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { BookingManagementComponent } from './components/admin features/booking-
   ],
 
   imports: [
+    TagModule ,
     RadioButtonModule,
     TooltipModule,
     SliderModule,
