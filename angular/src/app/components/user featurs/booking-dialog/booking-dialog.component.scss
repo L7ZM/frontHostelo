@@ -1,130 +1,113 @@
-/* General Dialog Styling */
-.room-details {
-  font-family: 'Roboto', Arial, sans-serif;
+:host ::ng-deep .room-details {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  color: #333;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Carousel Styling */
-.carousel-container {
+:host ::ng-deep .carousel-container {
   position: relative;
-  overflow: hidden;
-  border-radius: 8px;
+  max-width: 100%;
   margin-bottom: 20px;
 }
 
-.carousel-inner {
-  display: flex;
-  flex-wrap: nowrap;
-  transition: transform 0.5s ease-in-out;
+:host ::ng-deep .carousel-inner {
+  position: relative;
 }
 
-.carousel-item {
-  min-width: 100%;
-  display: none;
-}
-
-.carousel-item.active {
-  display: block;
-}
-
-.carousel-item img {
-  border-radius: 8px;
-  max-height: 300px;
-  object-fit: cover;
+:host ::ng-deep .carousel-item img {
   width: 100%;
-}
-
-/* No Photo Placeholder */
-.no-photo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  background-color: #f4f4f4;
+  height: auto;
   border-radius: 8px;
-  color: #999;
-  font-size: 16px;
-  font-style: italic;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
 }
 
-/* Room Details */
-.room-details h2 {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: #222;
-}
-
-.room-details p {
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.date-container p {
-  font-size: 16px;
-  margin-bottom: 5px;
-  color: #444;
-}
-
-/* Service Selection */
-.service-item {
-  margin-bottom: 10px;
-}
-
-.p-checkbox .p-checkbox-box {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.p-checkbox-box.p-highlight {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-/* Total Price */
-.room-details h3 {
-  font-size: 20px;
-  font-weight: 600;
-  margin-top: 20px;
-  margin-bottom: 15px;
-  color: #111;
-}
-
-/* Dialog Footer */
-.dialog-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.dialog-footer button {
-  border-radius: 20px;
-  padding: 10px 20px;
-}
-
-.p-button-primary {
-  background-color: #007bff;
+:host ::ng-deep .carousel-control-prev,
+:host ::ng-deep .carousel-control-next {
+  width: 5%;
+  height: 100%;
+  background: none;
   border: none;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
 }
 
-.p-button-primary:hover {
-  background-color: #0056b3;
+:host ::ng-deep .carousel-control-prev-icon,
+:host ::ng-deep .carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
 
-.p-button-text {
+:host ::ng-deep .room-info {
+  margin-bottom: 20px;
+}
+
+:host ::ng-deep .room-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+:host ::ng-deep .room-description {
+  font-size: 16px;
   color: #555;
-  font-size: 14px;
+  line-height: 1.5;
 }
 
-.p-button-text:hover {
+:host ::ng-deep .room-price {
+  font-size: 18px;
+  font-weight: bold;
   color: #007bff;
-  text-decoration: underline;
+}
+
+:host ::ng-deep .date-container,
+:host ::ng-deep .service-selection {
+  margin-bottom: 20px;
+}
+
+:host ::ng-deep .service-selection h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+:host ::ng-deep .service-item {
+  margin-bottom: 10px;
+}
+
+:host ::ng-deep .total-price {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #28a745;
+}
+
+:host ::ng-deep .price-amount {
+  font-size: 24px;
+  color: #007bff;
+}
+
+:host ::ng-deep .dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+:host ::ng-deep .dialog-footer button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+:host ::ng-deep .p-button-rounded {
+  border-radius: 50px;
+}
+
+:host ::ng-deep .no-photo {
+  font-size: 18px;
+  font-weight: 500;
+  color: #888;
+  text-align: center;
+  padding: 20px 0;
 }

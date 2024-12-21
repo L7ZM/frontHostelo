@@ -18,7 +18,7 @@
               [(ngModel)]="dateFrom"
               [maxDate]="dateTo"
               placeholder="From"
-              dateFormat="dd/mm/yyyy"
+              dateFormat="dd/mm/yy"
               [ngClass]="{'error-border': dateFromError}"
               (ngModelChange)="validateDates()"
             ></p-calendar>
@@ -33,7 +33,7 @@
               [(ngModel)]="dateTo"
               [minDate]="dateFrom"
               placeholder="To"
-              dateFormat="dd/mm/yyyy"
+              dateFormat="dd/mm/yy"
               [ngClass]="{'error-border': dateToError}"
               (ngModelChange)="validateDates()"
             ></p-calendar>

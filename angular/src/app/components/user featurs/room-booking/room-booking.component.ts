@@ -3,6 +3,7 @@ import { RoomService } from 'src/app/services/rooms/room-service.service';
 import { BookingDialogComponent } from '../booking-dialog/booking-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
 
+
 @Component({
   selector: 'app-room-booking',
   templateUrl: './room-booking.component.html',
@@ -26,6 +27,7 @@ export class RoomBookingComponent implements OnInit {
   // Error flags
   dateFromError: boolean = false;
   dateToError: boolean = false;
+
 
   @HostListener('window:scroll', ['$event'])
   onscroll(): void {
