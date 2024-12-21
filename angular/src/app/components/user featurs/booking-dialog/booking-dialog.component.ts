@@ -1,6 +1,9 @@
+import { Reservation } from 'src/app/models/reservation/reservation.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ServicesManageService } from 'src/app/services/servicesManagement/services-manage.service';
+import { ReservationService } from 'src/app/services/reservation/reservation.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-booking-dialog',
@@ -19,6 +22,9 @@ export class BookingDialogComponent implements OnInit {
   totalDays!: number;
 
   constructor(
+    private messageService: MessageService, // Inject the MessageService
+    private confirmationService: ConfirmationService,
+    private reservationService: ReservationService,
     private servicesService: ServicesManageService,
     private ref: DynamicDialogRef,
     @Inject(DynamicDialogConfig) private config: DynamicDialogConfig
@@ -99,4 +105,41 @@ export class BookingDialogComponent implements OnInit {
   closeDialog() {
     this.ref.close();
   }
+
+  // The reserveRoom method now uses ReservationService to submit the reservation
+  reserveRoom() {
+    // Prepare reservation data
+    const reservationData = {
+      chambreId: this.room.id,  // Assume room has an 'id' property
+      dateDebut: this.dateFrom.toISOString().split('T')[0],  // Convert to YYYY-MM-DD
+      dateFin: this.dateTo.toISOString().split('T')[0],  // Convert to YYYY-MM-DD
+      serviceIds: this.selectedServices.map((service) => service.id) // Assuming each service has an 'id' property
+    };
+
+    // Call the ReservationService to create the reservation
+    this.reservationService.createReservation(reservationData).subscribe(
+      (response) => {
+        // Show success message
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Reservation Successful',
+          detail: 'Your room has been successfully reserved.'
+        });
+
+        // Optionally close the dialog
+        this.closeDialog();
+      },
+      (error) => {
+        console.error('Error making reservation', error);
+
+        // Show error message
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Reservation Failed',
+          detail: 'There was an error making your reservation. Please try again.'
+        });
+      }
+    );
+  }
+
 }

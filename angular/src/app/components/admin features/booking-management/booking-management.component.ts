@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { data } from 'jquery';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Reservation } from 'src/app/models/reservation/reservation.model';
@@ -10,17 +10,19 @@ import { ReservationService } from 'src/app/services/reservation/reservation.ser
   selector: 'app-booking-management',
   templateUrl: './booking-management.component.html',
   styleUrls: ['./booking-management.component.scss'],
-  providers: [DatePipe]  
+  providers: [DatePipe]
 })
 export class BookingManagementComponent  implements OnInit {
   reservations: any[] = [];
-  statusOptions: { label: string; value: string }[] = []; 
+  statusOptions: { label: string; value: string }[] = [];
 
-  constructor(private reservationService: ReservationService,
+
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+    private reservationService: ReservationService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private datePipe: DatePipe) {}
-  
+
   ngOnInit() {
     this.loadReservations();
   }
@@ -28,13 +30,14 @@ export class BookingManagementComponent  implements OnInit {
     this.reservationService.getAllReservation().subscribe(
       (data) => {
         console.log(data)
-        this.reservations = this.transformDates(data);  
+        this.reservations = this.transformDates(data);
            },
       (error) => {
         console.error('Error loading services', error);
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Could not load services' });
       }
     );
+    this.changeDetectorRef.detectChanges();
   }
   getSeverity(status: string ){
     switch (status) {
@@ -77,6 +80,7 @@ export class BookingManagementComponent  implements OnInit {
               summary: 'Success',
               detail: 'Reservation validated successfully'
             });
+            reservation.status = 'CONFIRMEE';
             this.loadReservations();
           },
           error: () => this.messageService.add({
@@ -93,16 +97,16 @@ export class BookingManagementComponent  implements OnInit {
           detail: 'Reservation validation cancelled'
         });
       }
+
     });
  }
   deleteReservation(reservation: Reservation) {
-    console.log("your in delete")
     this.confirmationService.confirm({
       message: 'Are you sure you want to cancel this reservation?',
       header: 'Confirm Cancellation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        console.log("you remove reservation that have id : " , reservation.id)
+
         this.reservationService.cancelReservation(reservation.id).subscribe({
           next: () => {
             this.messageService.add({
@@ -130,6 +134,6 @@ export class BookingManagementComponent  implements OnInit {
     });
   }
 }
-  
+
 
 

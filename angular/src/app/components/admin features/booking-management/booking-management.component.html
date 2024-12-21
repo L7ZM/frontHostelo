@@ -1,8 +1,8 @@
 
               <div class="card">
                 <p-confirmDialog></p-confirmDialog>
-                <p-table 
-                  [value]="reservations" 
+                <p-table
+                  [value]="reservations"
                   dataKey="id"
                   [rows]="10"
                   [paginator]="true"
@@ -10,11 +10,11 @@
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                   [globalFilterFields]="['numeroChambre', 'dateDebut', 'dateFin', 'status']"
                 >
-                
+
                 <ng-template pTemplate="caption">
                   <p style="text-align: center; align-items: center; height: 0rem;">MANAGE BOOKING</p>
                 </ng-template>
-                
+
                   <ng-template pTemplate="header">
                     <tr>
                       <th style="min-width:8rem">
@@ -53,19 +53,19 @@
                         <div class="flex align-items-center">
                           Actions
                         </div>
-                      </th>                  
+                      </th>
                       </tr>
                   </ng-template>
-              
+
                   <ng-template pTemplate="body" let-reservation>
                     <tr>
                       <td>{{ reservation.numeroChambre }}</td>
                       <td>{{ reservation.dateDebut | date: 'dd/MM/yyyy' }}</td>
                       <td>{{ reservation.dateFin | date: 'dd/MM/yyyy' }}</td>
                       <td>
-                        <p-tag 
-                          *ngIf="reservation.status" 
-                          [value]="reservation.status" 
+                        <p-tag
+                          *ngIf="reservation.status"
+                          [value]="reservation.status"
                           [severity]="getSeverity(reservation.status)">
                         </p-tag>
                       </td>
@@ -76,7 +76,7 @@
                       </td>
                     </tr>
                   </ng-template>
-              
+
                   <ng-template pTemplate="emptymessage">
                     <tr>
                       <td colspan="4">No bookings found.</td>
@@ -84,3 +84,5 @@
                   </ng-template>
                 </p-table>
               </div>
+
+              <p-toast />

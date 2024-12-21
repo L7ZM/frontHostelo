@@ -40,6 +40,8 @@
   <!-- Dialog Footer -->
   <div class="dialog-footer">
     <button pButton label="Close" icon="pi pi-times" (click)="closeDialog()" class="p-button-text"></button>
-    <button pButton label="Confirm Booking" icon="pi pi-check" class="p-button-primary"></button>
+    <button pButton label="Confirm Booking" (click)="reserveRoom()" icon="pi pi-check" class="p-button-primary"></button>
+    <p-toast></p-toast>
   </div>
 </div>
+
