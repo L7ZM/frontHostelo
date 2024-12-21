@@ -3,8 +3,10 @@ export interface Reservation {
     numeroChambre: number; 
     dateDebut: string;      
     dateFin: string;       
-    clientId: number;      
+    idUser: number;      
     status: string;        
     totalPrice?: number;    
-    services?: string[];    
+    services?: string[];   
+    nom: string;
+    prenom: string; 
   }
