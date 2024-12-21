@@ -23,6 +23,18 @@
                           <p-columnFilter type="text" field="numeroChambre" display="menu"></p-columnFilter>
                         </div>
                       </th>
+                      <th style="min-width:8rem">
+                        <div class="flex align-items-center">
+                          First name
+                          <p-columnFilter type="text" field="prenom" display="menu"></p-columnFilter>
+                        </div>
+                      </th>
+                      <th style="min-width:8rem">
+                        <div class="flex align-items-center">
+                          Last name
+                          <p-columnFilter type="text" field="nom" display="menu"></p-columnFilter>
+                        </div>
+                      </th>
                       <th style="min-width:10rem">
                         <div class="flex align-items-center">
                           Start Date
@@ -60,6 +72,8 @@
                   <ng-template pTemplate="body" let-reservation>
                     <tr>
                       <td>{{ reservation.numeroChambre }}</td>
+                      <td>{{ reservation.prenom }}</td>
+                      <td>{{ reservation.nom }}</td>
                       <td>{{ reservation.dateDebut | date: 'dd/MM/yyyy' }}</td>
                       <td>{{ reservation.dateFin | date: 'dd/MM/yyyy' }}</td>
                       <td>

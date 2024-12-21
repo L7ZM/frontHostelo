@@ -53,6 +53,10 @@ import { BookingManagementComponent } from './components/admin features/booking-
 import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
 import { BookingDialogComponent } from './components/user featurs/booking-dialog/booking-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5c237e523d7b36b7f810c78b2f92d5a173b090ca
 import { TagModule } from 'primeng/tag';
 
 @NgModule({
