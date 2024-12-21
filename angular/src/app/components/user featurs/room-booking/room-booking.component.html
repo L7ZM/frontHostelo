@@ -83,6 +83,7 @@
                   [src]="'data:image/jpeg;base64,' + photo"
                   class="d-block w-100"
                   alt="Room photo"
+                  style="height: 300px; object-fit: cover;"
                 />
               </div>
             </div>
@@ -108,8 +109,20 @@
                 aria-hidden="true"
               ></span>
             </button>
+
+            <!-- Custom Indicators -->
+            <div class="carousel-indicators">
+              <button
+                *ngFor="let photo of room.photos; let i = index"
+                [attr.data-bs-target]="'#carousel-' + room.numeroChambre"
+                [attr.data-bs-slide-to]="i"
+                [class.active]="i === 0"
+                class="carousel-indicator"
+              ></button>
+            </div>
           </div>
         </div>
+
         <ng-template #noPhoto>
           <div class="no-photo-placeholder text-center">
             No Photos Available
