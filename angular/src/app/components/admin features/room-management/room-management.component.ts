@@ -38,6 +38,23 @@ export class RoomManagementComponent {
     { label: 'MAINTENANCE', value: 'EN_ENTRETIEN' }
   ];
 
+  responsiveOptions: any[] = [
+    {
+        breakpoint: '1024px',
+        numVisible: 5
+    },
+    {
+      breakpoint: '768px',
+        numVisible: 3
+
+    },
+    {
+        breakpoint: '560px',
+
+        numVisible: 1
+    }
+];
+
   constructor(
     private roomService: RoomService,
     private messageService: MessageService,

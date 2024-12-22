@@ -24,11 +24,18 @@
     <ng-template pTemplate="body" let-room>
       <tr>
         <td>
-          <p-carousel [value]="room.photos" [numVisible]="1" [numScroll]="1">
+          <p-galleria [value]="room.photos" [showItemNavigators]="true" [showThumbnails]="false"
+           [showIndicators]="false" [showIndicatorsOnItem]="true" 
+            [containerStyle]="{ 'max-width': '400px' }"> 
             <ng-template pTemplate="item" let-photo>
-              <img [src]="'data:image/jpeg;base64,' + photo" alt="Room photo" style="width: 30%; height: auto;">
+                <img [src]="'data:image/jpeg;base64,' + photo" style="width: 100%; display: block;" />
             </ng-template>
-          </p-carousel>
+            <ng-template pTemplate="thumbnail" let-photo>
+                <div class="grid grid-nogutter justify-content-center">
+                    <img [src]="'data:image/jpeg;base64,' + photo" style="display: block;" />
+                </div>
+            </ng-template>
+        </p-galleria>
         </td>
         <td>{{room.numeroChambre}}</td>
         <td>{{room.type}}</td>

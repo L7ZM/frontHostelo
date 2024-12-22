@@ -300,3 +300,13 @@
     }
   }
 }
+
+::ng-deep .p-galleria .p-galleria-item-nav {
+  background: transparent;
+  color: #f8f9fa;
+  width: 4rem;
+  height: 4rem;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+  margin: -21px 0.5rem;
+}

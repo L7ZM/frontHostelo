@@ -54,6 +54,7 @@ import { RoomBookingComponent } from './components/user featurs/room-booking/roo
 import { BookingDialogComponent } from './components/user featurs/booking-dialog/booking-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TagModule } from 'primeng/tag';
+import { GalleriaModule } from 'primeng/galleria';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { TagModule } from 'primeng/tag';
     TooltipModule,
     SliderModule,
     MultiSelectModule,
+    GalleriaModule ,
     SplitterModule,
     DividerModule,
     ReactiveFormsModule,

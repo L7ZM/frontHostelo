@@ -57,7 +57,8 @@
 .card-footer {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: -1rem;
+  padding: 0.5rem 1.5rem;
 }
 
 .update-button, .delete-button {
@@ -77,4 +78,16 @@
 .delete-button {
   color: #f44336;
   border-color: #f44336;
+}
+
+::ng-deep .p-card .p-card-body {
+  padding: 0rem;
+}
+
+::ng-deep .p-card .p-card-content {
+  padding: 2rem 0;
+}
+
+::ng-depp .p-card .p-card-footer {
+  padding: 0 0 0 0;
 }

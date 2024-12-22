@@ -69,58 +69,18 @@
       <!-- Room Image Carousel -->
       <div class="hotel-left">
         <div *ngIf="room.photos?.length; else noPhoto">
-          <div
-            id="carousel-{{ room.numeroChambre }}"
-            class="carousel slide carousel-fade"
-          >
-            <div class="carousel-inner">
-              <div
-                *ngFor="let photo of room.photos; let i = index"
-                class="carousel-item"
-                [class.active]="i === 0"
-              >
-                <img
-                  [src]="'data:image/jpeg;base64,' + photo"
-                  class="d-block w-100"
-                  alt="Room photo"
-                  style="height: 300px; object-fit: cover;"
-                />
-              </div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              [attr.data-bs-target]="'#carousel-' + room.numeroChambre"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              [attr.data-bs-target]="'#carousel-' + room.numeroChambre"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-            </button>
-
-            <!-- Custom Indicators -->
-            <div class="carousel-indicators">
-              <button
-                *ngFor="let photo of room.photos; let i = index"
-                [attr.data-bs-target]="'#carousel-' + room.numeroChambre"
-                [attr.data-bs-slide-to]="i"
-                [class.active]="i === 0"
-                class="carousel-indicator"
-              ></button>
-            </div>
-          </div>
+          <p-galleria [value]="room.photos" [showItemNavigators]="true" [showThumbnails]="false"
+           [showIndicators]="false" [showIndicatorsOnItem]="true" 
+            [containerStyle]="{ 'max-width': '433px' }"> 
+            <ng-template pTemplate="item" let-photo>
+                <img [src]="'data:image/jpeg;base64,' + photo" style="width: 100%; display: block;" />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-photo>
+                <div class="grid grid-nogutter justify-content-center">
+                    <img [src]="'data:image/jpeg;base64,' + photo" style="display: block;" />
+                </div>
+            </ng-template>
+        </p-galleria>
         </div>
 
         <ng-template #noPhoto>
