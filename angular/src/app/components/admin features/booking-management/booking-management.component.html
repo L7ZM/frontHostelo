@@ -38,27 +38,22 @@
                       <th style="min-width:10rem">
                         <div class="flex align-items-center">
                           Start Date
-                          <!-- <p-columnFilter type="date"  field="dateDebut" display="menu"></p-columnFilter> -->
                         </div>
                       </th>
                       <th style="min-width:10rem">
                         <div class="flex align-items-center">
                           End Date
-                          <!-- <p-columnFilter type="date" field="dateFin" display="menu"></p-columnFilter> -->
+                        </div>
+                      </th>
+                      <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                          Additionnel services 
                         </div>
                       </th>
                       <th style="min-width:10rem">
                         <div class="flex align-items-center">
                             Status
-                            <!-- <p-columnFilter field="status" matchMode="equals" display="menu">
-                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                                    <p-dropdown [ngModel]="value" [options]="reservations" (onChange)="filter($event.value)" placeholder="Any">
-                                        <ng-template let-option pTemplate="item">
-                                            <p-tag [value]="option.value" [severity]="getSeverity(option.label)"></p-tag>
-                                        </ng-template>
-                                    </p-dropdown>
-                                </ng-template>
-                            </p-columnFilter> -->
+                      
                         </div>
                     </th>
                       <th style="min-width:10rem">
@@ -76,6 +71,14 @@
                       <td>{{ reservation.nom }}</td>
                       <td>{{ reservation.dateDebut | date: 'dd/MM/yyyy' }}</td>
                       <td>{{ reservation.dateFin | date: 'dd/MM/yyyy' }}</td>
+                      <td>
+                        <span *ngIf="reservation.services?.length; else noServices">
+                          {{ reservation.services.join(' , ') }}
+                        </span>
+                        <ng-template #noServices>
+                          <span>No additional services</span>
+                        </ng-template>
+                      </td>
                       <td>
                         <p-tag
                           *ngIf="reservation.status"
