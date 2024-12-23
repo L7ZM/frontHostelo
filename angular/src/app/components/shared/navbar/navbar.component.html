@@ -55,7 +55,7 @@
           <li *ngIf="userRole !== 'visitor'"  class="nav-main-item">
             <a class="nav-main-link" routerLink="/my-bookings">
               <i class="pi pi-calendar nav-main-link-icon"></i>
-              <span class="nav-main-link-name">My Bookings</span>
+              <span class="nav-main-link-name" routerLink="myBookings">My Bookings</span>
             </a>
           </li>
           <li *ngIf="userRole !== 'visitor'"  class="nav-main-item">

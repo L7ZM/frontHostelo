@@ -60,9 +60,12 @@
         [(ngModel)]="selectedServices[service.nomService]"
         [value]="service"
         (ngModelChange)="updatePrice(service)"
+        [disabled]="service.isRequired"
         class="service-checkbox"
+
       ></p-checkbox>
     </div>
+
   </div>
 
   <!-- Total Price Section -->

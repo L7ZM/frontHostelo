@@ -25,7 +25,7 @@
             <td>{{ i + 1 }}</td>
             <td class="fw-semibold fs-sm">{{ service.nomService }}</td>
             <td class="fs-sm">{{ service.description }}</td>
-            <td class="fs-sm">{{ service.prix | currency }}</td>
+            <td class="fs-sm">{{ service.prix | currency:'MAD' }}</td>
             <td class="text-center">
               <div class="btn-group">
                 <!-- Edit Button -->
@@ -69,6 +69,7 @@
     <div class="p-field">
       <label for="prix">Price</label>
       <input id="prix" type="number" pInputText [(ngModel)]="service.prix" required />
+
     </div>
   </div>
   <div class="p-dialog-footer">

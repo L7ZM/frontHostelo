@@ -55,6 +55,7 @@ import { BookingDialogComponent } from './components/user featurs/booking-dialog
 import { DialogService } from 'primeng/dynamicdialog';
 import { TagModule } from 'primeng/tag';
 import { GalleriaModule } from 'primeng/galleria';
+import { MyBookingsComponent } from './components/user featurs/my-bookings/my-bookings.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,7 @@ import { GalleriaModule } from 'primeng/galleria';
     BookingManagementComponent,
     RoomBookingComponent,
     BookingDialogComponent
-
+,MyBookingsComponent
   ],
 
   imports: [

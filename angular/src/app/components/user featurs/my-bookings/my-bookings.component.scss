@@ -1,0 +1,151 @@
+
+
+.booking-container {
+
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #ece6d7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 2px solid #ddd;
+  width: 100%;
+  max-width: 800px;
+}
+
+.booking-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.btn-book {
+  text-decoration: none;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-book:hover {
+  background-color: #0056b3;
+}
+
+.booking-cards {
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.booking-card {
+  width: 100%;
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  align-items: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.booking-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.room-image {
+  width: 350px;
+  height: auto;
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.text {
+  padding: 10px 0;
+}
+
+.room-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.room-type {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.status.confirmed {
+  background-color: #28a745;
+  color: white;
+}
+
+.status.pending {
+  background-color: #ffc107;
+  color: black;
+}
+
+.details p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-edit, .btn-cancel {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.btn-cancel:hover {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}

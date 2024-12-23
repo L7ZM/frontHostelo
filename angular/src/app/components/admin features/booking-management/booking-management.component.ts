@@ -84,9 +84,9 @@ export class BookingManagementComponent  implements OnInit {
             this.loadReservations();
           },
           error: () => this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Failed to validate reservation'
+            severity: 'info',
+            summary: 'Info',
+            detail: 'Already validated reservation'
           })
         });
       },
@@ -117,9 +117,9 @@ export class BookingManagementComponent  implements OnInit {
             this.loadReservations();
           },
           error: () => this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Failed to cancel reservation'
+            severity: 'info',
+            summary: 'Info',
+            detail: 'You cannot cancel the reservation within 48 hours of check-in'
           })
         });
       },

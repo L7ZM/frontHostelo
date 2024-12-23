@@ -20,6 +20,7 @@ export class BookingDialogComponent implements OnInit {
   isVisible: boolean = false; // Dialog visibility
   selectedServicesMap: Map<string, boolean> = new Map();
   totalDays!: number;
+  readonly requiredServiceName: string[] = ['Breakfast']
 
   constructor(
     private messageService: MessageService, // Inject the MessageService
@@ -44,10 +45,21 @@ export class BookingDialogComponent implements OnInit {
   fetchServices(): void {
     this.servicesService.getAllServices().subscribe(
       (data) => {
-        this.services = data.map((service: any) => ({
-          ...service,
-          selected: false,
-        })); // Ensure selected is set to false
+        this.services = data.map((service: any) => {
+          const isRequired = this.requiredServiceName.includes(service.nomService);
+          if (isRequired) {
+            this.selectedServicesMap.set(service.nomService, true); // Mark required service as checked
+            this.selectedServices.push(service); // Automatically add to selected services
+          } else {
+            this.selectedServicesMap.set(service.nomService, false); // Ensure non-required services are unchecked
+          }
+          return { ...service, isRequired };
+        });
+
+        this.calculateTotalDays();
+        this.totalPrice =
+          this.room.prix * this.totalDays +
+          this.selectedServices.reduce((sum, s) => sum + s.prix, 0);
       },
       (error) => {
         console.error('Error fetching services', error);
