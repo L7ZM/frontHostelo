@@ -12,7 +12,10 @@ export class ReservationService {
   constructor(private http: HttpClient) {}
 
   getAllReservation(): Observable<any> {
-    return this.http.get<any>(`${this.ApiUrl}`);
+    return this.http.get<any>(this.ApiUrl);  }
+
+  getMyReservation():Observable<any>{
+    return this.http.get<any>(`${this.ApiUrl}/myBooking`);
   }
 
   cancelReservation(idReservation: number): Observable<void> {

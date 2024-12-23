@@ -3,32 +3,38 @@
     <h1>My Bookings</h1>
     <a routerLink="/book" class="btn-book">New Booking</a>
   </header>
+  <p-confirmDialog></p-confirmDialog>
+
 
   <div class="booking-cards">
-    <!-- Booking Card -->
-    <div class="booking-card">
+    <div *ngIf="bookings.length === 0" class="no-bookings">
+      <p>No bookings available.</p>
+    </div>
+
+    <div *ngFor="let booking of bookings" class="booking-card">
       <img src="assets/1.jpg" alt="Room" class="room-image">
       <div class="info">
         <div class="text">
           <div class="room-name">
-            <span class="room-type">Deluxe Room</span>
-            <span class="status confirmed">Confirmed</span>
+            <span class="room-type">Room {{ booking.numeroChambre }}</span>
+            <span class="status" [ngClass]="{
+              'confirmed': booking.status === 'CONFIRMEE',
+              'pending': booking.status === 'EN_ATTENTE'
+            }">
+              {{ booking.status | titlecase }}
+            </span>
           </div>
           <div class="details">
-            <p><strong>Check-in:</strong> 2024-12-25</p>
-            <p><strong>Check-out:</strong> 2024-12-28</p>
-            <p><strong>Total:</strong> $800</p>
-          </div>
+            <p><strong>Check-in:</strong> {{ booking.dateDebut }}</p>
+            <p><strong>Check-out:</strong> {{ booking.dateFin }}</p>
+            {{ booking.services?.join(', ') || 'No services' }}</div>
         </div>
         <div class="actions">
           <button class="btn-edit">Edit</button>
-          <button class="btn-cancel">Cancel</button>
-        </div>
+          <button class="btn-cancel" (click)="cancelReservation(booking)">Cancel</button>
+                </div>
       </div>
     </div>
-
-    <!-- Add more booking cards here dynamically -->
-
   </div>
 </div>
 

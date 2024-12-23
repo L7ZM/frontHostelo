@@ -84,9 +84,9 @@ const routes: Routes = [
    },
    {
     path: 'myBookings',
-    component: MyBookingsComponent , // temporarly using home component,
+    component: MyBookingsComponent , 
     canActivate: [RoleGuard],
-    data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }, // Accessible to both roles
+    data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }, 
   },
 
 ];
