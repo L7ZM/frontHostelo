@@ -51,10 +51,16 @@ export class NavbarComponent implements OnInit {
           routerLink: '/profile',
         },
         {
+          label: 'Fidelity Points',
+          icon: 'pi pi-star',
+          // routerLink: '/fidelity-points', // Adjust the link as needed for your application
+        },
+        {
           label: 'Logout',
           icon: 'pi pi-sign-out',
           command: () => this.logout(),
         },
+
       ];
     } else {
       this.profileItems = [

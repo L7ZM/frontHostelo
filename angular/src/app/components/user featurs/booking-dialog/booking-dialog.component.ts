@@ -20,7 +20,7 @@ export class BookingDialogComponent implements OnInit {
   isVisible: boolean = false; // Dialog visibility
   selectedServicesMap: Map<string, boolean> = new Map();
   totalDays!: number;
-  readonly requiredServiceName: string[] = ['Breakfast']
+  readonly requiredServiceName: string[] = ['Breakfast','petit dejeuner'];
 
   constructor(
     private messageService: MessageService, // Inject the MessageService

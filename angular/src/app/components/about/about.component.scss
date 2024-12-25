@@ -213,3 +213,72 @@ $container-max-width: 1200px;
     }
   }
 }
+  /* Style for the carousel items */
+.facility-carousel .facility-item {
+  text-align: center;
+  padding: 1rem; /* Padding around each card */
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem; /* Adds space between the cards vertically */
+  transition: transform 0.3s ease; /* Optional: Add smooth transform effect */
+}
+/* Hide carousel indicators */
+/* Use a more specific selector */
+div .p-carousel .p-carousel-indicators,
+div .p-carousel .p-carousel-dot {
+  display: none !important;
+}
+
+/* On hover, slightly scale the card */
+.facility-carousel .facility-item:hover {
+  transform: scale(1.05);
+}
+
+/* Style for the image */
+.facility-carousel .facility-item img {
+  width: 86%; /* Adjust width to 86% */
+  height: 280px; /* Set height to 280px */
+  object-fit: cover; /* Ensure the image covers the space */
+  border-radius: 8px; /* Rounded corners for the image */
+  margin-bottom: 1rem;
+}
+
+/* Adjust spacing between carousel items */
+.facility-carousel .p-carousel-item {
+  display: flex;
+  justify-content: center; /* Align items centrally */
+  gap: 3rem; /* Increase space between the cards horizontally */
+}
+
+/* Adjust text and titles */
+.facility-carousel .facility-item h3 {
+  font-size: 1.1rem; /* Smaller font size for title */
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.facility-carousel .facility-item p {
+  font-size: 0.9rem; /* Smaller font size for description */
+  color: #777;
+}
+
+/* Optional: Adjust responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .facility-carousel .facility-item {
+    padding: 0.5rem; /* Reduce padding on smaller screens */
+  }
+
+  .facility-carousel .facility-item img {
+    width: 80%; /* Adjust width for mobile screens */
+    height: 200px; /* Smaller height for mobile screens */
+  }
+
+  .facility-carousel .facility-item h3 {
+    font-size: 1rem; /* Smaller title font on mobile */
+  }
+
+  .facility-carousel .facility-item p {
+    font-size: 0.8rem; /* Smaller description font on mobile */
+  }
+}

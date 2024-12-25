@@ -88,6 +88,12 @@
     border-bottom-left-radius: 15px;
     transition: opacity 0.5s ease;
   }
+  .room-type {
+    font-size: 18px; /* Moderate font size */
+    font-weight: 500; /* Medium weight */
+    color: #444; /* Darker shade for text */
+    margin-bottom: 10px; /* Space below the room type */
+  }
 
   .hotel-right {
     padding: 25px; /* Balanced padding */

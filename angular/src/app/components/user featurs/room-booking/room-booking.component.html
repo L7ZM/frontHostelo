@@ -70,8 +70,8 @@
       <div class="hotel-left">
         <div *ngIf="room.photos?.length; else noPhoto">
           <p-galleria [value]="room.photos" [showItemNavigators]="true" [showThumbnails]="false"
-           [showIndicators]="false" [showIndicatorsOnItem]="true" 
-            [containerStyle]="{ 'max-width': '433px' }"> 
+           [showIndicators]="false" [showIndicatorsOnItem]="true"
+            [containerStyle]="{ 'max-width': '433px' }">
             <ng-template pTemplate="item" let-photo>
                 <img [src]="'data:image/jpeg;base64,' + photo" style="width: 100%; display: block;" />
             </ng-template>
@@ -92,17 +92,9 @@
 
       <!-- Room Details -->
       <div class="hotel-right">
-        <h2 class="hotel-title">{{ room.numeroChambre }} - {{ room.type }}</h2>
-        <span
-          class="badge me-2"
-          [ngClass]="{
-            'bg-success': room.etat === 'DISPONIBLE',
-            'bg-danger': room.etat === 'OCCUPEE',
-            'bg-warning': room.etat === 'EN_ENTRETIEN'
-          }"
-        >
-          {{ room.etat }}
-        </span>
+        <h2 class="hotel-title"> Room N :{{ room.numeroChambre }} </h2>
+        <h4 class="room-type">{{ room.type }}</h4>
+
         <p class="description">
           {{ room.description || "No description available." }}
         </p>
