@@ -1,7 +1,4 @@
-
-
 .booking-container {
-
   font-family: Arial, sans-serif;
   padding: 20px;
   background-color: #ece6d7;
@@ -42,7 +39,6 @@
 }
 
 .booking-cards {
-
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -69,10 +65,32 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.room-image {
+.room-info {
+  position: relative;
   width: 350px;
-  height: auto;
-  object-fit: cover;
+  height: 200px; /* Adjust as needed */
+  background-color: aliceblue;
+  border-radius: 10px;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.room-text {
+  position: absolute;
+  top: 10px; /* Position "Room N:" text in top-left corner */
+  left: 10px;
+  font-size: 20px;
+  color: #333;
+  margin-right: 96px;
+}
+
+.room-number {
+  font-size: 80px; /* Large font size for the room number */
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  margin-left: 135px;
 }
 
 .info {
@@ -105,6 +123,7 @@
   border-radius: 15px;
   font-size: 14px;
   font-weight: bold;
+  margin-left: auto;
 }
 
 .status.confirmed {

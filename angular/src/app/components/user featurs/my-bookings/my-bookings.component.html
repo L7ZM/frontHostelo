@@ -5,18 +5,22 @@
   </header>
   <p-confirmDialog></p-confirmDialog>
 
-
   <div class="booking-cards">
     <div *ngIf="bookings.length === 0" class="no-bookings">
       <p>No bookings available.</p>
     </div>
 
     <div *ngFor="let booking of bookings" class="booking-card">
-      <img src="assets/1.jpg" alt="Room" class="room-image">
+      <div class="room-info">
+        <!-- Display Room Number as Text -->
+        <div class="room-text">
+          <h4 style="margin-right: 96px;">Room N: </h4>
+          <h1 class="room-number"> {{ booking.numeroChambre }}</h1>
+        </div>
+      </div>
       <div class="info">
         <div class="text">
           <div class="room-name">
-            <span class="room-type">Room {{ booking.numeroChambre }}</span>
             <span class="status" [ngClass]="{
               'confirmed': booking.status === 'CONFIRMEE',
               'pending': booking.status === 'EN_ATTENTE'
@@ -27,13 +31,15 @@
           <div class="details">
             <p><strong>Check-in:</strong> {{ booking.dateDebut }}</p>
             <p><strong>Check-out:</strong> {{ booking.dateFin }}</p>
-            {{ booking.services?.join(', ') || 'No services' }}</div>
+            {{ booking.services?.join(', ') || 'No services' }}
+          </div>
         </div>
         <div class="actions">
           <button class="btn-cancel" (click)="cancelReservation(booking)">Cancel</button>
-                </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 
