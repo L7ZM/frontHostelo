@@ -1,4 +1,5 @@
 
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerComponent } from './components/admin features/customers Management/customer/customer.component';
@@ -10,8 +11,8 @@ import { VirtualTourComponent } from './components/virtual-tour/virtual-tour.com
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ProfileComponent } from './components/user featurs/profile/profile.component';
-import { RoleGuard } from './guards/role.guard';
-import { NoAuthGuard } from './guards/no-auth.guard';
+import { RoleGuard } from './guards/role/role.guard';
+import { NoAuthGuard } from './guards/no auth/no-auth.guard';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
 import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
 import { BookingManagementComponent } from './components/admin features/booking-management/booking-management.component';
@@ -32,8 +33,8 @@ const routes: Routes = [
   {
     path: 'book',
     component: RoomBookingComponent  ,
-    // canActivate: [RoleGuard],
-    // data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }, // Accessible to both roles
+    canActivate: [RoleGuard],
+    data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }, // Accessible to both roles
   },
   {
     path: 'contact',
@@ -84,10 +85,11 @@ const routes: Routes = [
    },
    {
     path: 'myBookings',
-    component: MyBookingsComponent , 
+    component: MyBookingsComponent ,
     canActivate: [RoleGuard],
-    data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }, 
+    data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] },
   },
+
 
 ];
 

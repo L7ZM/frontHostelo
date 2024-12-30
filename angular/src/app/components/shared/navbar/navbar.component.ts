@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,7 +11,8 @@ export class NavbarComponent implements OnInit {
   sidebarVisible: boolean = false;
   userRole: string = 'visitor'; // Default role
   profileItems: MenuItem[] = []; // Menu items
-
+  isFidelityDialogVisible: boolean = false; // Controls dialog visibility
+  fidelityPoints: number = 0; // This should come from your profile service or data
   constructor(
     private authService: AuthenticationService,
     private router: Router
@@ -23,12 +23,22 @@ export class NavbarComponent implements OnInit {
     this.authService.userRole$.subscribe((role) => {
       this.userRole = role; // Update role dynamically
       this.updateProfileItems(); // Update menu items
+      this.fetchUser(); // Fetch user profile
     });
 
     // Update the role based on the localStorage roles after refresh
     this.updateUserRole();
   }
-
+  private fetchUser(): void {
+    // Fetch user profile from localStorage
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      if (parsedUser) {
+        this.fidelityPoints = parsedUser.pointsFidelite || 0;  // Access fidelity points directly from the stored user
+      }
+    }
+  }
   private updateUserRole(): void {
     const roles = this.authService.getRoles();
     if (roles.includes('ROLE_ADMIN')) {
@@ -53,7 +63,7 @@ export class NavbarComponent implements OnInit {
         {
           label: 'Fidelity Points',
           icon: 'pi pi-star',
-          // routerLink: '/fidelity-points', // Adjust the link as needed for your application
+          command: () => this.showFidelityDialog(),
         },
         {
           label: 'Logout',
@@ -67,6 +77,9 @@ export class NavbarComponent implements OnInit {
         { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/login' },
       ];
     }
+  }
+  private showFidelityDialog(): void {
+    this.isFidelityDialogVisible = true; // Open the dialog
   }
 
   logout(): void {

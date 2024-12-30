@@ -153,3 +153,20 @@
     </div>
   </div>
 </header>
+
+<p-dialog header="Fidelity Points"
+          [(visible)]="isFidelityDialogVisible"
+          [style]="{width: '400px', 'z-index': '9999'}"
+          [modal]="true"
+          [closable]="false"
+          [resizable]="false"
+          [draggable]="false"
+          class="fidelity-dialog">
+  <p>
+    <strong>Your current fidelity points:</strong> {{ fidelityPoints }}
+  </p>
+  <p-footer>
+    <button type="button" pButton label="Close" icon="pi pi-times" (click)="isFidelityDialogVisible = false"></button>
+  </p-footer>
+</p-dialog>
+
