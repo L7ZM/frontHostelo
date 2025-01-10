@@ -57,6 +57,7 @@ import { TagModule } from 'primeng/tag';
 import { GalleriaModule } from 'primeng/galleria';
 import { MyBookingsComponent } from './components/user featurs/my-bookings/my-bookings.component';
 
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -77,7 +78,7 @@ import { MyBookingsComponent } from './components/user featurs/my-bookings/my-bo
     BookingManagementComponent,
     RoomBookingComponent,
     BookingDialogComponent
-,MyBookingsComponent
+,MyBookingsComponent,
   ],
 
   imports: [

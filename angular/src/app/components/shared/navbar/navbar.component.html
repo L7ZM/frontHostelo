@@ -112,7 +112,11 @@
           </a>
         </li>
         <li class="nav-main-item">
-          <a class="nav-main-link" href="book">
+          <a *ngIf="userRole === 'user' || userRole === 'staff'" class="nav-main-link" href="book">
+            <i class="nav-main-link-icon fas fa-bed"></i>
+            <span class="nav-main-link-name">Our Rooms</span>
+          </a>
+          <a *ngIf="userRole === 'visitor'" class="nav-main-link" href="register">
             <i class="nav-main-link-icon fas fa-bed"></i>
             <span class="nav-main-link-name">Our Rooms</span>
           </a>

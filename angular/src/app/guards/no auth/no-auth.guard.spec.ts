@@ -1,6 +1,5 @@
+import { NoAuthGuard } from './no-auth.guard';
 import { TestBed } from '@angular/core/testing';
-
-import { NoAuthGuard } from '../no-auth.guard';
 
 describe('NoAuthGuard', () => {
   let guard: NoAuthGuard;

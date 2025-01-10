@@ -70,7 +70,7 @@ export class BookingManagementComponent  implements OnInit {
   validateReservation(reservation:Reservation){
     this.confirmationService.confirm({
       message: 'Are you sure you want to validate this reservation?',
-      header: 'Confirm Cancellation',
+      header: 'Confirm validation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.reservationService.validateReservation(reservation.id).subscribe({

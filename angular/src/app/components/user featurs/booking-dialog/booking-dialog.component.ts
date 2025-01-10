@@ -4,6 +4,7 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ServicesManageService } from 'src/app/services/servicesManagement/services-manage.service';
 import { ReservationService } from 'src/app/services/reservation/reservation.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-dialog',
@@ -12,7 +13,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class BookingDialogComponent implements OnInit {
   room: any; // The room data
-  dateFrom!: Date;  // Start date passed from RoomBookingComponent
+  dateFrom!: Date; // Start date passed from RoomBookingComponent
   dateTo!: Date;
   services: any[] = []; // Available services
   selectedServices: any[] = []; // Selected services
@@ -20,9 +21,14 @@ export class BookingDialogComponent implements OnInit {
   isVisible: boolean = false; // Dialog visibility
   selectedServicesMap: Map<string, boolean> = new Map();
   totalDays!: number;
-  readonly requiredServiceName: string[] = ['Breakfast','petit dejeuner'];
+  readonly requiredServiceName: string[] = ['Breakfast', 'petit dejeuner'];
+  finalPrice: number = 0; // Final price after discount (calculated separately)
+  fidelityPoints: number = 50; // Fidelity points for the user
+  applyPoints: boolean = false; // Whether to apply fidelity points
+
 
   constructor(
+    private router: Router,
     private messageService: MessageService, // Inject the MessageService
     private confirmationService: ConfirmationService,
     private reservationService: ReservationService,
@@ -37,16 +43,29 @@ export class BookingDialogComponent implements OnInit {
     this.room = room;
     this.dateFrom = new Date(dateFrom); // Ensure the dates are Date objects
     this.dateTo = new Date(dateTo);
+    // this.fetchUser(); // Fetch user profile from localStorage
     // Fetch services from the service manager
     this.fetchServices();
     this.calculateTotalDays(); // Calculate the days on init
+    this.calculateFinalPrice()
   }
-
+  private fetchUser(): void {
+    // Fetch user profile from localStorage
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      if (parsedUser) {
+        this.fidelityPoints = parsedUser.pointsFidelite; // Access fidelity points directly from the stored user
+      }
+    }
+  }
   fetchServices(): void {
     this.servicesService.getAllServices().subscribe(
       (data) => {
         this.services = data.map((service: any) => {
-          const isRequired = this.requiredServiceName.includes(service.nomService);
+          const isRequired = this.requiredServiceName.includes(
+            service.nomService
+          );
           if (isRequired) {
             this.selectedServicesMap.set(service.nomService, true); // Mark required service as checked
             this.selectedServices.push(service); // Automatically add to selected services
@@ -102,18 +121,33 @@ export class BookingDialogComponent implements OnInit {
       );
     }
 
+
     // Recalculate total price after selecting a service
     this.calculateTotalDays(); // Ensure days are recalculated
     if (this.totalDays > 0) {
       // Calculate total price including room price and selected services
       this.totalPrice =
-        (this.room.prix * this.totalDays) + // Multiply room price by the number of days
+        this.room.prix * this.totalDays + // Multiply room price by the number of days
         this.selectedServices.reduce((sum, s) => sum + s.prix, 0); // Add price of selected services
     }
 
-    console.log('Updated Total Price:', this.totalPrice);  // For debugging
+    this.calculateFinalPrice()
   }
+  calculateFinalPrice() {
+    console.log('Apply Points:', this.applyPoints); // Debugging log
 
+    // If applyPoints is true (checkbox is checked), increase the final price by 50% of the total price
+    if (this.applyPoints) {
+      this.finalPrice = this.totalPrice * 0.5; // Add 50% to total price
+    } else {
+      // If unchecked, return the total price
+      this.finalPrice = this.totalPrice;
+    }
+  }
+  onApplyPointsChange(event: Event): void {
+    this.applyPoints = (event.target as HTMLInputElement).checked;
+    this.calculateFinalPrice();
+  }
   closeDialog() {
     this.ref.close();
   }
@@ -122,10 +156,10 @@ export class BookingDialogComponent implements OnInit {
   reserveRoom() {
     // Prepare reservation data
     const reservationData = {
-      chambreId: this.room.id,  // Assume room has an 'id' property
-      dateDebut: this.dateFrom.toISOString().split('T')[0],  // Convert to YYYY-MM-DD
-      dateFin: this.dateTo.toISOString().split('T')[0],  // Convert to YYYY-MM-DD
-      serviceIds: this.selectedServices.map((service) => service.id) // Assuming each service has an 'id' property
+      chambreId: this.room.id, // Assume room has an 'id' property
+      dateDebut: this.dateFrom.toISOString().split('T')[0], // Convert to YYYY-MM-DD
+      dateFin: this.dateTo.toISOString().split('T')[0], // Convert to YYYY-MM-DD
+      serviceIds: this.selectedServices.map((service) => service.id), // Assuming each service has an 'id' property
     };
 
     // Call the ReservationService to create the reservation
@@ -148,10 +182,10 @@ export class BookingDialogComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Reservation Failed',
-          detail: 'There was an error making your reservation. Please try again.'
+          detail:
+            'There was an error making your reservation. Please try again.',
         });
       }
     );
   }
-
 }
