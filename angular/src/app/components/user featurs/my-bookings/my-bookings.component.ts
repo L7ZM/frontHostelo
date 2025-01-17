@@ -29,38 +29,65 @@ export class MyBookingsComponent {
     );
   }
 
-  cancelReservation(bookings: Reservation) {
-    console.log('youre in cancel button')
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to cancel this reservation?',
-      header: 'Confirm Cancellation',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
+  cancelReservation(booking: Reservation) {
+    const now = new Date();
+    const bookingDateDebut = new Date(booking.dateDebut);
 
-        this.reservationService.cancelReservation(bookings.id).subscribe({
-          next: () => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: 'Reservation cancelled successfully'
-            });
-            this.fetchBookings();
-          },
-          error: () => this.messageService.add({
+    const diffInHours = Math.abs((bookingDateDebut.getTime() - now.getTime()) / (1000 * 60 * 60)); // Difference in hours
+
+    if (diffInHours < 48) {
+      this.confirmationService.confirm({
+        message: `This reservation is less than 48 hours from now. Cancelling it will result in a deduction of fidelity points. Do you want to proceed?`,
+        header: 'Fidelity Points Deduction',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.performCancellation(booking.id);
+        },
+        reject: () => {
+          this.messageService.add({
             severity: 'info',
-            summary: 'Info',
-            detail: 'You cannot cancel the reservation within 48 hours of check-in'
-          })
+            summary: 'Cancelled',
+            detail: 'Reservation cancellation cancelled'
+          });
+        }
+      });
+    } else {
+      this.confirmationService.confirm({
+        message: 'Are you sure you want to cancel this reservation?',
+        header: 'Confirm Cancellation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.performCancellation(booking.id);
+        },
+        reject: () => {
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Cancelled',
+            detail: 'Reservation cancellation cancelled'
+          });
+        }
+      });
+    }
+  }
+
+  private performCancellation(bookingId: number) {
+    this.reservationService.cancelReservation(bookingId).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Reservation cancelled successfully'
         });
+        this.fetchBookings();
       },
-      reject: () => {
-        console.log("you remove reservation that have id : " , bookings.id)
+      error: () => {
         this.messageService.add({
           severity: 'info',
-          summary: 'Cancelled',
-          detail: 'Reservation cancellation cancelled'
+          summary: 'Info',
+          detail: 'You cannot cancel the reservation within 48 hours of check-in'
         });
       }
     });
   }
+
 }

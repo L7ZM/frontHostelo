@@ -50,7 +50,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
 import { BookingManagementComponent } from './components/admin features/booking-management/booking-management.component';
-import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
+import { RoomBookingComponent } from './components/room-booking/room-booking.component';
 import { BookingDialogComponent } from './components/user featurs/booking-dialog/booking-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TagModule } from 'primeng/tag';

@@ -14,7 +14,7 @@ import { ProfileComponent } from './components/user featurs/profile/profile.comp
 import { RoleGuard } from './guards/role/role.guard';
 import { NoAuthGuard } from './guards/no auth/no-auth.guard';
 import { ServicesManagementComponent } from './components/admin features/services-management/services-management.component';
-import { RoomBookingComponent } from './components/user featurs/room-booking/room-booking.component';
+import { RoomBookingComponent } from './components/room-booking/room-booking.component';
 import { BookingManagementComponent } from './components/admin features/booking-management/booking-management.component';
 import { MyBookingsComponent } from './components/user featurs/my-bookings/my-bookings.component';
 

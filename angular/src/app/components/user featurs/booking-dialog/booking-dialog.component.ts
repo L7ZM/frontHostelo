@@ -23,7 +23,7 @@ export class BookingDialogComponent implements OnInit {
   totalDays!: number;
   readonly requiredServiceName: string[] = ['Breakfast', 'petit dejeuner'];
   finalPrice: number = 0; // Final price after discount (calculated separately)
-  fidelityPoints: number = 50; // Fidelity points for the user
+  fidelityPoints: number = 0; // Fidelity points from user profile
   applyPoints: boolean = false; // Whether to apply fidelity points
 
 
@@ -43,8 +43,8 @@ export class BookingDialogComponent implements OnInit {
     this.room = room;
     this.dateFrom = new Date(dateFrom); // Ensure the dates are Date objects
     this.dateTo = new Date(dateTo);
-    // this.fetchUser(); // Fetch user profile from localStorage
-    // Fetch services from the service manager
+    this.fetchUser(); // Fetch user profile from localStorage
+
     this.fetchServices();
     this.calculateTotalDays(); // Calculate the days on init
     this.calculateFinalPrice()
@@ -160,6 +160,7 @@ export class BookingDialogComponent implements OnInit {
       dateDebut: this.dateFrom.toISOString().split('T')[0], // Convert to YYYY-MM-DD
       dateFin: this.dateTo.toISOString().split('T')[0], // Convert to YYYY-MM-DD
       serviceIds: this.selectedServices.map((service) => service.id), // Assuming each service has an 'id' property
+      usePoints : this.applyPoints
     };
 
     // Call the ReservationService to create the reservation
@@ -171,7 +172,6 @@ export class BookingDialogComponent implements OnInit {
           summary: 'Reservation Successful',
           detail: 'Your room has been successfully reserved.'
         });
-
         // Optionally close the dialog
         this.closeDialog();
       },
