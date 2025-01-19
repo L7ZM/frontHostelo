@@ -4,7 +4,6 @@
     <a routerLink="/book" class="btn-book">New Booking</a>
   </header>
   <p-confirmDialog></p-confirmDialog>
-
   <div class="booking-cards">
     <div *ngIf="bookings.length === 0" class="no-bookings">
       <p>No bookings available.</p>
@@ -12,10 +11,9 @@
 
     <div *ngFor="let booking of bookings" class="booking-card">
       <div class="room-info">
-        <!-- Display Room Number as Text -->
         <div class="room-text">
-          <h4 style="margin-right: 96px;">Room N: </h4>
-          <h1 class="room-number"> {{ booking.numeroChambre }}</h1>
+          <h4 style="margin-right: 96px;">Room N:</h4>
+          <h1 class="room-number">{{ booking.numeroChambre }}</h1>
         </div>
       </div>
       <div class="info">
@@ -36,10 +34,40 @@
         </div>
         <div class="actions">
           <button class="btn-cancel" (click)="cancelReservation(booking)">Cancel</button>
+          <button class="btn-facture" (click)="viewFacture(booking)">View Facture</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<p-dialog
 
+  header="Facture Details"
+  [(visible)]="factureDialogVisible"
+  [modal]="true"
+  [style]="{ width: '600px', 'border-radius': '12px' }"
+  [closable]="true"
+  (onHide)="clearFacture()"
+>
+  <div class="facture-header">
+    <img src="assets/LogoPNG.png" alt="Logo" class="facture-logo" style="
+      width: 190px;
+      height: auto;
+      margin-left: 180px;" />
+
+  </div>
+
+  <ng-container *ngIf="facture">
+    <div class="facture-details">
+      <p><strong>Facture ID:</strong> {{ facture.reservationId }}</p>
+      <p><strong>Total Amount:</strong> {{ facture.montantTotal | currency:'EUR' }}</p>
+      <p><strong>Date Issued:</strong> {{ facture.dateEmission | date:'longDate' }}</p>
+      <p><strong>Payment Status:</strong> {{ facture.etatPaiement }}</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!facture">
+    <p>Loading...</p>
+  </ng-container>
+</p-dialog>
 

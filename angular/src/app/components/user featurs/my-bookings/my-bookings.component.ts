@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Reservation } from 'src/app/models/reservation/reservation.model';
 import { ReservationService } from 'src/app/services/reservation/reservation.service';
@@ -7,15 +7,20 @@ import { ReservationService } from 'src/app/services/reservation/reservation.ser
 @Component({
   selector: 'app-my-bookings',
   templateUrl: './my-bookings.component.html',
-  styleUrls: ['./my-bookings.component.scss']
+  styleUrls: ['./my-bookings.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MyBookingsComponent {
   bookings: Reservation[] = [];
+  factureDialogVisible: boolean=false;
+  facture: any;
+
 
   constructor(private http: HttpClient,
      private reservationService: ReservationService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
+        private factureService: ReservationService
   ) {}
 
   ngOnInit(): void {
@@ -89,5 +94,22 @@ export class MyBookingsComponent {
       }
     });
   }
+  viewFacture(booking: any): void {
+    this.factureDialogVisible = true;
+    const reservationId = booking.id; // Adjust according to your data structure
 
+    this.factureService.getFactureByReservationId(reservationId).subscribe(
+      (data: any) => {
+        this.facture = data;
+      },
+      (error) => {
+        console.error('Error fetching facture:', error);
+        this.factureDialogVisible = false;
+      }
+    );
+  }
+
+  clearFacture(): void {
+    this.facture = null;
+  }
 }

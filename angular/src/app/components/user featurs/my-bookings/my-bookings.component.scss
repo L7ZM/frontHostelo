@@ -147,7 +147,7 @@
   gap: 10px;
 }
 
-.btn-edit, .btn-cancel {
+.btn-facture, .btn-cancel {
   background-color: transparent;
   border: 1px solid #ddd;
   padding: 5px 10px;
@@ -157,7 +157,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-edit:hover {
+.btn-facture:hover {
   background-color: #007bff;
   color: white;
   border-color: #007bff;
@@ -167,4 +167,62 @@
   background-color: #dc3545;
   color: white;
   border-color: #dc3545;
+}
+/* Luxury style for facture dialog */
+::ng-deep .luxury-facture-dialog .p-dialog {
+  background-color: #ffffff; /* Clean white background */
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+::ng-deep .luxury-facture-dialog .facture-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f2f2f2; /* Elegant bottom border */
+}
+
+::ng-deep .luxury-facture-dialog .facture-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for logo */
+}
+
+::ng-deep .luxury-facture-dialog .facture-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50; /* Dark, elegant text */
+  letter-spacing: 0.5px;
+}
+
+::ng-deep .luxury-facture-dialog .facture-details {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #34495e; /* Subtle gray-blue text for elegance */
+}
+
+::ng-deep .luxury-facture-dialog .facture-details strong {
+  color: #2c3e50; /* Rich dark color for important text */
+  font-weight: 600;
+}
+
+::ng-deep .luxury-facture-dialog p {
+  font-size: 16px;
+  color: #7f8c8d; /* Muted gray color for normal text */
+  margin-bottom: 12px;
+}
+
+::ng-deep .luxury-facture-dialog p:last-child {
+  margin-bottom: 0; /* Remove margin on last item */
+}
+
+::ng-deep .luxury-facture-dialog .p-dialog-title {
+  color: #2c3e50; /* Matching title color */
+  font-weight: 600;
+  font-size: 24px;
 }
