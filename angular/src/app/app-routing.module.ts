@@ -33,8 +33,8 @@ const routes: Routes = [
   {
     path: 'book',
     component: RoomBookingComponent  ,
-    canActivate: [RoleGuard],
-    data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }, // Accessible to both roles
+    // canActivate: [RoleGuard],
+    // data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }, // Accessible to both roles
   },
   {
     path: 'contact',

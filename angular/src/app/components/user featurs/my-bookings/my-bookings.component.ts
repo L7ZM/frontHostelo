@@ -112,4 +112,9 @@ export class MyBookingsComponent {
   clearFacture(): void {
     this.facture = null;
   }
+
+  closeFactureDialog(): void {
+    this.factureDialogVisible = false;
+    this.clearFacture();
+  }
 }

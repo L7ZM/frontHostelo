@@ -163,6 +163,8 @@ export class BookingDialogComponent implements OnInit {
       usePoints : this.applyPoints
     };
 
+    console.log(reservationData);
+
     // Call the ReservationService to create the reservation
     this.reservationService.createReservation(reservationData).subscribe(
       (response) => {

@@ -129,21 +129,21 @@
   </div>
 
   <!-- Availability Filter -->
-  <div class="filter-section">
+  <!-- <div class="filter-section">
     <h4>Availability</h4>
     <p-dropdown
       [options]="availabilityOptions"
       [(ngModel)]="selectedAvailability"
       placeholder="Select Availability"
     ></p-dropdown>
-  </div>
+  </div> -->
   <!-- Price Filter -->
   <div class="filter-section">
     <h4>Price Range</h4>
     <p-slider
       [(ngModel)]="priceRange"
       [min]="100"
-      [max]="1000"
+      [max]="5000"
       [range]="true"
     ></p-slider>
     <p>{{ priceRange[0] }} MAD - {{ priceRange[1] }} MAD</p>

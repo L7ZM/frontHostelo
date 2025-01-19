@@ -43,6 +43,6 @@ export class ReservationService {
     return this.http.post(this.ApiUrl, reservationData, { headers });
   }
   getFactureByReservationId(reservationId: number): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/factures/reservation/${reservationId}`);
+    return this.http.get(`http://localhost:8080/api/factures/${reservationId}`);
   }
 }

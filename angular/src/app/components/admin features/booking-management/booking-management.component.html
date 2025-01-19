@@ -88,7 +88,7 @@
                       </td>
                       <td>
                         <button pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-outlined mr-2" (click)="validateReservation(reservation)"  ></button>
-                        <button pButton pRipple icon="pi pi-file-edit" class="p-button-rounded p-button-success p-button-outlined mr-2" ></button>
+                        <button pButton pRipple icon="pi pi-file-edit" class="p-button-rounded p-button-success p-button-outlined mr-2" (click)="viewFacture(reservation)"></button>
                         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteReservation(reservation)" ></button>
                       </td>
                     </tr>
@@ -103,3 +103,39 @@
               </div>
 
               <p-toast />
+              <p-dialog
+
+              header="Facture Details"
+              [(visible)]="factureDialogVisible"
+              [modal]="true"
+              [style]="{ width: '600px', 'border-radius': '12px' }"
+              [closable]="true"
+              (onHide)="clearFacture()"
+            >
+              <div class="facture-header">
+                <img src="assets/LogoPNG.png" alt="Logo" class="facture-logo" style="
+                  width: 190px;
+                  height: auto;
+                  margin-left: 180px;" />
+            
+              </div>
+            
+              <ng-container *ngIf="facture">
+                <div class="facture-details">
+                  <p><strong>Total Amount:</strong> {{ facture.montantTotal }}  MAD </p>
+                  <p><strong>Date Issued:</strong> {{ facture.dateEmission | date:'longDate' }}</p>
+                  <p><strong>Payment Status:</strong> {{ facture.etatPaiement }}</p>
+                </div>
+              </ng-container>
+            
+              <ng-container *ngIf="!facture">
+                <p>Loading...</p>
+              </ng-container>
+              <ng-template pTemplate="footer">
+                <div style="text-align: center;">
+                  <button pButton label="Cancel" class="p-button-rounded p-button-outlined" (click)="closeFactureDialog()"></button>
+                  <button pButton label="Validate payment" class="p-button-rounded p-button-outlined" severity="success" (click)="validatePayment(facture)"></button>
+                </div>
+              </ng-template>
+            </p-dialog>
+            

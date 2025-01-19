@@ -7,13 +7,14 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 })
 export class ServicesManageService {
   private ApiUrl = 'http://localhost:8080/api/admin/serviceAdditionnel'; // URL to your API
+  private ApiService = 'http://localhost:8080/api/user/serviceAdditionnel'; // URL to your API
   private DeleteApiUrl = 'http://localhost:8080/api/admin'; // URL to your API
 
   constructor(private http: HttpClient) { }
 
   // Get all services
   getAllServices(): Observable<any> {
-    return this.http.get<any>(`${this.ApiUrl}`);
+    return this.http.get<any>(`${this.ApiService}`);
   }
 
   // Add a new service

@@ -59,8 +59,7 @@
 
   <ng-container *ngIf="facture">
     <div class="facture-details">
-      <p><strong>Facture ID:</strong> {{ facture.id}}</p>
-      <p><strong>Total Amount:</strong> {{ facture.montantTotal | currency:'MAD' }}</p>
+      <p><strong>Total Amount:</strong> {{ facture.montantTotal }}  MAD </p>
       <p><strong>Date Issued:</strong> {{ facture.dateEmission | date:'longDate' }}</p>
       <p><strong>Payment Status:</strong> {{ facture.etatPaiement }}</p>
     </div>
@@ -69,5 +68,10 @@
   <ng-container *ngIf="!facture">
     <p>Loading...</p>
   </ng-container>
+  <ng-template pTemplate="footer">
+    <div style="text-align: center;">
+      <button pButton label="Cancel" class="p-button-rounded p-button-outlined" (click)="closeFactureDialog()"></button>
+    </div>
+  </ng-template>
 </p-dialog>
 

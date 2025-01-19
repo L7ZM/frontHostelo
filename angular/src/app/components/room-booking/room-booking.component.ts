@@ -23,7 +23,7 @@ export class RoomBookingComponent implements OnInit {
   priceRange: number[] = [100, 1000];
   roomTypes: string[] = ['SIMPLE', 'DELUXE', 'DOUBLE'];
   selectedRoomTypes: string[] = [];
-  availabilityOptions: string[] = ['DISPONIBLE', 'OCCUPEE', 'EN_ENTRETIEN'];
+  availabilityOptions: string[] = ['DISPONIBLE'];
   selectedAvailability: string = '';
 
   // Error flags
@@ -74,10 +74,8 @@ export class RoomBookingComponent implements OnInit {
       const matchesType =
         this.selectedRoomTypes.length === 0 ||
         this.selectedRoomTypes.includes(room.type);
-      const matchesAvailability =
-        this.selectedAvailability === '' ||
-        room.etat === this.selectedAvailability;
-
+      const matchesAvailability = room.etat === 'DISPONIBLE'; // Strictly filter for DISPONIBLE
+  
       return inPriceRange && matchesType && matchesAvailability;
     });
     this.visible = false; // Close the filter dialog

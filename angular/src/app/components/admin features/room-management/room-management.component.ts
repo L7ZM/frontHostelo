@@ -34,7 +34,6 @@ export class RoomManagementComponent {
 
   etatOptions = [
     { label: 'DISPONIBLE', value: 'DISPONIBLE' },
-    { label: 'OCCUPE', value: 'OCCUPEE' },
     { label: 'MAINTENANCE', value: 'EN_ENTRETIEN' }
   ];
 
@@ -59,9 +58,7 @@ export class RoomManagementComponent {
     private roomService: RoomService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-  ) {
-    // this.loadRooms();
-  }
+  ) {  }
 
   ngOnInit(): void {
     this.loadRooms();
