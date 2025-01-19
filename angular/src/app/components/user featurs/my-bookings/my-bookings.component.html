@@ -60,7 +60,7 @@
   <ng-container *ngIf="facture">
     <div class="facture-details">
       <p><strong>Facture ID:</strong> {{ facture.id}}</p>
-      <p><strong>Total Amount:</strong> {{ facture.montantTotal | currency:'EUR' }}</p>
+      <p><strong>Total Amount:</strong> {{ facture.montantTotal | currency:'MAD' }}</p>
       <p><strong>Date Issued:</strong> {{ facture.dateEmission | date:'longDate' }}</p>
       <p><strong>Payment Status:</strong> {{ facture.etatPaiement }}</p>
     </div>
