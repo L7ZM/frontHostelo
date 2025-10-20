@@ -1,6 +1,6 @@
 export const environment = {
   api: {
-    baseUrl: 'http://localhost:8080',
+   baseUrl: 'https://perceptive-reflection-production.up.railway.app',
     authUrl: 'auth/login',
     registerUrl: 'auth/signup',
     customerUrl: 'api/users',
